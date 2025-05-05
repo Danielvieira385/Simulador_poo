@@ -15,10 +15,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
 fun Application.configureRouting() {
     routing {
         get("/") {
-            call.respond(ThymeleafContent("iniciar.html", mapOf("title" to "iniciar")))
-        }
-        get("/menu") {
-            call.respond(ThymeleafContent("menu.html", mapOf("title" to "menu")))
+            call.respond(ThymeleafContent("index.html", mapOf("title" to ThymeleafUser(1, "user1"))))
         }
     }
 }

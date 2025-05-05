@@ -21,8 +21,17 @@ fun Application.configureTemplating() {
         })
     }
     routing {
-        get("/html-thymeleaf") {
+        get("/") {
             call.respond(ThymeleafContent("index", mapOf("user" to ThymeleafUser(1, "user1"))))
+        }
+        get("/iniciar") {
+            call.respond(ThymeleafContent("iniciar", mapOf("title" to ThymeleafUser(1, "user1"))))
+        }
+        get("/menu") {
+            call.respond(ThymeleafContent("menu", mapOf("title" to ThymeleafUser(1, "user1"))))
+        }
+        get("/criar_personagem") {
+            call.respond(ThymeleafContent("criar_personagem", mapOf("title" to ThymeleafUser(1, "user1"))))
         }
     }
 }

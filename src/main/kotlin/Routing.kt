@@ -15,11 +15,8 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
 fun Application.configureRouting() {
     routing {
         get("/") {
-            call.respondText("Hello World!")
+            call.respond(ThymeleafContent("iniciar.html", mapOf("title" to "iniciar")))
         }
-        // Static plugin. Try to access `/static/index.html`
-        staticResources("/static", "static")
-
         get("/menu") {
             call.respond(ThymeleafContent("menu.html", mapOf("title" to "menu")))
         }

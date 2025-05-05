@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Criar Personagem </title>
+</head>
+<body>
+  <div>
+    <form method="post" action="/pagina_seguinte">
+      <div>
+        <label name="nome_personagem"> Nome da Personagem: </label>
+        <input name="nome_personagem" id="nome_personagem">
+      </div>
+      <br>
+      <div>
+        <label name="categoria_personagem"></label>
+          <select name="categoria_personagem" id="categoria_personagem">
+            <option> Guerreiro </option>
+            <option> Arqueiro </option>
+            <option> Mago </option>
+          </select>
+      </div>
+      <br>
+    <input type="submit" value="Criar Personagem" />
+  </form >
+  </div>
+</body>
+</html>

@@ -1,6 +1,4 @@
 package com.example.Menu
 
-
-fun main(){
-
+fun main() {
 }

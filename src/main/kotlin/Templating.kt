@@ -22,7 +22,7 @@ fun Application.configureTemplating() {
     }
     routing {
         get("/") {
-            call.respond(ThymeleafContent("index", mapOf("user" to ThymeleafUser(1, "user1"))))
+            call.respond(ThymeleafContent("iniciar", mapOf("user" to ThymeleafUser(1, "user1"))))
         }
         get("/iniciar") {
             call.respond(ThymeleafContent("iniciar", mapOf("title" to ThymeleafUser(1, "user1"))))
@@ -32,6 +32,9 @@ fun Application.configureTemplating() {
         }
         get("/criar_personagem") {
             call.respond(ThymeleafContent("criar_personagem", mapOf("title" to ThymeleafUser(1, "user1"))))
+        }
+        get("/consultaBaseDados") {
+            call.respond(ThymeleafContent("consultaBaseDados", mapOf("title" to ThymeleafUser(1, "user1"))))
         }
     }
 }

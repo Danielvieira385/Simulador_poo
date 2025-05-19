@@ -1,11 +1,13 @@
 package com.example
 
+import com.example.Criação_personagem.Personagem
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.http.content.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.thymeleaf.Thymeleaf
@@ -36,6 +38,21 @@ fun Application.configureTemplating() {
         get("/consultaBaseDados") {
             call.respond(ThymeleafContent("consultaBaseDados", mapOf("title" to ThymeleafUser(1, "user1"))))
         }
+        post("/vila") {
+            val params = call.receiveParameters()
+            val nome = params["nome_personagem"] ?: ""
+            val categoriaPrincipal = params["categoria_principal"] ?: ""
+            val categoriaSecundaria = params["categoria_secundaria"]?: ""
+            val nivel = 0
+
+            val personagem = Personagem()
+            personagem.criarPersonagem(nome, categoriaPrincipal, categoriaSecundaria, nivel) // Exemplo com idade e categoria principal fixas
+
+            // Aqui podes guardar numa base de dados, numa lista ou simplesmente responder
+            call.respond(ThymeleafContent("vila", mapOf("personagem" to personagem)))
+        }
+
+
     }
 }
 data class ThymeleafUser(val id: Int, val name: String)

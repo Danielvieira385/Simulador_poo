@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title> Criar Personagem </title>
+  <meta charset="UTF-8">
+  <title>Criar Personagem</title>
 </head>
 <body>
+<form method="post" action="/vila">
   <div>
-    <form method="post" action="/pagina_seguinte">
-      <div>
-        <label name="nome_personagem"> Nome da Personagem: </label>
-        <input name="nome_personagem" id="nome_personagem">
-      </div>
-      <br>
-      <div>
-        <label name="categoria_personagem"></label>
-          <select name="categoria_personagem" id="categoria_personagem">
-            <option>Guerreiro</option>
-            <option>Arqueiro</option>
-            <option>Mago</option>
-          </select>
-      </div>
-      <br>
-    <input type="submit" value="Criar Personagem" />
-  </form >
+    <label for="nome_personagem">Nome da Personagem:</label>
+    <input type="text" name="nome_personagem" id="nome_personagem" />
   </div>
+  <br>
+  <div>
+    <label for="categoria_principal">Categoria Secundária:</label>
+    <select name="categoria_principal" id="categoria_principal">
+      <option>Guerreiro</option>
+      <option>Arqueiro</option>
+      <option>Mago</option>
+    </select>
+  </div>
+  <br>
+  <div>
+    <label for="categoria_secundaria">Categoria Secundária:</label>
+    <select name="categoria_secundaria" id="categoria_secundaria">
+      <option>Ferreiro</option>
+      <option>Caçador</option>
+      <option>Pescador</option>
+      <option>Agricultor</option>
+    </select>
+  </div>
+  <br>
+  <input type="submit" value="Criar Personagem" />
+</form>
 </body>
 </html>

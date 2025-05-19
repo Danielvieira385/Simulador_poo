@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Personagem Criado</title>
+    </head>
+    <body>
+        <h1>Personagem Criado com Sucesso!</h1>
+        <p th:text="'Nome: ' + ${personagem.nome}"></p>
+        <p th:text="'Categoria Principal: ' + ${personagem.categoriaPrincipal}"></p>
+        <p th:text="'Categoria Secundária: ' + ${personagem.categoriaSecundaria}"></p>
+        <p th:text="'Nível do Personagem : '  + ${personagem.nivel}"></p>
+    </body>
+</html>

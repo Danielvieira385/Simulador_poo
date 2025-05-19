@@ -1,41 +1,83 @@
 package com.example.Criacao_personagem
 
+import com.example.Menu.Arma.Companion.json
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import org.attoparser.dom.DOMWriter.writeText
+import java.io.File
 
 @Serializable
 data class Personagem(
+    var id: Int = 0,
     var nome: String = "",
     var categoriaPrincipal: String = "",
     var categoriaSecundaria: String = "",
     var nivel: Int = 0,
-    var inventario: List<Int> = listOf()
+    var inventario: List<Int> = listOf(),
+    var coins : Int = 0
 ) {
+
     override fun toString(): String {
-        return "Personagem ${nome}: " +
+        return " ID do Personagem - ${id}" +
+                "   Personagem ${nome}: " +
                 "   Categoria Principal : ${categoriaPrincipal}" +
                 "   Categoria Secundaria : ${categoriaSecundaria}" +
                 "   Nível: $nivel" +
-                "   Inventário: $inventario"
+                "   Inventário: $inventario" +
+                "   Dinheiro: $coins"
     }
+
     companion object {
 
+
+        private val CAMINHODATA = "./src/main/resources/data"
         private val personagens = mutableMapOf<String, Personagem>()
 
-        fun criarPersonagem(
-            nome: String,
-            categoriaPrincipal: String,
-            categoriaSecundaria: String,
-            nivel: Int,
-            inventario: List<Int>
-        ): Personagem {
-            return Personagem(
-                nome,
-                categoriaPrincipal,
-                categoriaSecundaria,
-                nivel,
-                inventario
-            )
+        fun obterID_Personagem(): Int {
+            val personagens_criadas = obterTodosPersonagens()
+            return if (personagens_criadas.isEmpty()) 1 else personagens_criadas.maxOf { it.id } + 1
         }
-        fun todas(): List<Personagem> = personagens.values.toList()
+
+        fun obterTodosPersonagens(): List<Personagem> {
+            val file = File("${Personagem.CAMINHODATA}/personagens.json")
+            if (!file.exists()) {
+                file.parentFile.mkdirs()
+                file.createNewFile()
+                return emptyList()
+            }
+            val jsonString = file.readText()
+            return if (jsonString.isEmpty()) emptyList()
+            else json.decodeFromString(jsonString)
+        }
+
+
+        fun criarPersonagem(
+            id: Int, nome: String, categoriaPrincipal: String, categoriaSecundaria: String,
+            nivel: Int, inventario: List<Int>, coins: Int
+        ) : Personagem{
+            val novaPersonagem = Personagem(
+                id = obterID_Personagem(),
+                nome = nome,
+                categoriaPrincipal = categoriaPrincipal,
+                categoriaSecundaria = categoriaSecundaria,
+                nivel = nivel,
+                inventario = inventario,
+                coins = coins
+            )
+
+            val personagemExistentes = obterTodosPersonagens().toMutableList()
+            personagemExistentes.add(novaPersonagem)
+
+            println(novaPersonagem)
+            File("${CAMINHODATA}/personagens.json").apply {
+                parentFile.mkdirs()
+                writeText(json.encodeToString(personagemExistentes))
+
+            }
+
+            return novaPersonagem
+        }
+
     }
 }

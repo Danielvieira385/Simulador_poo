@@ -1,20 +1,22 @@
 package com.example
 
 import com.example.Criacao_personagem.Personagem
+import com.example.Criacao_personagem.Personagem.Companion
 import com.example.Criacao_personagem.Personagem.Companion.criarPersonagem
-import com.example.Criação_personagem.*
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
+import com.example.Criacao_personagem.Personagem.Companion.obterID_Personagem
+import com.example.Criacao_personagem.Personagem.Companion.obterTodosPersonagens
+import com.example.Menu.Arma
+import com.example.Menu.Arma.Companion.json
+
 import io.ktor.server.application.*
-import io.ktor.server.http.content.*
-import io.ktor.server.plugins.contentnegotiation.*
-import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.thymeleaf.Thymeleaf
 import io.ktor.server.thymeleaf.ThymeleafContent
+import kotlinx.serialization.json.Json
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
+import java.io.File
 
 fun Application.configureTemplating() {
     install(Thymeleaf) {
@@ -41,21 +43,27 @@ fun Application.configureTemplating() {
             call.respond(ThymeleafContent("consultaBaseDados", mapOf("title" to ThymeleafUser(1, "user1"))))
         }
         post("/vila") {
-            val params = call.receiveParameters()
+            var params = call.receiveParameters()
+            val id = obterID_Personagem()
             val nome = params["nome_personagem"] ?: ""
             val categoriaPrincipal = params["categoria_principal"] ?: ""
             val categoriaSecundaria = params["categoria_secundaria"]?: ""
-            val nivel = 0
-            val inventario = listOf<Int>()
+            val nivel = 1
+            val inventario = listOf<Int>(1)
+            val coins = 1
 
-            val personagem = criarPersonagem(nome, categoriaPrincipal, categoriaSecundaria, nivel, inventario)
+            val personagem = criarPersonagem(id, nome, categoriaPrincipal, categoriaSecundaria, nivel, inventario,coins)
+            //val personagem_criada = Personagem(id,nome,categoriaPrincipal,categoriaSecundaria,nivel,inventario,coins)
+
+            //val CAMINHODATA = "./src/main/resources/data"
+
+            call.respond(ThymeleafContent("vila", mapOf("personagem" to personagem)))
+            }
 
 
-            // Aqui podes guardar numa base de dados, numa lista ou simplesmente responder
-            call.respond(ThymeleafContent("vila", mapOf("personagem" to Personagem.todas())))
         }
 
 
     }
-}
+
 data class ThymeleafUser(val id: Int, val name: String)

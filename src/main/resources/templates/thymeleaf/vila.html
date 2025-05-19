@@ -6,11 +6,13 @@
     </head>
     <body>
         <h1>Personagem Criado com Sucesso!</h1>
+        <p th:text="'ID Personagem: ' + ${personagem.id}"></p>
         <p th:text="'Nome: ' + ${personagem.nome}"></p>
         <p th:text="'Categoria Principal: ' + ${personagem.categoriaPrincipal}"></p>
         <p th:text="'Categoria Secundária: ' + ${personagem.categoriaSecundaria}"></p>
         <p th:text="'Nível do Personagem : '  + ${personagem.nivel}"></p>
         <p th:text="'Inventario : ' + ${personagem.inventario}"></p>
+        <p th:text="'Coins : ' + ${personagem.coins}"></p>
 
         <button onClick = "window.location.href='/menu'">Voltar ao Menu!</button>
     </body>

@@ -1,63 +1,62 @@
 package com.example.Menu
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.io.File
 
-class Arma(nome: String, dano: Int, tipo: String, nivel: Int, id: Int){
-    var id: Int = 0
-    var nome: String = ""
-    var dano: Int = 0
-    var tipo: String = ""
-    var nivel: Int = 0
-
-    val CAMINHODATA = "./src/main/resources/data"
-
-    fun obterID(): Int {
-        val arma = obterTodasArmas()
-        return if (arma.isEmpty()) 1 else arma.maxOf { it.id } + 1
-    }
-
-    fun obterTodasArmas(): List<Arma> {
-        val json = File("$CAMINHODATA/armas.json").readText()
-        return Json.decodeFromString<List<Arma>>(json)
-    }
-
-    fun criarArma(nome: String, dano: Int, tipo: String, nivel: Int) {
-        this.id = obterID()
-        this.nome = nome
-        this.dano = dano
-        this.tipo = tipo
-        this.nivel = nivel
-
-        val listaArmas = listOf(
-            Arma(nome, dano, tipo, nivel, id)
-        )
-
-        val novaArma = Arma(nome, dano, tipo, nivel, id)
-        val guardarArma = Json.encodeToString(listaArmas.map { GuardarArma.construir(it) })
-        File("$CAMINHODATA/armas.json").writeText(Json.encodeToString(guardarArma))
-        println("Arma criada: $novaArma")
-    }
-}
-
 @Serializable
-data class GuardarArma(
-    val id: Int,
-    val nome: String,
-    val dano: Int,
-    val tipo: String,
-    val nivel: Int){
-
+data class Arma(
+    var id: Int = 0,
+    var nome: String = "",
+    var dano: Int = 0,
+    var tipo: String = "",
+    var nivel: Int = 0
+) {
     companion object {
-        fun construir(arma: Arma): GuardarArma =
-            GuardarArma(
-                arma.id,
-                arma.nome,
-                arma.dano,
-                arma.tipo,
-                arma.nivel
+        val CAMINHODATA = "./src/main/resources/data"
+        val json = Json {
+            prettyPrint = true
+            ignoreUnknownKeys = true
+        }
+
+        fun obterID(): Int {
+            val armas = obterTodasArmas()
+            return if (armas.isEmpty()) 1 else armas.maxOf { it.id } + 1
+        }
+
+        fun obterTodasArmas(): List<Arma> {
+            val file = File("$CAMINHODATA/armas.json")
+            if (!file.exists()) {
+                file.parentFile.mkdirs()
+                file.createNewFile()
+                return emptyList()
+            }
+            val jsonString = file.readText()
+            return if (jsonString.isEmpty()) emptyList()
+            else json.decodeFromString(jsonString)
+        }
+
+        fun criarArma(nome: String, dano: Int, tipo: String, nivel: Int): Arma {
+            val novaArma = Arma(
+                id = obterID(),
+                nome = nome,
+                dano = dano,
+                tipo = tipo,
+                nivel = nivel
             )
+
+            val armasExistentes = obterTodasArmas().toMutableList()
+            armasExistentes.add(novaArma)
+
+            File("$CAMINHODATA/armas.json").apply {
+                parentFile.mkdirs()
+                writeText(json.encodeToString(armasExistentes))
+            }
+
+            println("Arma criada: $novaArma")
+            return novaArma
+        }
     }
 }
-

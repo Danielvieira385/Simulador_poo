@@ -1,1 +1,23 @@
-2
+[
+    {
+        "id": 1,
+        "nome": "Espada",
+        "dano": 10,
+        "tipo": "Corte",
+        "nivel": 1
+    },
+    {
+        "id": 2,
+        "nome": "Machado",
+        "dano": 15,
+        "tipo": "Corte",
+        "nivel": 2
+    },
+    {
+        "id": 3,
+        "nome": "Arco",
+        "dano": 8,
+        "tipo": "Perfuração",
+        "nivel": 1
+    }
+]

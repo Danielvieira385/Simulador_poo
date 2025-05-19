@@ -1,6 +1,8 @@
 package com.example
 
-import com.example.Criação_personagem.Personagem
+import com.example.Criacao_personagem.Personagem
+import com.example.Criacao_personagem.Personagem.Companion.criarPersonagem
+import com.example.Criação_personagem.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -44,12 +46,13 @@ fun Application.configureTemplating() {
             val categoriaPrincipal = params["categoria_principal"] ?: ""
             val categoriaSecundaria = params["categoria_secundaria"]?: ""
             val nivel = 0
+            val inventario = listOf<Int>()
 
-            val personagem = Personagem()
-            personagem.criarPersonagem(nome, categoriaPrincipal, categoriaSecundaria, nivel) // Exemplo com idade e categoria principal fixas
+            val personagem = criarPersonagem(nome, categoriaPrincipal, categoriaSecundaria, nivel, inventario)
+
 
             // Aqui podes guardar numa base de dados, numa lista ou simplesmente responder
-            call.respond(ThymeleafContent("vila", mapOf("personagem" to personagem)))
+            call.respond(ThymeleafContent("vila", mapOf("personagem" to Personagem.todas())))
         }
 
 

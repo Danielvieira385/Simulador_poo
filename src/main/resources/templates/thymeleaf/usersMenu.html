@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu de Utilizadores</title>
+</head>
+<body>
+<div>
+    <h1>Menu</h1>
+    <form method="post" action="/menu">
+        <div>
+            <label for="nome_utilizador">Username: </label>
+            <input type="text" name="nome_utilizador" id="nome_utilizador" />
+        </div>
+        <br>
+        <div>
+            <label for="password">Password: </label>
+            <input type="text" name="password" id="password" />
+        </div>
+        <br>
+        <br>
+        <input type="submit" value="Iniciar Sessão" />
+    </form>
+    <button onClick="window.location.href='/criarUtilizador'">Criar Conta de Utilizador</button>
+</div>
+</body>
+</html>

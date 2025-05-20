@@ -5,7 +5,8 @@
     <title>Criar Utilizador</title>
 </head>
 <body>
-<form method="post" action="/usersMenu">
+<h1>Criação de Conta de Utilizador!</h1>
+<form method="post" action="/criarUtilizador">
     <div>
         <label for="nomeUtilizador">Username: </label>
         <input type="text" name="nomeUtilizador" id="nomeUtilizador" />
@@ -13,7 +14,7 @@
     <br>
     <div>
         <label for="password">Password: </label>
-        <input type="text" name="password" id="password" />
+        <input type="password" name="password" id="password" />
     </div>
     <br>
     <div>
@@ -22,6 +23,8 @@
     </div>
     <br>
     <input type="submit" value="Criar Utilizador" />
+    <br>
+    <button onClick="window.location.href='/usersMenu'">Voltar ao Menu</button>
 </form>
 </body>
 </html>

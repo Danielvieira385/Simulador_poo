@@ -8,6 +8,9 @@ import com.example.Criacao_personagem.Personagem.Companion.obterTodosPersonagens
 import com.example.Menu.Arma
 import com.example.Menu.Arma.Companion.json
 
+import com.example.Utilizadores.Utilizador.*
+import com.example.Utilizadores.Utilizador.Companion.criarUtilizador
+import com.example.Utilizadores.Utilizador.Companion.obterID_Utilizador
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -32,6 +35,23 @@ fun Application.configureTemplating() {
         }
         get("/iniciar") {
             call.respond(ThymeleafContent("iniciar", mapOf("title" to ThymeleafUser(1, "user1"))))
+        }
+        get("/usersMenu") {
+            call.respond(ThymeleafContent("usersMenu",mapOf()))
+        }
+        get("/criarUtilizador") {
+            call.respond(ThymeleafContent("criarUtilizador",mapOf()))
+        }
+        post("/criarUtilizador") {
+            var params = call.receiveParameters()
+            val id = obterID_Utilizador()
+            val nome = params["nomeUtilizador"]?:""
+            val password = params["password"]?:""
+            val idade = params["idade"]?:""
+
+            val utilizador = criarUtilizador(id,nome,idade.toInt(),password)
+            print(utilizador.toString())
+            call.respond(ThymeleafContent("usersMenu",mapOf()))
         }
         get("/menu") {
             call.respond(ThymeleafContent("menu", mapOf("title" to ThymeleafUser(1, "user1"))))

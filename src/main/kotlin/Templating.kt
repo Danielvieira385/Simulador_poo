@@ -7,6 +7,9 @@ import com.example.Criacao_personagem.Personagem.Companion.obterID_Personagem
 import com.example.Criacao_personagem.Personagem.Companion.obterTodosPersonagens
 import com.example.Menu.Arma
 import com.example.Menu.Arma.Companion.json
+import com.example.Vila.Vila
+import com.example.Vila.Loja
+
 
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -59,7 +62,6 @@ fun Application.configureTemplating() {
 
             call.respond(ThymeleafContent("vila", mapOf("personagem" to personagem)))
             }
-
 
         }
 

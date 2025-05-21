@@ -10,6 +10,7 @@ import java.io.File
 @Serializable
 data class Personagem(
     var id: Int = 0,
+    var idUtilizador: Int = 0,
     var nome: String = "",
     var categoriaPrincipal: String = "",
     var categoriaSecundaria: String = "",
@@ -20,6 +21,7 @@ data class Personagem(
 
     override fun toString(): String {
         return " ID do Personagem - ${id}" +
+                "ID do Utilizador - ${idUtilizador}" +
                 "   Personagem ${nome}: " +
                 "   Categoria Principal : ${categoriaPrincipal}" +
                 "   Categoria Secundaria : ${categoriaSecundaria}" +
@@ -53,11 +55,12 @@ data class Personagem(
 
 
         fun criarPersonagem(
-            id: Int, nome: String, categoriaPrincipal: String, categoriaSecundaria: String,
+            id: Int, idUtilizador: Int, nome: String, categoriaPrincipal: String, categoriaSecundaria: String,
             nivel: Int, inventario: List<Int>, coins: Int
         ) : Personagem{
             val novaPersonagem = Personagem(
                 id = obterID_Personagem(),
+                idUtilizador = idUtilizador,
                 nome = nome,
                 categoriaPrincipal = categoriaPrincipal,
                 categoriaSecundaria = categoriaSecundaria,

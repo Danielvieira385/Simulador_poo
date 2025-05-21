@@ -7,7 +7,10 @@
 <body>
 <div>
     <h1>Menu</h1>
-    <form method="post" action="/menu">
+    <div th:if="${erro}" style="color: red; font-weight: bold; margin-bottom: 10px;">
+        <p th:text="${erro}"></p>
+    </div>
+    <form method="post" action="/usersMenu">
         <div>
             <label for="nome_utilizador">Username: </label>
             <input type="text" name="nome_utilizador" id="nome_utilizador" />
@@ -15,12 +18,13 @@
         <br>
         <div>
             <label for="password">Password: </label>
-            <input type="text" name="password" id="password" />
+            <input type="password" name="password" id="password" />
         </div>
         <br>
         <br>
         <input type="submit" value="Iniciar Sessão" />
     </form>
+    <br>
     <button onClick="window.location.href='/criarUtilizador'">Criar Conta de Utilizador</button>
 </div>
 </body>

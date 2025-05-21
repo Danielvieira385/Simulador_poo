@@ -11,6 +11,7 @@ import com.example.Menu.Arma.Companion.json
 import com.example.Utilizadores.Utilizador.*
 import com.example.Utilizadores.Utilizador.Companion.criarUtilizador
 import com.example.Utilizadores.Utilizador.Companion.obterID_Utilizador
+import com.example.Utilizadores.Utilizador.Companion.obterTodosUtilizadores
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -37,7 +38,29 @@ fun Application.configureTemplating() {
             call.respond(ThymeleafContent("iniciar", mapOf("title" to ThymeleafUser(1, "user1"))))
         }
         get("/usersMenu") {
-            call.respond(ThymeleafContent("usersMenu",mapOf()))
+            call.respond(ThymeleafContent("usersMenu", mapOf()))
+        }
+        post("/usersMenu") {
+            val params = call.receiveParameters()
+            val nomeUtilizador = params["nome_utilizador"] ?: ""
+            val password = params["password"] ?: ""
+
+            val utilizadores = obterTodosUtilizadores()
+            val utilizador = utilizadores.find { it.nome == nomeUtilizador && it.password == password }
+            if (utilizador != null) {
+                call.respondRedirect("/menu?id=${utilizador.id}")
+            } else {
+                call.respond(ThymeleafContent("usersMenu", mapOf("erro" to "Credenciais inválidas")))
+            }
+        }
+        get("/menu") {
+            val idUtilizador = call.request.queryParameters["id"]?.toIntOrNull()
+            val utilizador = obterTodosUtilizadores().find { it.id == idUtilizador }
+            if (utilizador != null) {
+                call.respond(ThymeleafContent("menu", mapOf("utilizador" to utilizador)))
+            } else {
+                call.respondRedirect("/usersMenu")
+            }
         }
         get("/criarUtilizador") {
             call.respond(ThymeleafContent("criarUtilizador",mapOf()))
@@ -53,18 +76,24 @@ fun Application.configureTemplating() {
             print(utilizador.toString())
             call.respond(ThymeleafContent("usersMenu",mapOf()))
         }
-        get("/menu") {
-            call.respond(ThymeleafContent("menu", mapOf("title" to ThymeleafUser(1, "user1"))))
-        }
+
         get("/criar_personagem") {
-            call.respond(ThymeleafContent("criar_personagem", mapOf("title" to ThymeleafUser(1, "user1"))))
+            val idUtilizador = call.request.queryParameters["id"]?.toIntOrNull()
+            val utilizador = obterTodosUtilizadores().find { it.id == idUtilizador }
+
+            if (utilizador != null) {
+                call.respond(ThymeleafContent("criar_personagem", mapOf("utilizador" to utilizador)))
+            }else {
+                call.respondRedirect("/usersMenu")
+            }
         }
         get("/consultaBaseDados") {
             call.respond(ThymeleafContent("consultaBaseDados", mapOf("title" to ThymeleafUser(1, "user1"))))
         }
         post("/vila") {
-            var params = call.receiveParameters()
+            val params = call.receiveParameters()
             val id = obterID_Personagem()
+            val idUtilizador = params["id_Utilizador"] ?:""
             val nome = params["nome_personagem"] ?: ""
             val categoriaPrincipal = params["categoria_principal"] ?: ""
             val categoriaSecundaria = params["categoria_secundaria"]?: ""
@@ -72,10 +101,10 @@ fun Application.configureTemplating() {
             val inventario = listOf<Int>(1)
             val coins = 1
 
-            val personagem = criarPersonagem(id, nome, categoriaPrincipal, categoriaSecundaria, nivel, inventario,coins)
+            val personagem = criarPersonagem(id,idUtilizador.toInt(), nome, categoriaPrincipal, categoriaSecundaria, nivel, inventario,coins)
             //val personagem_criada = Personagem(id,nome,categoriaPrincipal,categoriaSecundaria,nivel,inventario,coins)
 
-            //val CAMINHODATA = "./src/main/resources/data"
+            val CAMINHODATA = "./src/main/resources/data"
 
             call.respond(ThymeleafContent("vila", mapOf("personagem" to personagem)))
             }

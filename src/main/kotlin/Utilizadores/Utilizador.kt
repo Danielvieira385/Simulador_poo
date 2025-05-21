@@ -16,9 +16,9 @@ data class Utilizador(
 ) {
 
     override fun toString(): String {
-        return " ID do Personagem - ${id}" +
-                "   Personagem ${nome}: " +
-                "   Categoria Principal : ${idade}"
+        return " ID do Utilizador - ${id}" +
+                "   Nome do Utilizador : ${nome} " +
+                "   Idade do Utilizador : ${idade}"
     }
 
     companion object {

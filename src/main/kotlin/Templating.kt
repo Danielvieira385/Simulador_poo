@@ -7,6 +7,9 @@ import com.example.Criacao_personagem.Personagem.Companion.obterID_Personagem
 import com.example.Criacao_personagem.Personagem.Companion.obterTodosPersonagens
 import com.example.Menu.Arma
 import com.example.Menu.Arma.Companion.json
+import com.example.Vila.Vila
+import com.example.Vila.Loja
+
 
 import com.example.Utilizadores.Utilizador.*
 import com.example.Utilizadores.Utilizador.Companion.criarUtilizador
@@ -108,7 +111,6 @@ fun Application.configureTemplating() {
 
             call.respond(ThymeleafContent("vila", mapOf("personagem" to personagem)))
             }
-
 
         }
 

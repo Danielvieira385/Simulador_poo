@@ -56,15 +56,6 @@ fun Application.configureTemplating() {
                 call.respond(ThymeleafContent("usersMenu", mapOf("erro" to "Credenciais inválidas")))
             }
         }
-        get("/menu") {
-            val idUtilizador = call.request.queryParameters["id"]?.toIntOrNull()
-            val utilizador = obterTodosUtilizadores().find { it.id == idUtilizador }
-            if (utilizador != null) {
-                call.respond(ThymeleafContent("menu", mapOf("utilizador" to utilizador)))
-            } else {
-                call.respondRedirect("/usersMenu")
-            }
-        }
         get("/criarUtilizador") {
             call.respond(ThymeleafContent("criarUtilizador",mapOf()))
         }
@@ -76,17 +67,32 @@ fun Application.configureTemplating() {
             val idade = params["idade"]?:""
 
             val utilizador = criarUtilizador(id,nome,idade.toInt(),password)
-            print(utilizador.toString())
-            call.respond(ThymeleafContent("usersMenu",mapOf()))
+            call.respond(ThymeleafContent("usersMenu",mapOf("utilizador" to utilizador)))
         }
-
-        get("/criar_personagem") {
+        get("/menu") {
             val idUtilizador = call.request.queryParameters["id"]?.toIntOrNull()
             val utilizador = obterTodosUtilizadores().find { it.id == idUtilizador }
-
             if (utilizador != null) {
-                call.respond(ThymeleafContent("criar_personagem", mapOf("utilizador" to utilizador)))
-            }else {
+                call.respond(ThymeleafContent("menu", mapOf("utilizador" to utilizador)))
+            } else {
+                call.respondRedirect("/usersMenu")
+            }
+        }
+        post("/criar_personagem") {
+            val params = call.receiveParameters()
+            val idUtilizador = params["id_Utilizador"]
+            if (idUtilizador != null) {
+                call.respond(ThymeleafContent("criar_personagem", mapOf("idUtilizador" to idUtilizador)))
+            } else {
+                call.respondRedirect("/usersMenu")
+            }
+        }
+        get("/criar_personagem") {
+            val idUtilizador = call.request.queryParameters["id_Utilizador"]
+            println(idUtilizador)
+            if (idUtilizador != null) {
+                call.respond(ThymeleafContent("criar_personagem", mapOf("idUtilizador" to idUtilizador)))
+            } else {
                 call.respondRedirect("/usersMenu")
             }
         }

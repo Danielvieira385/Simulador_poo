@@ -6,7 +6,7 @@
 </head>
 <body>
 <form method="post" action="/vila">
-  <input type="text" name="id_Utilizador" th:value="${utilizador.id}" />
+  <input type="hidden" name="id_Utilizador" th:value="${idUtilizador}" />
   <div>
     <label for="nome_personagem">Nome da Personagem:</label>
     <input type="text" name="nome_personagem" id="nome_personagem" />

@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "idUtilizador": 1,
+        "nome": "Personagem 1",
+        "categoriaPrincipal": "Arqueiro",
+        "categoriaSecundaria": "Caçador",
+        "nivel": 1,
+        "inventario": [
+            1
+        ],
+        "coins": 1
+    }
+]

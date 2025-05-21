@@ -1,14 +1,19 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Menu</title>
+    <input type="hidden" name="id_Utilizador" th:value="${utilizador.id}" />
 </head>
 <body>
 <div>
     <h1>Menu</h1>
     <ul>
-        <button onClick="window.location.href='/criar_personagem?id=[[${utilizador.id}]]'">Criar personagem</button>
+        <form method="post" action="/criar_personagem">
+            <input type="hidden" name="id_Utilizador" th:value="${utilizador.id}" />
+            <button type="submit">Criar personagem</button>
+        </form>
         <button onClick="window.location.href='/selecionarPersonagem'">Selecionar personagem</button>
         <button onClick="window.location.href='/sair'">Sair</button>
     </ul>

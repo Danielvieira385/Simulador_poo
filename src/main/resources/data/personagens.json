@@ -2,9 +2,57 @@
     {
         "id": 1,
         "idUtilizador": 1,
-        "nome": "Personagem 1",
+        "nome": "Personagem_Daniel",
+        "categoriaPrincipal": "Guerreiro",
+        "categoriaSecundaria": "Ferreiro",
+        "nivel": 1,
+        "inventario": [
+            1
+        ],
+        "coins": 1
+    },
+    {
+        "id": 2,
+        "idUtilizador": 1,
+        "nome": "Personagem2_Daniel",
         "categoriaPrincipal": "Arqueiro",
         "categoriaSecundaria": "Caçador",
+        "nivel": 1,
+        "inventario": [
+            1
+        ],
+        "coins": 1
+    },
+    {
+        "id": 3,
+        "idUtilizador": 2,
+        "nome": "Personagem3_Daniel2",
+        "categoriaPrincipal": "Arqueiro",
+        "categoriaSecundaria": "Ferreiro",
+        "nivel": 1,
+        "inventario": [
+            1
+        ],
+        "coins": 1
+    },
+    {
+        "id": 4,
+        "idUtilizador": 2,
+        "nome": "Personagem4_Daniel2",
+        "categoriaPrincipal": "Arqueiro",
+        "categoriaSecundaria": "Caçador",
+        "nivel": 1,
+        "inventario": [
+            1
+        ],
+        "coins": 1
+    },
+    {
+        "id": 5,
+        "idUtilizador": 3,
+        "nome": "Daniel 3",
+        "categoriaPrincipal": "Mago",
+        "categoriaSecundaria": "Agricultor",
         "nivel": 1,
         "inventario": [
             1

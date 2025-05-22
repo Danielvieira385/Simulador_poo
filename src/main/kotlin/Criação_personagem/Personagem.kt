@@ -21,8 +21,8 @@ data class Personagem(
 
     override fun toString(): String {
         return " ID do Personagem - ${id}" +
-                "ID do Utilizador - ${idUtilizador}" +
-                "   Personagem ${nome}: " +
+                " ID do Utilizador - ${idUtilizador}" +
+                "   Personagem: ${nome} " +
                 "   Categoria Principal : ${categoriaPrincipal}" +
                 "   Categoria Secundaria : ${categoriaSecundaria}" +
                 "   Nível: $nivel" +
@@ -34,7 +34,7 @@ data class Personagem(
 
 
         private val CAMINHODATA = "./src/main/resources/data"
-        private val personagens = mutableMapOf<String, Personagem>()
+        val personagens = mutableMapOf<String, Personagem>()
 
         fun obterID_Personagem(): Int {
             val personagens_criadas = obterTodosPersonagens()

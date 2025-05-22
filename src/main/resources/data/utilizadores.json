@@ -1,8 +1,20 @@
 [
     {
         "id": 1,
-        "nome": "teste",
+        "nome": "Daniel ",
         "idade": 24,
+        "password": "123"
+    },
+    {
+        "id": 2,
+        "nome": "Daniel 2",
+        "idade": 22,
+        "password": "123"
+    },
+    {
+        "id": 3,
+        "nome": "Daniel 3",
+        "idade": 23,
         "password": "123"
     }
 ]

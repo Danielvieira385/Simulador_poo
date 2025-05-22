@@ -14,7 +14,10 @@
             <input type="hidden" name="id_Utilizador" th:value="${utilizador.id}" />
             <button type="submit">Criar personagem</button>
         </form>
-        <button onClick="window.location.href='/selecionarPersonagem'">Selecionar personagem</button>
+        <form method="post" action="/selecionarPersonagem">
+            <input type="hidden" name="id_Utilizador_select" th:value="${utilizador.id}" />
+            <button type="submit">Selecionar Personagem</button>
+        </form>
         <button onClick="window.location.href='/sair'">Sair</button>
     </ul>
 </div>

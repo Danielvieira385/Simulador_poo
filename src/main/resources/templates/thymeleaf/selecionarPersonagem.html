@@ -6,9 +6,12 @@
 </head>
 <body>
     <h1>Selecione a personagem que deseja jogar:</h1>
-    <form method="post" action="/jogar">
-        <select name="personagem" id="personagem">
-            <option th:each="personagem : ${personagens}" th:value="${personagem.id}" th:text="${personagem.nome}"></option>
+    <form method="post" action="/vila">
+        <input type="hidden" name="tipoBusca" value="selecao"/>
+        <select name="personagemSelecionado">
+            <option th:each="personagem : ${personagensUtilizador}"
+                    th:value="${personagem.id}"
+                    th:text="${personagem.nome}">Personagem</option>
         </select>
         <input type="submit" value="Jogar" />
     </form>

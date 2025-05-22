@@ -5,6 +5,7 @@ import com.example.Criacao_personagem.Personagem.Companion
 import com.example.Criacao_personagem.Personagem.Companion.criarPersonagem
 import com.example.Criacao_personagem.Personagem.Companion.obterID_Personagem
 import com.example.Criacao_personagem.Personagem.Companion.obterTodosPersonagens
+import com.example.Criacao_personagem.Personagem.Companion.personagens
 import com.example.Menu.Arma
 import com.example.Menu.Arma.Companion.json
 import com.example.Vila.Vila
@@ -84,43 +85,73 @@ fun Application.configureTemplating() {
             if (idUtilizador != null) {
                 call.respond(ThymeleafContent("criar_personagem", mapOf("idUtilizador" to idUtilizador)))
             } else {
-                call.respondRedirect("/usersMenu")
+                call.respondRedirect("/menu")
             }
         }
         get("/criar_personagem") {
             val idUtilizador = call.request.queryParameters["id_Utilizador"]
-            println(idUtilizador)
             if (idUtilizador != null) {
                 call.respond(ThymeleafContent("criar_personagem", mapOf("idUtilizador" to idUtilizador)))
             } else {
-                call.respondRedirect("/usersMenu")
+                call.respondRedirect("/menu")
             }
         }
         get("/consultaBaseDados") {
             call.respond(ThymeleafContent("consultaBaseDados", mapOf("title" to ThymeleafUser(1, "user1"))))
         }
-        post("/vila") {
-            val params = call.receiveParameters()
-            val id = obterID_Personagem()
-            val idUtilizador = params["id_Utilizador"] ?:""
-            val nome = params["nome_personagem"] ?: ""
-            val categoriaPrincipal = params["categoria_principal"] ?: ""
-            val categoriaSecundaria = params["categoria_secundaria"]?: ""
-            val nivel = 1
-            val inventario = listOf<Int>(1)
-            val coins = 1
-
-            val personagem = criarPersonagem(id,idUtilizador.toInt(), nome, categoriaPrincipal, categoriaSecundaria, nivel, inventario,coins)
-            //val personagem_criada = Personagem(id,nome,categoriaPrincipal,categoriaSecundaria,nivel,inventario,coins)
-
-            val CAMINHODATA = "./src/main/resources/data"
-
-            call.respond(ThymeleafContent("vila", mapOf("personagem" to personagem)))
+        get("/selecionarPersonagem") {
+            val idUtilizador = call.request.queryParameters["id_Utilizador"]
+            if (idUtilizador != null) {
+                call.respond(ThymeleafContent("selecionarPersonagem", mapOf("idUtilizador" to idUtilizador)))
+            } else {
+                call.respondRedirect("/menu")
             }
-
+        }
+        post("/selecionarPersonagem") {
+            val params = call.receiveParameters()
+            val idUtilizador = params["id_Utilizador_select"]?.toIntOrNull()
+            val personagens = obterTodosPersonagens()
+            val personagensUtilizador = personagens.filter {
+                it.idUtilizador == (idUtilizador?.toInt() ?: "")
+            }
+            if (idUtilizador != null) {
+                call.respond(ThymeleafContent("selecionarPersonagem", mapOf("personagensUtilizador" to personagensUtilizador)))
+            } else {
+                call.respondRedirect("/menu")
+            }
         }
 
+        post("/vila") {
+            val params = call.receiveParameters()
+            val tipoBusca = params["tipoBusca"] ?: ""
+            val idUtilizador = params["id_Utilizador"] ?:""
+            if (tipoBusca == "criacao") {
 
+                val id = obterID_Personagem()
+                val nome = params["nome_personagem"] ?: ""
+                val categoriaPrincipal = params["categoria_principal"] ?: ""
+                val categoriaSecundaria = params["categoria_secundaria"]?: ""
+                val nivel = 1
+                val inventario = listOf<Int>(1)
+                val coins = 1
+                val personagem = criarPersonagem(id,idUtilizador.toInt(), nome, categoriaPrincipal, categoriaSecundaria, nivel, inventario,coins)
+                call.respond(ThymeleafContent("vila", mapOf("personagem" to personagem)))
+
+            } else if (tipoBusca == "selecao") {
+                val personagemSelecionado = params["personagemSelecionado"]?:""
+                println(personagemSelecionado)
+                val todasPersonagens = obterTodosPersonagens()
+                val personagem = todasPersonagens.find { it.id == personagemSelecionado.toInt() }
+                if (personagem != null) {
+                    call.respond(ThymeleafContent("vila", mapOf("personagem" to personagem)))
+                } else {
+                    call.respond(ThymeleafContent("menu", mapOf("erro" to "Personagem não encontrado")))
+                }
+            } else {
+                call.respond(ThymeleafContent("menu", mapOf("idUtilizador" to idUtilizador)))
+            }
+            }
+        }
     }
 
 data class ThymeleafUser(val id: Int, val name: String)

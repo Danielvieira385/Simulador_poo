@@ -2,9 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Arena</title>
+    <title>ARENA</title>
 </head>
 <body>
+    <h1> ARENA </h1>
+    <div id="listaAdversarios">
+        <h2> Lista de todos os Adversarios! </h2>
+        <ul>
+            <li th:each="adversario : ${adversarios}">
+                <strong th:text="${adversario.nome}"></strong> -
+                Nível: <span th:text="${adversario.nivel}"></span> -
+                Arma: <span th:text="${adversario.arma}"></span>
+            </li>
+        </ul>
+    </div>
+    <div id="proximoAdversario">
+        <form>
+
+        </form>
+    </div>
+
 
 </body>
 </html>

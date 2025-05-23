@@ -16,5 +16,11 @@
         "nome": "Daniel 3",
         "idade": 23,
         "password": "123"
+    },
+    {
+        "id": 4,
+        "nome": "Conta Administrador",
+        "idade": 22,
+        "password": "012"
     }
 ]

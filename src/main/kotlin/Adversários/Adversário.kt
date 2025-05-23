@@ -11,16 +11,16 @@ data class Adversário(
     var categoriaPrincipal: String = "",
     var categoriaSecundaria: String = "",
     var nivel: Int = 0,
-    var inventario: List<Int> = listOf(),
+    var arma: Int = 0
 ) {
 
     override fun toString(): String {
-        return " ID do Personagem - ${id}" +
-                "   Personagem ${nome}: " +
+        return " ID do Adversario - ${id}" +
+                "   Adversario ${nome}: " +
                 "   Categoria Principal : ${categoriaPrincipal}" +
                 "   Categoria Secundaria : ${categoriaSecundaria}" +
                 "   Nível: $nivel" +
-                "   Inventário: $inventario"
+                "   Arma: $arma"
     }
 
     companion object {
@@ -49,7 +49,7 @@ data class Adversário(
 
         fun criarAdversario(
             id: Int, nome: String, categoriaPrincipal: String, categoriaSecundaria: String,
-            nivel: Int, inventario: List<Int>, coins: Int
+            nivel: Int, arma: Int
         ) : Adversário{
             val novoAdversario = Adversário(
                 id = obterID_Adversario(),
@@ -57,13 +57,13 @@ data class Adversário(
                 categoriaPrincipal = categoriaPrincipal,
                 categoriaSecundaria = categoriaSecundaria,
                 nivel = nivel,
-                inventario = inventario,
+                arma = arma,
             )
 
             val adversariosExistentes = obterTodosAdversarios().toMutableList()
             adversariosExistentes.add(novoAdversario)
 
-            File("${CAMINHODATA}/personagens.json").apply {
+            File("${CAMINHODATA}/adversarios.json").apply {
                 parentFile.mkdirs()
                 writeText(json.encodeToString(adversariosExistentes))
 

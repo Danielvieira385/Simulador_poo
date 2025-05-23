@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Adversário</title>
+</head>
+<body>
+<form method="post" action="/paginaAdminAdversarios">
+    <div>
+        <label for="nome_adversario">Nome do Adversario:</label>
+        <input type="text" name="nome_adversario" id="nome_adversario" />
+    </div>
+    <br>
+    <div>
+        <label for="categoria_principal">Categoria Secundária:</label>
+        <select name="categoria_principal" id="categoria_principal">
+            <option>Guerreiro</option>
+            <option>Arqueiro</option>
+            <option>Mago</option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <label for="categoria_secundaria">Categoria Secundária:</label>
+        <select name="categoria_secundaria" id="categoria_secundaria">
+            <option>Ferreiro</option>
+            <option>Caçador</option>
+            <option>Pescador</option>
+            <option>Agricultor</option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <label for="nivelAdversario">Nivel do adversario:</label>
+        <input name="nivelAdversario" id="nivelAdversario"/>
+    </div>
+    <br>
+    <div>
+        <label for="armaAdversario">Arma:</label>
+        <input name="armaAdversario" id="armaAdversario">
+    </div>
+    <br>
+    <input type="submit" value="Criar Adversario" />
+</form>
+</body>
+</html>

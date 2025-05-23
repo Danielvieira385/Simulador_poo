@@ -1,5 +1,8 @@
 package com.example
 
+import com.example.Adversários.Adversário.Companion.criarAdversario
+import com.example.Adversários.Adversário.Companion.obterID_Adversario
+import com.example.Adversários.Adversário.Companion.obterTodosAdversarios
 import com.example.Criacao_personagem.Personagem
 import com.example.Criacao_personagem.Personagem.Companion
 import com.example.Criacao_personagem.Personagem.Companion.criarPersonagem
@@ -52,10 +55,32 @@ fun Application.configureTemplating() {
             val utilizadores = obterTodosUtilizadores()
             val utilizador = utilizadores.find { it.nome == nomeUtilizador && it.password == password }
             if (utilizador != null) {
-                call.respondRedirect("/menu?id=${utilizador.id}")
+                if (utilizador.nome == "Conta Administrador" && utilizador.password == "012") {
+                    call.respondRedirect("/ferramentasAdmin")
+                } else {
+                    call.respondRedirect("/menu?id=${utilizador.id}")
+                }
             } else {
                 call.respond(ThymeleafContent("usersMenu", mapOf("erro" to "Credenciais inválidas")))
             }
+        }
+        get("/ferramentasAdmin") {
+            call.respond(ThymeleafContent("ferramentasAdmin", mapOf("titulo" to "Painel do Administrador")))
+        }
+        get("/paginaAdminAdversarios") {
+            call.respond(ThymeleafContent("paginaAdminAdversarios",mapOf()))
+        }
+        post("/paginaAdminAdversarios") {
+            var params = call.receiveParameters()
+            val id = obterID_Adversario()
+            val nome = params["nome_adversario"]?:""
+            val categoriaPrincipal = params["categoria_principal"]?:""
+            val categoriaSecundaria = params["categoria_secundaria"]?:""
+            val nivel = params["nivelAdversario"]?:""
+            val arma = params["armaAdversario"]?:""
+
+            val adversario = criarAdversario(id,nome,categoriaPrincipal,categoriaSecundaria,nivel.toInt(),arma.toInt())
+            call.respond(ThymeleafContent("ferramentasAdmin",mapOf()))
         }
         get("/criarUtilizador") {
             call.respond(ThymeleafContent("criarUtilizador",mapOf()))
@@ -151,6 +176,12 @@ fun Application.configureTemplating() {
                 call.respond(ThymeleafContent("menu", mapOf("idUtilizador" to idUtilizador)))
             }
             }
+
+        get("/arena") {
+            val adversarios = obterTodosAdversarios()
+            call.respond(ThymeleafContent("arena", mapOf("adversarios" to adversarios)))
+        }
+
         }
     }
 

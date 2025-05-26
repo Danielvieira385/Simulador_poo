@@ -197,6 +197,22 @@ fun Application.configureTemplating() {
                 call.respond(ThymeleafContent("arena", context))
             }
         }
+        post("/loja") {
+            val params = call.receiveParameters()
+            val idUtilizador = params["id_Utilizador"] ?: ""
+            val tipoProcura = params["tipoProcura"] ?: ""
+
+            if (tipoProcura == "compra") {
+                Loja.comprarObjeto()
+                call.respond(ThymeleafContent("loja", mapOf("idUtilizador" to idUtilizador)))
+            } else if (tipoProcura == "venda") {
+                Loja.venderObjeto()
+                call.respond(ThymeleafContent("loja", mapOf("idUtilizador" to idUtilizador)))
+            } else {
+                call.respond(ThymeleafContent("menu", mapOf("idUtilizador" to idUtilizador)))
+            }
+
+        }
         }
 
         }

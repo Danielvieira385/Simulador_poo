@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loja</title>
+</head>
+<body>
+<h1>Loja</h1>
+<form method="post" action="/vila">
+    <input type="hidden" name="tipoProcura" value="loja"/>
+    <select name="itemSelecionado">
+        <option th:each="item : ${itensLoja}"
+                th:value="${item.id}"
+                th:text="${item.nome}">Item</option>
+    </select>
+    <input type="submit" value="Comprar" />
+</form>
+</body>
+</html>

@@ -8,6 +8,7 @@
         <h1>VILA</h1>
 
         <div id="infoPersonagem">
+            <input type="hidden" name="personagem" th:value="${personagem}" />
             <p th:text="'Nome: ' + ${personagem.nome}"></p>
             <p th:text="'Nível do Personagem : '  + ${personagem.nivel}"></p>
             <p th:text="'Coins : ' + ${personagem.coins}"></p>
@@ -24,7 +25,15 @@
             <input type="hidden" name="personagemId" th:value="${personagem.id}" />
             <button type="submit">Ir para Arena</button>
         </form>
-        <button onClick ="window.location.href='/loja'"> LOJA  </button>
+
+        <form action="/loja" method="post">
+            <input type="hidden" name="personagemIdLoja" th:value="${personagem.id}" />
+            <input type="hidden" name="personagemInventario" th:value="${personagem.inventario}" />
+            <input type="hidden" name="stockArmas" th:value="${armasDisponiveis}" />
+            <button type="submit">Ir para Loja</button>
+        </form>
+
+<!--        <button onClick ="window.location.href='/loja'"> LOJA  </button>-->
         <button onClick ="window.location.href='/taberna'"> TABERNA </button>
 
     </body>

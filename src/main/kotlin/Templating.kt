@@ -70,32 +70,33 @@ fun Application.configureTemplating() {
             call.respond(ThymeleafContent("ferramentasAdmin", mapOf("titulo" to "Painel do Administrador")))
         }
         get("/paginaAdminAdversarios") {
-            call.respond(ThymeleafContent("paginaAdminAdversarios",mapOf()))
+            call.respond(ThymeleafContent("paginaAdminAdversarios", mapOf()))
         }
         post("/paginaAdminAdversarios") {
             var params = call.receiveParameters()
             val id = obterID_Adversario()
-            val nome = params["nome_adversario"]?:""
-            val categoriaPrincipal = params["categoria_principal"]?:""
-            val categoriaSecundaria = params["categoria_secundaria"]?:""
-            val nivel = params["nivelAdversario"]?:""
-            val arma = params["armaAdversario"]?:""
+            val nome = params["nome_adversario"] ?: ""
+            val categoriaPrincipal = params["categoria_principal"] ?: ""
+            val categoriaSecundaria = params["categoria_secundaria"] ?: ""
+            val nivel = params["nivelAdversario"] ?: ""
+            val arma = params["armaAdversario"] ?: ""
 
-            val adversario = criarAdversario(id,nome,categoriaPrincipal,categoriaSecundaria,nivel.toInt(),arma.toInt())
-            call.respond(ThymeleafContent("ferramentasAdmin",mapOf()))
+            val adversario =
+                criarAdversario(id, nome, categoriaPrincipal, categoriaSecundaria, nivel.toInt(), arma.toInt())
+            call.respond(ThymeleafContent("ferramentasAdmin", mapOf()))
         }
         get("/criarUtilizador") {
-            call.respond(ThymeleafContent("criarUtilizador",mapOf()))
+            call.respond(ThymeleafContent("criarUtilizador", mapOf()))
         }
         post("/criarUtilizador") {
             var params = call.receiveParameters()
             val id = obterID_Utilizador()
-            val nome = params["nomeUtilizador"]?:""
-            val password = params["password"]?:""
-            val idade = params["idade"]?:""
+            val nome = params["nomeUtilizador"] ?: ""
+            val password = params["password"] ?: ""
+            val idade = params["idade"] ?: ""
 
-            val utilizador = criarUtilizador(id,nome,idade.toInt(),password)
-            call.respond(ThymeleafContent("usersMenu",mapOf("utilizador" to utilizador)))
+            val utilizador = criarUtilizador(id, nome, idade.toInt(), password)
+            call.respond(ThymeleafContent("usersMenu", mapOf("utilizador" to utilizador)))
         }
         get("/menu") {
             val idUtilizador = call.request.queryParameters["id"]?.toIntOrNull()
@@ -142,7 +143,12 @@ fun Application.configureTemplating() {
                 it.idUtilizador == (idUtilizador?.toInt() ?: "")
             }
             if (idUtilizador != null) {
-                call.respond(ThymeleafContent("selecionarPersonagem", mapOf("personagensUtilizador" to personagensUtilizador)))
+                call.respond(
+                    ThymeleafContent(
+                        "selecionarPersonagem",
+                        mapOf("personagensUtilizador" to personagensUtilizador)
+                    )
+                )
             } else {
                 call.respondRedirect("/menu")
             }
@@ -151,22 +157,32 @@ fun Application.configureTemplating() {
         post("/vila") {
             val params = call.receiveParameters()
             val tipoBusca = params["tipoBusca"] ?: ""
-            val idUtilizador = params["id_Utilizador"] ?:""
+            val idUtilizador = params["id_Utilizador"] ?: ""
             if (tipoBusca == "criacao") {
 
                 val id = obterID_Personagem()
                 val nome = params["nome_personagem"] ?: ""
                 val categoriaPrincipal = params["categoria_principal"] ?: ""
-                val categoriaSecundaria = params["categoria_secundaria"]?: ""
+                val categoriaSecundaria = params["categoria_secundaria"] ?: ""
                 val nivel = 1
                 val inventario = listOf<Int>(1)
                 val coins = 1
                 val progresso = 1
-                val personagem = criarPersonagem(id,idUtilizador.toInt(), nome, categoriaPrincipal, categoriaSecundaria, nivel, inventario,coins,progresso)
+                val personagem = criarPersonagem(
+                    id,
+                    idUtilizador.toInt(),
+                    nome,
+                    categoriaPrincipal,
+                    categoriaSecundaria,
+                    nivel,
+                    inventario,
+                    coins,
+                    progresso
+                )
                 call.respond(ThymeleafContent("vila", mapOf("personagem" to personagem)))
 
             } else if (tipoBusca == "selecao") {
-                val personagemSelecionado = params["personagemSelecionado"]?:""
+                val personagemSelecionado = params["personagemSelecionado"] ?: ""
                 println(personagemSelecionado)
                 val todasPersonagens = obterTodosPersonagens()
                 val personagem = todasPersonagens.find { it.id == personagemSelecionado.toInt() }
@@ -178,7 +194,7 @@ fun Application.configureTemplating() {
             } else {
                 call.respond(ThymeleafContent("menu", mapOf("idUtilizador" to idUtilizador)))
             }
-            }
+        }
 
         post("/arena") {
             val params = call.receiveParameters()
@@ -223,23 +239,21 @@ fun Application.configureTemplating() {
             }
         }
 
-        post("/loja") {
-            val params = call.receiveParameters()
-            val idUtilizador = params["id_Utilizador"] ?: ""
-            val tipoProcura = params["tipoProcura"] ?: ""
+            post("/loja") {
+                val params = call.receiveParameters()
+                val idPersonagem = params["personagemIdLoja"]!!.toInt()
+                val armasDisponiveis = Loja.mostrarTodosArmas()
+                val personagem = obterTodosPersonagens().find { it.id == idPersonagem }
 
-            if (tipoProcura == "compra") {
-                Loja.comprarObjeto()
-                call.respond(ThymeleafContent("loja", mapOf("idUtilizador" to idUtilizador)))
-            } else if (tipoProcura == "venda") {
-                Loja.venderObjeto()
-                call.respond(ThymeleafContent("loja", mapOf("idUtilizador" to idUtilizador)))
-            } else {
-                call.respond(ThymeleafContent("menu", mapOf("idUtilizador" to idUtilizador)))
+                if (personagem != null) {call.respond(ThymeleafContent("loja", mapOf(
+                    "personagem" to personagem,
+                    "armasDisponiveis" to armasDisponiveis))) } else {
+                        println("Personagem ou Armas não encontradas")
+                }
+
             }
 
         }
-        }
 
-        }
+    }
 data class ThymeleafUser(val id: Int, val name: String)

@@ -4,41 +4,47 @@
     "nome": "Espada",
     "dano": 10,
     "tipo": "Guerreiro",
-    "nivel": 1
+    "nivel": 1,
+    "preco": 100
   },
   {
     "id": 2,
     "nome": "Machado",
     "dano": 15,
     "tipo": "Guerreiro",
-    "nivel": 2
+    "nivel": 2,
+    "preco": 150
   },
   {
     "id": 3,
     "nome": "Arco",
     "dano": 8,
     "tipo": "Arqueiro",
-    "nivel": 1
+    "nivel": 1,
+    "preco": 75
   },
     {
         "id": 4,
         "nome": "Flecha",
         "dano": 5,
         "tipo": "Arqueiro",
-        "nivel": 1
+        "nivel": 1,
+      "preco": 5
     },
     {
         "id": 5,
         "nome": "Cajado",
         "dano": 12,
         "tipo": "Mago",
-        "nivel": 1
+        "nivel": 1,
+        "preco": 80
     },
     {
         "id": 6,
         "nome": "Cajado de Fogo",
         "dano": 15,
         "tipo": "Mago",
-        "nivel": 2
+        "nivel": 2,
+        "preco": 120
     }
 ]

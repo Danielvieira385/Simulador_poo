@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "nome": "Adversario 1",
+        "nome": "Adversario1",
         "categoriaPrincipal": "Guerreiro",
         "categoriaSecundaria": "Ferreiro",
         "nivel": 1,
@@ -9,10 +9,18 @@
     },
     {
         "id": 2,
-        "nome": "Adversario 2",
-        "categoriaPrincipal": "Mago",
-        "categoriaSecundaria": "Pescador",
+        "nome": "Adversario2",
+        "categoriaPrincipal": "Guerreiro",
+        "categoriaSecundaria": "Ferreiro",
         "nivel": 2,
         "arma": 2
+    },
+    {
+        "id": 3,
+        "nome": "Adversario3",
+        "categoriaPrincipal": "Guerreiro",
+        "categoriaSecundaria": "Ferreiro",
+        "nivel": 3,
+        "arma": 3
     }
 ]

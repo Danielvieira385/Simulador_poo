@@ -5,23 +5,35 @@
     <title>ARENA</title>
 </head>
 <body>
-    <h1> ARENA </h1>
-    <div id="listaAdversarios">
-        <h2> Lista de todos os Adversarios! </h2>
-        <ul>
-            <li th:each="adversario : ${adversarios}">
-                <strong th:text="${adversario.nome}"></strong> -
-                Nível: <span th:text="${adversario.nivel}"></span> -
-                Arma: <span th:text="${adversario.arma}"></span>
-            </li>
-        </ul>
-    </div>
-    <div id="proximoAdversario">
-        <form>
+<h1>ARENA</h1>
 
-        </form>
-    </div>
+<!-- Lista de Todos os Adversários -->
+<div id="listaAdversarios">
+    <h2>Lista de todos os Adversários!</h2>
+    <ul>
+        <li th:each="adversario : ${adversarios}">
+            <strong th:text="${adversario.nome}"></strong> -
+            Nível: <span th:text="${adversario.nivel}"></span> -
+            Arma: <span th:text="${adversario.arma}"></span>
+        </li>
+    </ul>
+</div>
 
+<!-- Info do Personagem -->
+<div>
+    <label>Personagem:</label>
+    <input type="text" th:value="${personagem.nome}" readonly>
+    <input type="text" th:value="${personagem.progresso}" readonly>
+</div>
 
+<!-- Próximo Adversário -->
+<div id="proximoAdversario" th:if="${proximoAdversario != null}">
+    <h2>Próximo Adversário</h2>
+    <p><strong th:text="${proximoAdversario.nome}"></strong></p>
+    <p>Categoria Principal: <span th:text="${proximoAdversario.categoriaPrincipal}"></span></p>
+    <p>Categoria Secundária: <span th:text="${proximoAdversario.categoriaSecundaria}"></span></p>
+    <p>Nível: <span th:text="${proximoAdversario.nivel}"></span></p>
+    <p>Arma: <span th:text="${proximoAdversario.arma}"></span></p>
+</div>
 </body>
 </html>

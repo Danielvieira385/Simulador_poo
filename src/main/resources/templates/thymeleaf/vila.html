@@ -6,10 +6,12 @@
     </head>
     <body>
         <h1>VILA</h1>
+
         <div id="infoPersonagem">
             <p th:text="'Nome: ' + ${personagem.nome}"></p>
             <p th:text="'Nível do Personagem : '  + ${personagem.nivel}"></p>
             <p th:text="'Coins : ' + ${personagem.coins}"></p>
+            <p th:text="'Progresso : ' + ${personagem.progresso}"></p>
             <!--<p th:text="'ID Personagem: ' + ${personagem.id}"></p>-->
             <!--<p th:text="'ID Utilizador: ' + ${personagem.idUtilizador}"></p>-->
             <!--<p th:text="'Categoria Principal: ' + ${personagem.categoriaPrincipal}"></p>-->
@@ -18,7 +20,10 @@
         </div>
 
         <button onClick = "window.location.href='/menu'">Voltar ao Menu!</button>
-        <button onClick ="window.location.href='/arena'"> ARENA </button>
+        <form action="/arena" method="post">
+            <input type="hidden" name="personagemId" th:value="${personagem.id}" />
+            <button type="submit">Ir para Arena</button>
+        </form>
         <button onClick ="window.location.href='/loja'"> LOJA  </button>
         <button onClick ="window.location.href='/taberna'"> TABERNA </button>
 

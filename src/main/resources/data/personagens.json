@@ -1,8 +1,8 @@
 [
     {
         "id": 1,
-        "idUtilizador": 1,
-        "nome": "Personagem 1",
+        "idUtilizador": 2,
+        "nome": "Personagem1",
         "categoriaPrincipal": "Guerreiro",
         "categoriaSecundaria": "Ferreiro",
         "nivel": 1,

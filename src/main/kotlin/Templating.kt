@@ -159,7 +159,8 @@ fun Application.configureTemplating() {
                 val nivel = 1
                 val inventario = listOf<Int>(1)
                 val coins = 1
-                val personagem = criarPersonagem(id,idUtilizador.toInt(), nome, categoriaPrincipal, categoriaSecundaria, nivel, inventario,coins)
+                val progresso = 1
+                val personagem = criarPersonagem(id,idUtilizador.toInt(), nome, categoriaPrincipal, categoriaSecundaria, nivel, inventario,coins,progresso)
                 call.respond(ThymeleafContent("vila", mapOf("personagem" to personagem)))
 
             } else if (tipoBusca == "selecao") {
@@ -177,12 +178,26 @@ fun Application.configureTemplating() {
             }
             }
 
-        get("/arena") {
+        post("/arena") {
+            val params = call.receiveParameters()
+            val personagemId = params["personagemId"]?.toIntOrNull()
+            val personagem = obterTodosPersonagens().find { it.id == personagemId }
             val adversarios = obterTodosAdversarios()
-            call.respond(ThymeleafContent("arena", mapOf("adversarios" to adversarios)))
+            var proximoAdversario = adversarios.find { it.id == personagem?.progresso }
+
+            if (personagem != null) {
+                val context = mutableMapOf<String, Any>(
+                    "adversarios" to adversarios,
+                    "personagem" to personagem
+                )
+                proximoAdversario?.let {
+                    context["proximoAdversario"] = it
+                }
+
+                call.respond(ThymeleafContent("arena", context))
+            }
+        }
         }
 
         }
-    }
-
 data class ThymeleafUser(val id: Int, val name: String)

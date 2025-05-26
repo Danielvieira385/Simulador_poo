@@ -16,7 +16,8 @@ data class Personagem(
     var categoriaSecundaria: String = "",
     var nivel: Int = 0,
     var inventario: List<Int> = listOf(),
-    var coins : Int = 0
+    var coins : Int = 0,
+    var progresso : Int = 1
 ) {
 
     override fun toString(): String {
@@ -27,7 +28,8 @@ data class Personagem(
                 "   Categoria Secundaria : ${categoriaSecundaria}" +
                 "   Nível: $nivel" +
                 "   Inventário: $inventario" +
-                "   Dinheiro: $coins"
+                "   Dinheiro: $coins" +
+                "   Progresso: $progresso"
     }
 
     companion object {
@@ -56,7 +58,7 @@ data class Personagem(
 
         fun criarPersonagem(
             id: Int, idUtilizador: Int, nome: String, categoriaPrincipal: String, categoriaSecundaria: String,
-            nivel: Int, inventario: List<Int>, coins: Int
+            nivel: Int, inventario: List<Int>, coins: Int, progresso: Int
         ) : Personagem{
             val novaPersonagem = Personagem(
                 id = obterID_Personagem(),
@@ -66,7 +68,8 @@ data class Personagem(
                 categoriaSecundaria = categoriaSecundaria,
                 nivel = nivel,
                 inventario = inventario,
-                coins = coins
+                coins = coins,
+                progresso = progresso
             )
 
             val personagemExistentes = obterTodosPersonagens().toMutableList()

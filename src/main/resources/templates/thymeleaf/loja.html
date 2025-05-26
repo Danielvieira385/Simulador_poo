@@ -6,14 +6,31 @@
 </head>
 <body>
 <h1>Loja</h1>
-<form method="post" action="/vila">
-    <input type="hidden" name="tipoProcura" value="loja"/>
-    <select name="itemSelecionado">
-        <option th:each="item : ${itensLoja}"
-                th:value="${item.id}"
-                th:text="${item.nome}">Item</option>
-    </select>
-    <input type="submit" value="Comprar" />
-</form>
+
+<div id="personagemInfo">
+    <h2>Informação da personagem!</h2>
+    <ul>
+        <li>
+            <strong th:text="'Nome: ' + ${personagem.nome}"></strong>
+            Nível: <span th:text="${personagem.nivel}"></span>
+            Coins: <span th:text="${personagem.coins}"></span>
+            Inventário: <span th:text="${personagem.inventario}"></span>
+        </li>
+    </ul>
+</div>
+
+<!-- Lista de Todos as Armas na Loja -->
+<div id="sockDeArmas">
+    <h2>Lista de Armas na Loja!</h2>
+    <ul>
+        <li th:each="arma : ${armasDisponiveis}">
+            <strong th:text="${arma.nome}"></strong>
+            - Preço: <span th:text="${arma.preco}"></span> Coins
+            - Dano: <span th:text="${arma.dano}"></span>
+            - Tipo: <span th:text="${arma.tipo}"></span>
+        </li>
+    </ul>
+</div>
+
 </body>
 </html>

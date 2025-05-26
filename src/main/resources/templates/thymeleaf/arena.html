@@ -22,18 +22,27 @@
 <!-- Info do Personagem -->
 <div>
     <label>Personagem:</label>
+    <input type="hidden" th:value="${personagem}" name="personagem">
     <input type="text" th:value="${personagem.nome}" readonly>
     <input type="text" th:value="${personagem.progresso}" readonly>
+    <!--<input type="text" th:value="${personagem.nivel}">-->
 </div>
 
 <!-- Próximo Adversário -->
 <div id="proximoAdversario" th:if="${proximoAdversario != null}">
     <h2>Próximo Adversário</h2>
+    <input type="hidden" th:value="${proximoAdversario}" name="adversario">
     <p><strong th:text="${proximoAdversario.nome}"></strong></p>
     <p>Categoria Principal: <span th:text="${proximoAdversario.categoriaPrincipal}"></span></p>
     <p>Categoria Secundária: <span th:text="${proximoAdversario.categoriaSecundaria}"></span></p>
     <p>Nível: <span th:text="${proximoAdversario.nivel}"></span></p>
     <p>Arma: <span th:text="${proximoAdversario.arma}"></span></p>
+
+    <form action="/combate" method="post">
+        <input type="hidden" name="personagem" th:value="${personagem.id}" />
+        <input type="hidden" name="adversario" th:value="${proximoAdversario.id}"/>
+        <button type="submit">Combate</button>
+    </form>
 </div>
 </body>
 </html>

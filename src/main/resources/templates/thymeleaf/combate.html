@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Combate </title>
+</head>
+<body>
+<h1> Combate </h1>
+<div>
+    <label> Personagem </label>
+    <input type="hidden" th:value="${personagem}" name="personagem">
+    <input type="text" th:value="${personagem.nome}" readonly>
+    <input type="text" th:value="${personagem.progresso}" readonly>
+    <input type="text" th:value="${personagem.inventario}">
+    <!--<input type="text" th:value="${personagem.nivel}">-->
+</div>
+
+<div id="proximoAdversario">
+    <h2> Adversário </h2>
+    <input type="hidden" th:value="${adversario}" name="adversario">
+    <p><strong th:text="${adversario.nome}"></strong></p>
+</div>
+
+<h2> RESULTADO: </h2>
+<p><strong th:text="${luta}"></strong></p>
+
+</body>
+</html>

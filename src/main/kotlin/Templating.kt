@@ -8,6 +8,7 @@ import com.example.Criacao_personagem.Personagem.Companion
 import com.example.Criacao_personagem.Personagem.Companion.criarPersonagem
 import com.example.Criacao_personagem.Personagem.Companion.obterID_Personagem
 import com.example.Criacao_personagem.Personagem.Companion.obterTodosPersonagens
+import com.example.Criacao_personagem.Personagem.Companion.passarNivel
 import com.example.Criacao_personagem.Personagem.Companion.personagens
 import com.example.Menu.Arma
 import com.example.Menu.Arma.Companion.json
@@ -19,6 +20,7 @@ import com.example.Utilizadores.Utilizador.*
 import com.example.Utilizadores.Utilizador.Companion.criarUtilizador
 import com.example.Utilizadores.Utilizador.Companion.obterID_Utilizador
 import com.example.Utilizadores.Utilizador.Companion.obterTodosUtilizadores
+import com.example.Vila.Combate
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -185,6 +187,12 @@ fun Application.configureTemplating() {
             val adversarios = obterTodosAdversarios()
             var proximoAdversario = adversarios.find { it.id == personagem?.progresso }
 
+            //Ganhar XP
+            //if (personagem != null) {
+              //  passarNivel(50,personagem)
+                //println(personagem.nivel)
+            //}
+
             if (personagem != null) {
                 val context = mutableMapOf<String, Any>(
                     "adversarios" to adversarios,
@@ -197,6 +205,24 @@ fun Application.configureTemplating() {
                 call.respond(ThymeleafContent("arena", context))
             }
         }
+
+        post("combate") {
+            val params = call.receiveParameters()
+            val personagemid = params["personagem"] ?: ""
+            val adversarioid = params["adversario"] ?: ""
+            val personagem = obterTodosPersonagens().find { it.id == personagemid.toInt()}
+            val adversario = obterTodosAdversarios().find { it.id == adversarioid.toInt()}
+
+            if (personagem != null) {
+                if (adversario != null) {
+                    var combate = Combate(personagem,adversario)
+                    var luta = combate.comecarBatalha()
+                    call.respond(ThymeleafContent("combate", mapOf("personagem" to personagem,
+                        "adversario" to adversario, "luta" to luta)))
+                }
+            }
+        }
+
         post("/loja") {
             val params = call.receiveParameters()
             val idUtilizador = params["id_Utilizador"] ?: ""

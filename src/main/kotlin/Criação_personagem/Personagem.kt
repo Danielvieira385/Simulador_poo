@@ -55,6 +55,15 @@ data class Personagem(
             else json.decodeFromString(jsonString)
         }
 
+        var exp : Int = 0
+        fun passarNivel(xp : Int, personagemAtiva : Personagem) {
+            exp += xp
+            if (exp >= 100) {
+                personagemAtiva.nivel += 1
+                exp = 0
+            }
+        }
+
 
         fun criarPersonagem(
             id: Int, idUtilizador: Int, nome: String, categoriaPrincipal: String, categoriaSecundaria: String,

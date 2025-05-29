@@ -32,7 +32,6 @@ class Inventario(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableL
 
     fun removerArmaInventario(idArma: Int) {
         if (idArmas.remove(idArma)) {
-            // Atualizar o arquivo JSON após remoção
             val file = File("$CAMINHODATA/inventario.json")
             val inventarioData: InventarioData =
                 if (file.exists() && file.readText().isNotEmpty())
@@ -50,11 +49,11 @@ class Inventario(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableL
         val todasArmas: List<Arma> = json.decodeFromString(fileArmas.readText())
         return todasArmas.filter { it.id in idArmas }
     }
-
-    fun mostrarArmasInventarioPorID(idPersonagem: Int): List<Int> {
-        val file = File("$CAMINHODATA/inventario.json")
-        if (!file.exists() || file.readText().isEmpty()) return emptyList()
-        val inventarioData: InventarioData = json.decodeFromString(file.readText())
-        return inventarioData.inventarios[idPersonagem] ?: emptyList()
-    }
+// Ainda não está a funcionar corretamente, mas é para mostrar as armas de um personagem específico
+//    fun mostrarArmasInventarioPorID(idPersonagem: Int): List<Int> {
+//        val file = File("$CAMINHODATA/inventario.json")
+//        if (!file.exists() || file.readText().isEmpty()) return emptyList()
+//        val inventarioData: InventarioData = json.decodeFromString(file.readText())
+//        return inventarioData.inventarios[idPersonagem] ?: emptyList()
+//    }
 }

@@ -29,6 +29,14 @@
             - Dano: <span th:text="${arma.dano}"></span>
             - Tipo: <span th:text="${arma.tipo}"></span>
         </li>
+        <form>
+            <select>
+                <option th:each="arma : ${armasDisponiveis}">
+                    <strong th:text="${arma.nome}"></strong>
+               </option>
+            </select>
+            <input type="submit" value="Comprar">
+        </form>
     </ul>
 </div>
 

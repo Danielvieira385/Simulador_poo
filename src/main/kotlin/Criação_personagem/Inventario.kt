@@ -10,7 +10,7 @@ import java.io.File
 @Serializable
 data class InventarioData(val inventarios: MutableMap<Int, MutableList<Int>> = mutableMapOf())
 
-class Inventario(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableListOf()) {
+class Item(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableListOf()) {
     val CAMINHODATA = "./src/main/resources/data"
     private val json = Json { ignoreUnknownKeys = true }
     val file = File("$CAMINHODATA/inventario.json")
@@ -64,17 +64,9 @@ class Inventario(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableL
         return todasArmas.filter { it.id in idArmas }
     }
 
-// Ainda não está a funcionar corretamente, mas é para mostrar as armas de um personagem específico
     fun mostrarArmasInventarioPorID(idPersonagem: Int): List<Int> {
         if (!file.exists() || file.readText().isEmpty()) return emptyList()
         val inventarioData: InventarioData = json.decodeFromString(file.readText())
         return inventarioData.inventarios[idPersonagem] ?: emptyList()
     }
-    }
-
-fun main(){
-    val inventario = Inventario(1)
-    inventario.removerArmaInventario(2)
-    println(inventario.mostrarArmasInventarioPorID(1))
-
 }

@@ -14,6 +14,8 @@ import com.example.Menu.Arma
 import com.example.Menu.Arma.Companion.json
 import com.example.Vila.Vila
 import com.example.Vila.Loja
+import com.example.Vila.Loja.Companion.mostrarTodosArmas
+
 
 
 import com.example.Utilizadores.Utilizador.*
@@ -244,12 +246,14 @@ fun Application.configureTemplating() {
                 val idPersonagem = params["personagemIdLoja"]!!.toInt()
                 val armasDisponiveis = Loja.mostrarTodosArmas()
                 val personagem = obterTodosPersonagens().find { it.id == idPersonagem }
+                val inventarioPersonagem =
 
                 if (personagem != null) {call.respond(ThymeleafContent("loja", mapOf(
                     "personagem" to personagem,
                     "armasDisponiveis" to armasDisponiveis))) } else {
                         println("Personagem ou Armas não encontradas")
                 }
+
 
             }
 

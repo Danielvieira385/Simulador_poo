@@ -3,6 +3,7 @@ import com.example.Menu.Arma.Companion.json
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import java.io.File
+import com.example.Criacao_personagem.Personagem
 
 @Serializable
 class Loja(
@@ -32,15 +33,12 @@ class Loja(
         }
 
         fun comprarObjeto() {
-            val objetos = mostrarTodosArmas()
-            for (objeto in objetos) {
-                println("ID: ${objeto.id} Nome: ${objeto.nome}")
-            }
-            val objetoEscolhido = readLine().toString()
+
 
         }
 
         fun venderObjeto() {
+
 
         }
     }

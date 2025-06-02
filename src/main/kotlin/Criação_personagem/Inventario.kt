@@ -13,18 +13,32 @@ data class InventarioData(val inventarios: MutableMap<Int, MutableList<Int>> = m
 class Inventario(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableListOf()) {
     val CAMINHODATA = "./src/main/resources/data"
     private val json = Json { ignoreUnknownKeys = true }
+    val file = File("$CAMINHODATA/inventario.json")
 
+    init {
+        if (file.exists() && file.readText().isNotEmpty()) {
+            val inventarioData: InventarioData = json.decodeFromString(file.readText())
+            idArmas.addAll(inventarioData.inventarios.getOrDefault(idPersonagem, mutableListOf()))
+        } else {
+            // Se o arquivo não existir, inicializa o inventário vazio
+            idArmas.clear()
+        }
+    }
+
+    override fun toString(): String {
+        return "Inventário do Personagem ID $idPersonagem: Armas IDs = $idArmas"
+    }
+
+    // Adiciona uma arma ao inventário do personagem
     fun adicionarArmaInventario(idArma: Int) {
         if (!idArmas.contains(idArma)) {
             idArmas.add(idArma)
 
-            val file = File("$CAMINHODATA/inventario.json")
             val inventarioData: InventarioData =
                 if (file.exists() && file.readText().isNotEmpty())
                     json.decodeFromString(file.readText())
                 else
                     InventarioData()
-
             inventarioData.inventarios[idPersonagem] = idArmas
             file.writeText(json.encodeToString(inventarioData))
         }
@@ -49,11 +63,18 @@ class Inventario(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableL
         val todasArmas: List<Arma> = json.decodeFromString(fileArmas.readText())
         return todasArmas.filter { it.id in idArmas }
     }
+
 // Ainda não está a funcionar corretamente, mas é para mostrar as armas de um personagem específico
-//    fun mostrarArmasInventarioPorID(idPersonagem: Int): List<Int> {
-//        val file = File("$CAMINHODATA/inventario.json")
-//        if (!file.exists() || file.readText().isEmpty()) return emptyList()
-//        val inventarioData: InventarioData = json.decodeFromString(file.readText())
-//        return inventarioData.inventarios[idPersonagem] ?: emptyList()
-//    }
+    fun mostrarArmasInventarioPorID(idPersonagem: Int): List<Int> {
+        if (!file.exists() || file.readText().isEmpty()) return emptyList()
+        val inventarioData: InventarioData = json.decodeFromString(file.readText())
+        return inventarioData.inventarios[idPersonagem] ?: emptyList()
+    }
+    }
+
+fun main(){
+    val inventario = Inventario(1)
+    inventario.removerArmaInventario(2)
+    println(inventario.mostrarArmasInventarioPorID(1))
+
 }

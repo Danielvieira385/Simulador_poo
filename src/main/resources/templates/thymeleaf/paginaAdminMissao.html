@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Missao</title>
+</head>
+<body>
+<form method="post" action="/paginaAdminMissao">
+    <div>
+        <label for="nome_missao">Nome da Missao:</label>
+        <input type="text" name="nome_missao" id="nome_missao" />
+    </div>
+    <br>
+    <div>
+        <label for="exp_missao">Experiência a dar pela Missão:</label>
+        <input type="number" name="exp_missao" id="exp_missao" />
+    </div>
+    <br>
+    <div>
+        <label for="recompensa_coins">Coins a dar pela Missão:</label>
+        <input type="number" name="recompensa_coins" id="recompensa_coins" />
+    </div>
+    <br>
+    <div>
+        <label for="nivelPersonagem">Nivel Personagem necessário:</label>
+        <input name="nivelPersonagem" id="nivelPersonagem"/>
+    </div>
+    <br>
+    <div>
+        <label for="adversario_missao">Id do Adversário:</label>
+        <input name="adversario_missao" id="adversario_missao">
+    </div>
+    <br>
+    <input type="submit" value="Criar Missão" />
+</form>
+</body>
+</html>

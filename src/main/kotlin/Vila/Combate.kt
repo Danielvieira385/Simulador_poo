@@ -65,6 +65,6 @@ class Combate (var personagem : Personagem, var inimigo : Adversário) {
                     }
                 }
             }
-            return primeiroAtacante + " /n " + vitorioso
+            return primeiroAtacante + vitorioso
         }
 }

@@ -12,6 +12,7 @@ import com.example.Criacao_personagem.Personagem.Companion.passarNivel
 import com.example.Criacao_personagem.Personagem.Companion.personagens
 import com.example.Menu.Arma
 import com.example.Menu.Arma.Companion.json
+import com.example.Menu.Missao.Companion.obterIDMissao
 import com.example.Vila.Vila
 import com.example.Vila.Loja
 import com.example.Vila.Loja.Companion.mostrarTodosArmas
@@ -87,6 +88,22 @@ fun Application.configureTemplating() {
                 criarAdversario(id, nome, categoriaPrincipal, categoriaSecundaria, nivel.toInt(), arma.toInt())
             call.respond(ThymeleafContent("ferramentasAdmin", mapOf()))
         }
+        get("/paginaAdminMissao") {
+            call.respond(ThymeleafContent("paginaAdminMissao", mapOf()))
+        }
+      //  post("/paginaAdminMissao") {
+        //    var params = call.receiveParameters()
+          //  val id = obterIDMissao()
+            //val nome = params["nome_missao"] ?: ""
+            //val exp = params["categoria_principal"] ?: ""
+            //val categoriaSecundaria = params["categoria_secundaria"] ?: ""
+            //val nivel = params["nivelAdversario"] ?: ""
+            //val arma = params["armaAdversario"] ?: ""
+
+            //val adversario =
+              //  criarAdversario(id, nome, categoriaPrincipal, categoriaSecundaria, nivel.toInt(), arma.toInt())
+            //call.respond(ThymeleafContent("ferramentasAdmin", mapOf()))
+        //}
         get("/criarUtilizador") {
             call.respond(ThymeleafContent("criarUtilizador", mapOf()))
         }

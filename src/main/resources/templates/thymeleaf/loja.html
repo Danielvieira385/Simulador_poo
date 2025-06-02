@@ -7,6 +7,7 @@
 <body>
 <h1>Loja</h1>
 
+<!-- Informação relacionada com a personagem -->
 <div id="personagemInfo">
     <h2>Informação da personagem!</h2>
     <ul>
@@ -29,13 +30,14 @@
             - Dano: <span th:text="${arma.dano}"></span>
             - Tipo: <span th:text="${arma.tipo}"></span>
         </li>
+        <br>
         <form>
             <select>
                 <option th:each="arma : ${armasDisponiveis}">
                     <strong th:text="${arma.nome}"></strong>
                </option>
             </select>
-            <input type="submit" value="Comprar">
+            <input type="submit" value="Comprar" th:action="@{/loja/comprarObjeto(armaId=${arma.id})}"/>
         </form>
     </ul>
 </div>

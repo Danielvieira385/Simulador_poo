@@ -1,5 +1,6 @@
 package com.example
 
+import Criação_personagem.Item
 import com.example.Adversários.Adversário.Companion.criarAdversario
 import com.example.Adversários.Adversário.Companion.obterID_Adversario
 import com.example.Adversários.Adversário.Companion.obterTodosAdversarios
@@ -246,18 +247,15 @@ fun Application.configureTemplating() {
                 val idPersonagem = params["personagemIdLoja"]!!.toInt()
                 val armasDisponiveis = Loja.mostrarTodosArmas()
                 val personagem = obterTodosPersonagens().find { it.id == idPersonagem }
-                val inventarioPersonagem =
+                val inventarioPersonagem: Item = Item(idPersonagem)
 
                 if (personagem != null) {call.respond(ThymeleafContent("loja", mapOf(
                     "personagem" to personagem,
-                    "armasDisponiveis" to armasDisponiveis))) } else {
+                    "armasDisponiveis" to armasDisponiveis,
+                    "inventárioPersonagem" to inventarioPersonagem))) } else {
                         println("Personagem ou Armas não encontradas")
                 }
-
-
             }
-
         }
-
     }
 data class ThymeleafUser(val id: Int, val name: String)

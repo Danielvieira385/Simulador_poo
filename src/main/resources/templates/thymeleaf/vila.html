@@ -34,7 +34,10 @@
         </form>
 
 <!--        <button onClick ="window.location.href='/loja'"> LOJA  </button>-->
-        <button onClick ="window.location.href='/taberna'"> TABERNA </button>
+        <form action="/taberna" method="post">
+            <input type="hidden" name="personagemIdTaberna" th:value="${personagem.id}" />
+            <button type="submit"> Ir para Taberna </button>
+        </form>
 
     </body>
 </html>

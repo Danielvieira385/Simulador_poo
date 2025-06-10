@@ -13,10 +13,13 @@ import com.example.Criacao_personagem.Personagem.Companion.passarNivel
 import com.example.Criacao_personagem.Personagem.Companion.personagens
 import com.example.Menu.Arma
 import com.example.Menu.Arma.Companion.json
+import com.example.Menu.Missao
+import com.example.Menu.Missao.Companion.criarMissao
 import com.example.Menu.Missao.Companion.obterIDMissao
+import com.example.Menu.Missao.Companion.obterTodasMissoes
 import com.example.Vila.Vila
 import com.example.Vila.Loja
-import com.example.Vila.Loja.Companion.mostrarTodosArmas
+import com.example.Vila.Loja.Companion.mostrarTodasArmas
 
 
 
@@ -92,19 +95,21 @@ fun Application.configureTemplating() {
         get("/paginaAdminMissao") {
             call.respond(ThymeleafContent("paginaAdminMissao", mapOf()))
         }
-      //  post("/paginaAdminMissao") {
-        //    var params = call.receiveParameters()
-          //  val id = obterIDMissao()
-            //val nome = params["nome_missao"] ?: ""
-            //val exp = params["categoria_principal"] ?: ""
-            //val categoriaSecundaria = params["categoria_secundaria"] ?: ""
-            //val nivel = params["nivelAdversario"] ?: ""
-            //val arma = params["armaAdversario"] ?: ""
+        post("/paginaAdminMissao") {
+            var params = call.receiveParameters()
+            val id = obterIDMissao()
+            val nome = params["nome_missao"] ?: ""
+            val exp = params["exp_missao"] ?: ""
+            val recompensa_coins = params["recompensa_coins"] ?: ""
+            val nivelPersonagem = params["nivelPersonagem"] ?: ""
+            val adversario = params["adversario_missao"] ?: ""
+            val descricao = params["descricaoMissao"] ?: ""
 
-            //val adversario =
-              //  criarAdversario(id, nome, categoriaPrincipal, categoriaSecundaria, nivel.toInt(), arma.toInt())
-            //call.respond(ThymeleafContent("ferramentasAdmin", mapOf()))
-        //}
+            val missao =
+                criarMissao(id, nome, exp.toInt(), recompensa_coins.toInt(), nivelPersonagem.toInt(),
+                    adversario.toInt(),descricao)
+            call.respond(ThymeleafContent("ferramentasAdmin", mapOf()))
+        }
         get("/criarUtilizador") {
             call.respond(ThymeleafContent("criarUtilizador", mapOf()))
         }
@@ -242,7 +247,7 @@ fun Application.configureTemplating() {
             }
         }
 
-        post("combate") {
+        post("/combate") {
             val params = call.receiveParameters()
             val personagemid = params["personagem"] ?: ""
             val adversarioid = params["adversario"] ?: ""
@@ -259,20 +264,41 @@ fun Application.configureTemplating() {
             }
         }
 
-            post("/loja") {
-                val params = call.receiveParameters()
-                val idPersonagem = params["personagemIdLoja"]!!.toInt()
-                val armasDisponiveis = Loja.mostrarTodosArmas()
-                val personagem = obterTodosPersonagens().find { it.id == idPersonagem }
-                val inventarioPersonagem: Item = Item(idPersonagem)
+        post("/loja") {
+            val params = call.receiveParameters()
+            val idPersonagem = params["personagemIdLoja"]!!.toInt()
+            val armasDisponiveis = Loja.mostrarTodasArmas()
+            val personagem = obterTodosPersonagens().find { it.id == idPersonagem }
+            val inventarioPersonagem: Item = Item(idPersonagem)
 
-                if (personagem != null) {call.respond(ThymeleafContent("loja", mapOf(
-                    "personagem" to personagem,
-                    "armasDisponiveis" to armasDisponiveis,
-                    "inventárioPersonagem" to inventarioPersonagem))) } else {
-                        println("Personagem ou Armas não encontradas")
-                }
+            if (personagem != null) {call.respond(ThymeleafContent("loja", mapOf(
+                "personagem" to personagem,
+                "armasDisponiveis" to armasDisponiveis,
+                "inventárioPersonagem" to inventarioPersonagem))) } else {
+                    println("Personagem ou Armas não encontradas") }
+        }
+
+        post("/taberna") {
+            val params = call.receiveParameters()
+            val personagemId = params["personagemIdTaberna"]?.toIntOrNull()
+            val personagem = obterTodosPersonagens().find { it.id == personagemId }
+            val missoes = obterTodasMissoes()
+            var missoesDisponiveis = mutableListOf<Missao>()
+            for (missao in missoes) {
+                if (personagem != null) {
+                    if (missao.nivel == personagem.nivel ) {
+                        missoesDisponiveis.add(missao)
+                    }
+                   }
             }
+            if (personagem != null) {
+                val context = mutableMapOf<String, Any>(
+                    "missoesDisponiveis" to missoesDisponiveis,
+                    "personagem" to personagem
+                )
+                call.respond(ThymeleafContent("taberna", context))
+            }
+        }
         }
     }
 data class ThymeleafUser(val id: Int, val name: String)

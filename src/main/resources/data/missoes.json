@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "nome": "Missão ",
+        "exp": 30,
+        "recompensa_coins": 100,
+        "nivel": 1,
+        "adversario_id": 2,
+        "descricao": "Primeira Missão"
+    },
+    {
+        "id": 2,
+        "nome": "Missão 2 ",
+        "exp": 50,
+        "recompensa_coins": 100,
+        "nivel": 1,
+        "adversario_id": 1,
+        "descricao": "Missão de Teste 2"
+    }
+]

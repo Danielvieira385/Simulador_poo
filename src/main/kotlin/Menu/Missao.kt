@@ -14,6 +14,7 @@ data class Missao(
     var recompensa_coins: Int = 0,
     var nivel: Int = 0,
     var adversario_id: Int = 0,
+    var descricao: String = ""
 ) {
     companion object {
         val CAMINHODATA = "./src/main/resources/data"
@@ -39,14 +40,15 @@ data class Missao(
             else json.decodeFromString(jsonString)
         }
 
-        fun criarMissao(nome: String, exp: Int, recompensa_coins: Int, nivel: Int, adversario_id: Int): Missao {
+        fun criarMissao(id: Int,nome: String,exp: Int, recompensa_coins: Int, nivel: Int, adversario_id: Int,descricao : String): Missao {
             val novaMissao = Missao(
                 id = obterIDMissao(),
                 nome = nome,
                 exp = exp,
                 recompensa_coins = recompensa_coins,
                 nivel = nivel,
-                adversario_id = adversario_id
+                adversario_id = adversario_id,
+                descricao = descricao
             )
 
             val missoesExistentes = obterTodasMissoes().toMutableList()

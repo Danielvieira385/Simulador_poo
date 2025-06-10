@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TABERNA</title>
+</head>
+<body>
+<h1>BEMVINDO A TABERNA</h1>
+
+<!-- Lista as Missões Disponivies -->
+<div id="listaMissoes">
+    <h2>Lista de todas as Missões Disponíveis!</h2>
+    <ul>
+        <li th:each="missao : ${missoesDisponiveis}">
+            <strong th:text="${missao.nome}">Nome da Missão</strong> -
+            Descrição: <span th:text="${missao.descricao}">Descrição</span> -
+            Coins: <span th:text="${missao.recompensa_coins}">0</span> -
+            Experiência: <span th:text="${missao.exp}">0</span>
+        </li>
+    </ul>
+</div>
+
+<!-- Info do Personagem -->
+<div>
+    <label>Personagem:</label>
+    <input type="hidden" th:value="${personagem}" name="personagem">
+    <input type="text" th:value="${personagem.nome}" readonly>
+    <input type="text" th:value="${personagem.progresso}" readonly>
+    <!--<input type="text" th:value="${personagem.nivel}">-->
+</div>
+
+</body>
+</html>

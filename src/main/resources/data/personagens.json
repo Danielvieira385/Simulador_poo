@@ -10,5 +10,17 @@
             1
         ],
         "coins": 1
+    },
+    {
+        "id": 2,
+        "idUtilizador": 5,
+        "nome": "Lilrodrigo",
+        "categoriaPrincipal": "Guerreiro",
+        "categoriaSecundaria": "Caçador",
+        "nivel": 1,
+        "inventario": [
+            1
+        ],
+        "coins": 1
     }
 ]

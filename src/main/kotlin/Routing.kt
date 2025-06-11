@@ -15,7 +15,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
 fun Application.configureRouting() {
     routing {
         get("/") {
-            call.respond(ThymeleafContent("index.html", mapOf("title" to ThymeleafUser(1, "user1"))))
+            call.respond(ThymeleafContent("index.html", mapOf()))
         }
     }
 }

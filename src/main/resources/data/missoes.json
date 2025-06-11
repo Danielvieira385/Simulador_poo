@@ -1,20 +1,32 @@
 [
     {
         "id": 1,
-        "nome": "Missão ",
-        "exp": 30,
-        "recompensa_coins": 100,
-        "nivel": 1,
-        "adversario_id": 2,
-        "descricao": "Primeira Missão"
-    },
-    {
-        "id": 2,
-        "nome": "Missão 2 ",
+        "nome": "Missão 1",
         "exp": 50,
         "recompensa_coins": 100,
         "nivel": 1,
         "adversario_id": 1,
-        "descricao": "Missão de Teste 2"
+        "descricao": "Descrição teste 1",
+        "duracao": 2
+    },
+    {
+        "id": 2,
+        "nome": "Missão teste 2 ",
+        "exp": 100,
+        "recompensa_coins": 120,
+        "nivel": 1,
+        "adversario_id": 1,
+        "descricao": "Descrição detalhada 2",
+        "duracao": 1
+    },
+    {
+        "id": 3,
+        "nome": "Missão Teste 3",
+        "exp": 120,
+        "recompensa_coins": 200,
+        "nivel": 2,
+        "adversario_id": 2,
+        "descricao": "Descrição 3",
+        "duracao": 3
     }
 ]

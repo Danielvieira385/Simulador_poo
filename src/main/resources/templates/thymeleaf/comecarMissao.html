@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Missão </title>
+</head>
+<body>
+<h1> Missão </h1>
+<div>
+    <label> Personagem </label>
+    <input type="hidden" th:value="${personagem}" name="personagem">
+    <input type="text" th:value="${personagem.nome}" readonly>
+    <input type="text" th:value="${personagem.progresso}" readonly>
+    <input type="text" th:value="${personagem.inventario}">
+    <!--<input type="text" th:value="${personagem.nivel}">-->
+</div>
+
+<div id="missaoEscolhida">
+    <h2> Missão </h2>
+    <input type="hidden" th:value="${missao}" name="adversario">
+    <p><strong th:text="${missao.nome}"></strong></p>
+    <p><strong th:text="${missao.descricao}"></strong></p>
+</div>
+
+<h2> RESULTADO: </h2>
+<p><strong th:text="${combate}"></strong></p>
+<br>
+<p><strong th:text="${duracao}"></strong></p>
+<br>
+<p><strong th:text="${expMissao}"></strong></p>
+<br>
+<p><strong th:text="${personagem.nivel}"></strong></p>
+
+<form action="/taberna" method="post">
+    <input type="hidden" name="personagemIdTaberna" th:value="${personagem.id}" />
+    <button type="submit"> Voltar á Taberna </button>
+</form>
+
+</body>
+</html>

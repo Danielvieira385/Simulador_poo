@@ -28,6 +28,7 @@ import com.example.Utilizadores.Utilizador.Companion.criarUtilizador
 import com.example.Utilizadores.Utilizador.Companion.obterID_Utilizador
 import com.example.Utilizadores.Utilizador.Companion.obterTodosUtilizadores
 import com.example.Vila.Combate
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -48,10 +49,10 @@ fun Application.configureTemplating() {
     }
     routing {
         get("/") {
-            call.respond(ThymeleafContent("iniciar", mapOf("user" to ThymeleafUser(1, "user1"))))
+            call.respond(ThymeleafContent("iniciar", mapOf()))
         }
         get("/iniciar") {
-            call.respond(ThymeleafContent("iniciar", mapOf("title" to ThymeleafUser(1, "user1"))))
+            call.respond(ThymeleafContent("iniciar", mapOf()))
         }
         get("/usersMenu") {
             call.respond(ThymeleafContent("usersMenu", mapOf()))
@@ -104,10 +105,11 @@ fun Application.configureTemplating() {
             val nivelPersonagem = params["nivelPersonagem"] ?: ""
             val adversario = params["adversario_missao"] ?: ""
             val descricao = params["descricaoMissao"] ?: ""
+            val duracao = params["duracaoMissao"] ?:""
 
             val missao =
                 criarMissao(id, nome, exp.toInt(), recompensa_coins.toInt(), nivelPersonagem.toInt(),
-                    adversario.toInt(),descricao)
+                    adversario.toInt(),descricao,duracao.toInt())
             call.respond(ThymeleafContent("ferramentasAdmin", mapOf()))
         }
         get("/criarUtilizador") {
@@ -149,9 +151,10 @@ fun Application.configureTemplating() {
                 call.respondRedirect("/menu")
             }
         }
-        get("/consultaBaseDados") {
-            call.respond(ThymeleafContent("consultaBaseDados", mapOf("title" to ThymeleafUser(1, "user1"))))
-        }
+        //get("/consultaBaseDados") {
+            //call.respond(ThymeleafContent("consultaBaseDados", mapOf("title" to ThymeleafUser(1, "user1"))))
+        //}
+
         get("/selecionarPersonagem") {
             val idUtilizador = call.request.queryParameters["id_Utilizador"]
             if (idUtilizador != null) {
@@ -299,6 +302,34 @@ fun Application.configureTemplating() {
                 call.respond(ThymeleafContent("taberna", context))
             }
         }
+
+        post("/comecarMissao") {
+            val params = call.receiveParameters()
+            val personagemId = params["personagem"]?.toIntOrNull()
+            val missaoId = params["missao"]?.toIntOrNull()
+
+            val personagem = obterTodosPersonagens().find { it.id == personagemId }
+            val missao = obterTodasMissoes().find { it.id == missaoId }
+
+            if (personagem != null && missao != null) {
+                val missaoEscolhida = Missao.começarMissao(missao, personagem)
+
+                if (missaoEscolhida != null) {
+                    val (combate, duracao, expMissao) = missaoEscolhida
+                    call.respond(
+                        ThymeleafContent(
+                            "comecarMissao", mapOf(
+                                "personagem" to personagem,
+                                "missao" to missao,
+                                "combate" to combate,
+                                "duracao" to duracao,
+                                "expMissao" to expMissao
+                            )
+                        )
+                    )
+                }
+            }
         }
     }
+}
 data class ThymeleafUser(val id: Int, val name: String)

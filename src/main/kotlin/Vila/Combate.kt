@@ -32,39 +32,43 @@ class Combate (var personagem : Personagem, var inimigo : Adversário) {
             var personagemPV: Int = 100
             var adversarioPV: Int = 100
             var primeiroAtacante: String = ""
-            val coinFlip = (1..3).random()
+            val coinFlip = (1..2).random()
+            println(coinFlip)
 
             if (armaPersonagem != null) {
                 if (armaAdversario != null) {
                     if (coinFlip == 1) {
                         primeiroAtacante = "O personagem atacará primeiro!"
-                        while (personagemPV != 0 && adversarioPV != 0) {
+                        while (personagemPV > 0 && adversarioPV > 0) {
                             adversarioPV -= armaPersonagem.dano
-                            println(adversarioPV)
+                            println("Vida Adversario - "+ adversarioPV)
                             personagemPV -= armaAdversario.dano
-                            println(personagemPV)
-                        }
-                        if (adversarioPV == 0) {
-                            vitorioso = "O personagem é vitorioso"
-                        } else {
-                            vitorioso = "O adversario é vitorioso"
+                            println("Vida Personagem - "+ personagemPV)
+                            if (adversarioPV <= 0) {
+                                vitorioso = "O personagem é vitorioso"
+                            } else if (personagemPV <= 0){
+                                vitorioso = "O adversario é vitorioso"
+                            }
                         }
                     } else if (coinFlip == 2) {
                         primeiroAtacante = "O Adversário atacará primeiro"
-                        while (personagemPV != 0 && adversarioPV != 0) {
+                        while (personagemPV > 0 && adversarioPV > 0) {
                             personagemPV -= armaAdversario.dano
-                            println(adversarioPV)
+                            println("Vida Personagem - "+ personagemPV)
                             adversarioPV -= armaPersonagem.dano
-                            println(personagemPV)
-                        }
-                        if (adversarioPV == 0) {
-                            vitorioso = "O personagem é vitorioso"
-                        } else {
-                            vitorioso = "O adversario é vitorioso"
+                            println("Vida Adversario - "+ adversarioPV)
+                            if (personagemPV <= 0) {
+                                vitorioso = "O adversário é vitorioso"
+                            } else if (adversarioPV <= 0){
+                                vitorioso = "O personagem é vitorioso"
+                            }
                         }
                     }
                 }
             }
+            println("Acabou uma luta")
+            println(primeiroAtacante)
+            println(vitorioso)
             return primeiroAtacante + vitorioso
         }
 }

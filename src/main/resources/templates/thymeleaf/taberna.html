@@ -16,6 +16,12 @@
             Descrição: <span th:text="${missao.descricao}">Descrição</span> -
             Coins: <span th:text="${missao.recompensa_coins}">0</span> -
             Experiência: <span th:text="${missao.exp}">0</span>
+            <!-- Começar Missão -->
+            <form action="/comecarMissao" method="post">
+                <input type="hidden" name="personagem" th:value="${personagem.id}" />
+                <input type="hidden" name="missao" th:value="${missao.id}"/>
+                <button type="submit"> Começar Missão </button>
+            </form>
         </li>
     </ul>
 </div>
@@ -28,6 +34,5 @@
     <input type="text" th:value="${personagem.progresso}" readonly>
     <!--<input type="text" th:value="${personagem.nivel}">-->
 </div>
-
 </body>
 </html>

@@ -43,6 +43,12 @@
         <input type="hidden" name="adversario" th:value="${proximoAdversario.id}"/>
         <button type="submit">Combate</button>
     </form>
+    <br>
+    <form method="post" action="/vila">
+        <input type="hidden" name="tipoBusca" value="selecao" />
+        <input type="hidden" name="personagemSelecionado" th:value="${personagem.id}" />
+        <button type="submit"> Voltar para a Vila </button>
+    </form>
 </div>
 </body>
 </html>

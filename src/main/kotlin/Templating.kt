@@ -28,6 +28,7 @@ import com.example.Utilizadores.Utilizador.Companion.criarUtilizador
 import com.example.Utilizadores.Utilizador.Companion.obterID_Utilizador
 import com.example.Utilizadores.Utilizador.Companion.obterTodosUtilizadores
 import com.example.Vila.Combate
+import com.example.Vila.Loja.Companion.comprarObjeto
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -270,15 +271,49 @@ fun Application.configureTemplating() {
         post("/loja") {
             val params = call.receiveParameters()
             val idPersonagem = params["personagemIdLoja"]!!.toInt()
-            val armasDisponiveis = Loja.mostrarTodasArmas()
+            val armasDisponiveis = mostrarTodasArmas()
             val personagem = obterTodosPersonagens().find { it.id == idPersonagem }
             val inventarioPersonagem: Item = Item(idPersonagem)
+            val inventarioP = inventarioPersonagem.mostrarArmasInventarioPorID(idPersonagem)
+            val nomeArmasPersonagem = inventarioPersonagem.mostarArmasInventarioNome(inventarioP)
+            println(nomeArmasPersonagem)
 
-            if (personagem != null) {call.respond(ThymeleafContent("loja", mapOf(
+            if (personagem != null) {
+                call.respond(ThymeleafContent("loja", mapOf(
                 "personagem" to personagem,
                 "armasDisponiveis" to armasDisponiveis,
-                "inventárioPersonagem" to inventarioPersonagem))) } else {
-                    println("Personagem ou Armas não encontradas") }
+                "inventarioPersonagem" to inventarioP,
+                 "inventarioPersonagemNomes" to nomeArmasPersonagem))) }
+            else {
+                println("Personagem ou Armas não encontradas")
+            }
+        }
+
+        post("/comprarArma") {
+            val params = call.receiveParameters()
+            val personagem = params["personagemId"]?.toInt()
+            val arma = params["armaId"]?.toInt()
+            val armasDisponiveis = mostrarTodasArmas()
+            val personagemCompleto = obterTodosPersonagens().find {it.id == personagem}
+
+
+            if (arma != null && personagem != null) {
+                comprarObjeto(arma,personagem)
+            }
+
+            if (personagem != null && personagemCompleto != null) {
+                val inventarioPersonagem: Item = Item(personagem.toInt())
+                val inventarioP = inventarioPersonagem.mostrarArmasInventarioPorID(personagem)
+                val nomeArmasPersonagem = inventarioPersonagem.mostarArmasInventarioNome(inventarioP)
+                println(nomeArmasPersonagem)
+                call.respond(ThymeleafContent("loja", mapOf(
+                    "personagem" to personagemCompleto,
+                    "armasDisponiveis" to armasDisponiveis,
+                    "inventarioPersonagem" to inventarioP,
+                    "inventarioPersonagemNomes" to nomeArmasPersonagem)))}
+            else {
+                println("Personagem ou Armas não encontradas")
+            }
         }
 
         post("/taberna") {

@@ -1,6 +1,7 @@
 package Criação_personagem
 
 import com.example.Menu.Arma
+import com.example.Menu.Arma.Companion.obterTodasArmas
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.encodeToString
@@ -26,7 +27,7 @@ class Item(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableListOf(
     }
 
     override fun toString(): String {
-        return "Inventário do Personagem ID $idPersonagem: Armas IDs = $idArmas"
+       return "Inventário = $idArmas"
     }
 
     // Adiciona uma arma ao inventário do personagem
@@ -69,4 +70,18 @@ class Item(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableListOf(
         val inventarioData: InventarioData = json.decodeFromString(file.readText())
         return inventarioData.inventarios[idPersonagem] ?: emptyList()
     }
+
+    fun mostarArmasInventarioNome(inventario: List<Int>): List<String> {
+        val todasArmas = obterTodasArmas()
+        val nomesArmas = mutableListOf<String>()
+        for (item in inventario) {
+            for (arma in todasArmas) {
+                if (item == arma.id) {
+                    nomesArmas.add(arma.nome)
+                }
+            }
+        }
+        return nomesArmas
+    }
+
 }

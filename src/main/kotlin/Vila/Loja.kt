@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import java.io.File
 import com.example.Criacao_personagem.Personagem
+import com.example.Criacao_personagem.Personagem.Companion.atualizarPersonagem
+import com.example.Criacao_personagem.Personagem.Companion.obterTodosPersonagens
 
 
 @Serializable
@@ -18,11 +20,8 @@ class Loja(
     val preco: Int
 ) {
     override fun toString(): String {
-        return "\nID = $id, " +
-                "Nome = $nome, " +
+        return "\nNome = $nome, " +
                 "Dano = $dano, " +
-                "Tipo de arma = $tipo, " +
-                "Nível da arma = $nivel" +
                 "Preço = $preco"
     }
 
@@ -40,17 +39,17 @@ class Loja(
             val inventario: Item = Item(idPersonagem)
 
             for (arma in armazem) {
-                if (arma.id == idArma) {
-                    val personagem = Personagem(idPersonagem)
+                if (arma.id.toInt() == idArma) {
+                    val personagem = obterTodosPersonagens().find {it.id == idPersonagem}
 
-                    if (personagem.coins >= arma.preco) {
-                        personagem.coins -= arma.preco
-                        inventario.adicionarArmaInventario(idArma)
-
-                        // Falta Remove a arma do armazém após a compra
-
-                        println("Você comprou a arma: ${arma.nome}")
-
+                    if (personagem != null) {
+                        println(arma.preco)
+                        if (personagem.coins >= arma.preco) {
+                            inventario.adicionarArmaInventario(idArma)
+                            personagem.coins -= arma.preco
+                            atualizarPersonagem("coins",personagem.coins.toString(),personagem)
+                            println("Você comprou a arma: ${arma.nome}")
+                        }
                     } else {
                         println("Dinheiro insuficiente para comprar a arma: ${arma.nome}")
                     }

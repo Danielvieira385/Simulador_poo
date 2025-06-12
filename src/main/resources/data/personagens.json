@@ -5,11 +5,11 @@
         "nome": "Personagem1",
         "categoriaPrincipal": "Guerreiro",
         "categoriaSecundaria": "Ferreiro",
-        "nivel": 1,
+        "nivel": 3,
         "inventario": [
             1
         ],
-        "coins": 1
+        "coins": 25
     },
     {
         "id": 2,
@@ -22,5 +22,17 @@
             1
         ],
         "coins": 1
+    },
+    {
+        "id": 3,
+        "idUtilizador": 2,
+        "nome": "Personagem2",
+        "categoriaPrincipal": "Guerreiro",
+        "categoriaSecundaria": "Ferreiro",
+        "nivel": 2,
+        "inventario": [
+            1
+        ],
+        "coins": 50
     }
 ]

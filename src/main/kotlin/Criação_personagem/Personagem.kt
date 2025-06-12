@@ -55,16 +55,40 @@ data class Personagem(
             else json.decodeFromString(jsonString)
         }
 
+        fun atualizarPersonagem(infoAMudar: String, infoAtualizada: String, personagem: Personagem) {
+            val personagens = obterTodosPersonagens().toMutableList()
+            val index = personagens.indexOfFirst { it.id == personagem.id }
+            if (index == -1) {
+                println("Personagem não encontrado.")
+                return
+            }
+            when (infoAMudar.lowercase()) {
+                "nome" -> personagens[index].nome = infoAtualizada
+                "nivel" -> personagens[index].nivel = infoAtualizada.toIntOrNull() ?: personagens[index].nivel
+                "coins" -> personagens[index].coins = infoAtualizada.toIntOrNull() ?: personagens[index].coins
+                "progresso" -> personagens[index].progresso = infoAtualizada.toIntOrNull() ?: personagens[index].progresso
+                else -> {
+                    println("Campo '$infoAMudar' não reconhecido.")
+                    return
+                }
+            }
+            File("${CAMINHODATA}/personagens.json").writeText(json.encodeToString(ListSerializer(Personagem.serializer()), personagens))
+            println("Personagem atualizado com sucesso.")
+        }
+
+
         var exp : Int = 0
         fun passarNivel(xp : Int, personagemAtiva : Personagem) :String {
             exp += xp
             if (exp >= 100) {
                 personagemAtiva.nivel += 1
                 exp = 0
+                atualizarPersonagem("nivel",personagemAtiva.nivel.toString(),personagemAtiva)
                 return "O ${personagemAtiva.nome} passou de nível!"
             } else {
                 return "O ${personagemAtiva.nome} ganhou $xp"
             }
+
         }
 
 

@@ -34,5 +34,12 @@
     <input type="text" th:value="${personagem.progresso}" readonly>
     <!--<input type="text" th:value="${personagem.nivel}">-->
 </div>
+
+<br>
+<form method="post" action="/vila">
+    <input type="hidden" name="tipoBusca" value="selecao" />
+    <input type="hidden" name="personagemSelecionado" th:value="${personagem.id}" />
+    <button type="submit"> Voltar para a Vila </button>
+</form>
 </body>
 </html>

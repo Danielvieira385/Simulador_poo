@@ -24,5 +24,10 @@
 <h2> RESULTADO: </h2>
 <p><strong th:text="${luta}"></strong></p>
 
+<form action="/arena" method="post">
+    <input type="hidden" name="personagemId" th:value="${personagem.id}" />
+    <button type="submit">Voltar para Arena</button>
+</form>
+
 </body>
 </html>

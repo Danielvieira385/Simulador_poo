@@ -31,9 +31,9 @@
 <br>
 <p><strong th:text="${personagem.nivel}"></strong></p>
 
-<form action="/taberna" method="post">
+<form method="post" action="/taberna">
     <input type="hidden" name="personagemIdTaberna" th:value="${personagem.id}" />
-    <button type="submit"> Voltar á Taberna </button>
+    <button type="submit"> Voltar para a Taberna </button>
 </form>
 
 </body>

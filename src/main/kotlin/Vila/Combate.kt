@@ -2,7 +2,9 @@ package com.example.Vila
 
 import com.example.Adversários.Adversário
 import com.example.Criacao_personagem.Personagem
+import com.example.Criacao_personagem.Personagem.Companion.atualizarPersonagem
 import com.example.Criacao_personagem.Personagem.Companion.obterTodosPersonagens
+import com.example.Criacao_personagem.Personagem.Companion.passarNivel
 import com.example.Menu.Arma.Companion.obterTodasArmas
 import kotlinx.serialization.Serializable
 import kotlin.random.Random
@@ -33,7 +35,6 @@ class Combate (var personagem : Personagem, var inimigo : Adversário) {
             var adversarioPV: Int = 100
             var primeiroAtacante: String = ""
             val coinFlip = (1..2).random()
-            println(coinFlip)
 
             if (armaPersonagem != null) {
                 if (armaAdversario != null) {
@@ -46,7 +47,9 @@ class Combate (var personagem : Personagem, var inimigo : Adversário) {
                             println("Vida Personagem - "+ personagemPV)
                             if (adversarioPV <= 0) {
                                 vitorioso = "O personagem é vitorioso"
-                            } else if (personagemPV <= 0){
+                                atualizarPersonagem("nivel", passarNivel(20,personagem),personagem)
+                                atualizarPersonagem("coins", "50",personagem)
+                            } else if (personagemPV <= 0) {
                                 vitorioso = "O adversario é vitorioso"
                             }
                         }
@@ -61,14 +64,13 @@ class Combate (var personagem : Personagem, var inimigo : Adversário) {
                                 vitorioso = "O adversário é vitorioso"
                             } else if (adversarioPV <= 0){
                                 vitorioso = "O personagem é vitorioso"
+                                atualizarPersonagem("nivel", passarNivel(20,personagem),personagem)
+                                atualizarPersonagem("coins", "50",personagem)
                             }
                         }
                     }
                 }
             }
-            println("Acabou uma luta")
-            println(primeiroAtacante)
-            println(vitorioso)
-            return primeiroAtacante + vitorioso
+            return primeiroAtacante + " <br> " + vitorioso
         }
 }

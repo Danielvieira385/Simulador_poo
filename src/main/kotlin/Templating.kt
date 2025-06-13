@@ -12,7 +12,9 @@ import com.example.Criacao_personagem.Personagem.Companion.obterTodosPersonagens
 import com.example.Criacao_personagem.Personagem.Companion.passarNivel
 import com.example.Criacao_personagem.Personagem.Companion.personagens
 import com.example.Menu.Arma
+import com.example.Menu.Arma.Companion.criarArma
 import com.example.Menu.Arma.Companion.json
+import com.example.Menu.Arma.Companion.obterTodasArmas
 import com.example.Menu.Missao
 import com.example.Menu.Missao.Companion.criarMissao
 import com.example.Menu.Missao.Companion.obterIDMissao
@@ -28,7 +30,10 @@ import com.example.Utilizadores.Utilizador.Companion.criarUtilizador
 import com.example.Utilizadores.Utilizador.Companion.obterID_Utilizador
 import com.example.Utilizadores.Utilizador.Companion.obterTodosUtilizadores
 import com.example.Vila.Combate
+import com.example.Vila.Loja.Companion.adicionarArmaLoja
 import com.example.Vila.Loja.Companion.comprarObjeto
+import com.example.Vila.Loja.Companion.obterTodasArmasLoja
+import com.example.Vila.Loja.Companion.venderObjeto
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -113,9 +118,49 @@ fun Application.configureTemplating() {
                     adversario.toInt(),descricao,duracao.toInt())
             call.respond(ThymeleafContent("ferramentasAdmin", mapOf()))
         }
+
+        get("/paginaAdminArma") {
+            call.respond(ThymeleafContent("paginaAdminArma", mapOf()))
+        }
+
+        post("/paginaAdminArma") {
+            var params = call.receiveParameters()
+            val nome = params["nome_arma"] ?: ""
+            val dano = params["dano_arma"] ?: ""
+            val tipo_arma = params["tipo_arma"] ?: ""
+            val nivel_necessario = params["nivel_necessario"] ?: ""
+            val preco_arma = params["preco_arma"] ?: ""
+
+            val arma =
+                criarArma(nome, dano.toInt(), tipo_arma, nivel_necessario.toInt(),
+                    preco_arma.toInt())
+            call.respond(ThymeleafContent("ferramentasAdmin", mapOf()))
+        }
+
+        get("/paginaAdminLoja") {
+            val armas = obterTodasArmas()
+            if (armas != null) {
+                call.respond(ThymeleafContent("paginaAdminLoja", mapOf("armas" to armas)))
+            }
+        }
+
+        post("/adicionarArmaLoja") {
+            var params = call.receiveParameters()
+            val armaId = params["armaId"] ?:""
+            val todasArmas = obterTodasArmas()
+            for (arma in todasArmas) {
+                if (arma.id == armaId.toInt()) {
+                    adicionarArmaLoja(arma.nome,arma.dano,arma.tipo,arma.nivel,arma.preco)
+                }
+            }
+            println(obterTodasArmasLoja())
+            call.respond(ThymeleafContent("paginaAdminLoja", mapOf("armas" to todasArmas)))
+        }
+
         get("/criarUtilizador") {
             call.respond(ThymeleafContent("criarUtilizador", mapOf()))
         }
+
         post("/criarUtilizador") {
             var params = call.receiveParameters()
             val id = obterID_Utilizador()
@@ -301,6 +346,30 @@ fun Application.configureTemplating() {
                 comprarObjeto(arma,personagem)
             }
 
+            if (personagem != null && personagemCompleto != null) {
+                val inventarioPersonagem: Item = Item(personagem.toInt())
+                val inventarioP = inventarioPersonagem.mostrarArmasInventarioPorID(personagem)
+                val nomeArmasPersonagem = inventarioPersonagem.mostarArmasInventarioNome(inventarioP)
+                println(nomeArmasPersonagem)
+                call.respond(ThymeleafContent("loja", mapOf(
+                    "personagem" to personagemCompleto,
+                    "armasDisponiveis" to armasDisponiveis,
+                    "inventarioPersonagem" to inventarioP,
+                    "inventarioPersonagemNomes" to nomeArmasPersonagem)))}
+            else {
+                println("Personagem ou Armas não encontradas")
+            }
+        }
+
+        post("/venderArma") {
+            val params = call.receiveParameters()
+            val personagem = params["personagemId"]?.toInt()
+            val arma = params["armaId"]?.toInt()
+            val armasDisponiveis = mostrarTodasArmas()
+            val personagemCompleto = obterTodosPersonagens().find {it.id == personagem}
+            if (arma != null && personagem != null) {
+                venderObjeto(arma,personagem)
+            }
             if (personagem != null && personagemCompleto != null) {
                 val inventarioPersonagem: Item = Item(personagem.toInt())
                 val inventarioP = inventarioPersonagem.mostrarArmasInventarioPorID(personagem)

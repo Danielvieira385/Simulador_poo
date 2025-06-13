@@ -2,22 +2,49 @@
     {
         "id": 1,
         "nome": "Espada",
-        "dano": 10,
-        "tipo": "Corte",
-        "nivel": 1
+        "dano": 20,
+        "tipo": "Guerreiro",
+        "nivel": 1,
+        "preco": 50
     },
     {
         "id": 2,
-        "nome": "Machado",
-        "dano": 15,
-        "tipo": "Corte",
-        "nivel": 2
+        "nome": "Bastão",
+        "dano": 25,
+        "tipo": "Mago",
+        "nivel": 1,
+        "preco": 20
     },
     {
         "id": 3,
         "nome": "Arco",
-        "dano": 8,
-        "tipo": "Perfuração",
-        "nivel": 1
+        "dano": 15,
+        "tipo": "Arqueiro",
+        "nivel": 1,
+        "preco": 25
+    },
+    {
+        "id": 4,
+        "nome": "Flecha",
+        "dano": 5,
+        "tipo": "Munição",
+        "nivel": 1,
+        "preco": 5
+    },
+    {
+        "id": 5,
+        "nome": "Arma Cara",
+        "dano": 50,
+        "tipo": "Guerreiro",
+        "nivel": 1,
+        "preco": 200
+    },
+    {
+        "id": 6,
+        "nome": "Arma Nivel alto",
+        "dano": 40,
+        "tipo": "Guerreiro",
+        "nivel": 3,
+        "preco": 20
     }
 ]

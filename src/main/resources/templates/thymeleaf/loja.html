@@ -17,8 +17,13 @@
             Coins: <span th:text="${personagem.coins}"></span>
             Inventário:
             <ul>
-                <li th:each="item : ${inventarioPersonagemNomes}">
-                    <strong th:text="${item}"></strong>
+                <li th:each="arma, iterStat : ${inventarioPersonagem}">
+                    <strong th:text="${inventarioPersonagemNomes[iterStat.index]}">Nome</strong>
+                    <form method="post" action="/venderArma">
+                        <input type="hidden" name="personagemId" th:value="${personagem.id}" />
+                        <input type="hidden" name="armaId" th:value="${arma}" />
+                        <button type="submit">Vender</button>
+                    </form>
                 </li>
             </ul>
         </li>

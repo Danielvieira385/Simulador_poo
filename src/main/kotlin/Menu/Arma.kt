@@ -12,7 +12,8 @@ data class Arma(
     var nome: String = "",
     var dano: Int = 0,
     var tipo: String = "",
-    var nivel: Int = 0
+    var nivel: Int = 0,
+    var preco: Int = 0
 ) {
     companion object {
         val CAMINHODATA = "./src/main/resources/data"
@@ -38,13 +39,14 @@ data class Arma(
             else json.decodeFromString(jsonString)
         }
 
-        fun criarArma(nome: String, dano: Int, tipo: String, nivel: Int): Arma {
+        fun criarArma(nome: String, dano: Int, tipo: String, nivel: Int, preco: Int): Arma {
             val novaArma = Arma(
                 id = obterID(),
                 nome = nome,
                 dano = dano,
                 tipo = tipo,
-                nivel = nivel
+                nivel = nivel,
+                preco = preco
             )
 
             val armasExistentes = obterTodasArmas().toMutableList()

@@ -2,6 +2,7 @@ package Criação_personagem
 
 import com.example.Menu.Arma
 import com.example.Menu.Arma.Companion.obterTodasArmas
+import com.example.Vila.Loja.Companion.obterTodasArmasLoja
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.encodeToString
@@ -32,18 +33,23 @@ class Item(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableListOf(
 
     // Adiciona uma arma ao inventário do personagem
     fun adicionarArmaInventario(idArma: Int) {
-        if (!idArmas.contains(idArma)) {
-            idArmas.add(idArma)
+        val inventarioData: InventarioData =
+            if (file.exists() && file.readText().isNotEmpty())
+                json.decodeFromString(file.readText())
+            else
+                InventarioData()
 
-            val inventarioData: InventarioData =
-                if (file.exists() && file.readText().isNotEmpty())
-                    json.decodeFromString(file.readText())
-                else
-                    InventarioData()
-            inventarioData.inventarios[idPersonagem] = idArmas
-            file.writeText(json.encodeToString(inventarioData))
-        }
+        // Pega a lista atual ou cria nova
+        val listaAtual = inventarioData.inventarios.getOrDefault(idPersonagem, mutableListOf())
+        listaAtual.add(idArma)
+
+        // Atualiza o mapa com a lista modificada
+        inventarioData.inventarios[idPersonagem] = listaAtual
+
+        // Salva novamente
+        file.writeText(json.encodeToString(inventarioData))
     }
+
 
     fun removerArmaInventario(idArma: Int) {
         if (idArmas.remove(idArma)) {
@@ -72,7 +78,7 @@ class Item(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableListOf(
     }
 
     fun mostarArmasInventarioNome(inventario: List<Int>): List<String> {
-        val todasArmas = obterTodasArmas()
+        val todasArmas = obterTodasArmasLoja()
         val nomesArmas = mutableListOf<String>()
         for (item in inventario) {
             for (arma in todasArmas) {

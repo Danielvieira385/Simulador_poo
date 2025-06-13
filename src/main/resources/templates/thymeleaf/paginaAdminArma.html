@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Arma</title>
+</head>
+<body>
+<form method="post" action="/paginaAdminArma">
+    <div>
+        <label for="nome_arma">Nome da Arma:</label>
+        <input type="text" name="nome_arma" id="nome_arma" />
+    </div>
+    <br>
+    <div>
+        <label for="dano_arma">Dano da arma: </label>
+        <input type="number" name="dano_arma" id="dano_arma" />
+    </div>
+    <br>
+    <div>
+        <label for="tipo_arma">Tipo da arma: </label>
+        <input type="text" name="tipo_arma" id="tipo_arma" />
+    </div>
+    <br>
+    <div>
+        <label for="nivel_necessario">Nivel Personagem necessário:</label>
+        <input type="number" name="nivel_necessario" id="nivel_necessario"/>
+    </div>
+    <br>
+    <div>
+        <label for="preco_arma">Preço da arma: </label>
+        <input type="number" name="preco_arma" id="preco_arma"/>
+    </div>
+    <br>
+    <input type="submit" value="Adicionar Arma" />
+</form>
+</body>
+</html>

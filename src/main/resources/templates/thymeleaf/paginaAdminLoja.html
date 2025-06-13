@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> LOJA ADMINISTRADOR </title>
+</head>
+<body>
+<h1> Adicionar Entrada de Arma na Loja </h1>
+
+<!-- Lista todas as Armas -->
+<div id="listaArmas">
+    <h2>Lista de todas as Armas Disponíveis!</h2>
+    <ul>
+        <li th:each="arma : ${armas}">
+            <strong th:text="${arma.nome}">Nome da Arma</strong> -
+            Dano: <span th:text="${arma.dano}"></span> -
+            Tipo: <span th:text="${arma.tipo}"></span> -
+            Coins: <span th:text="${arma.preco}">0</span> -
+            Nivel: <span th:text="${arma.nivel}">0</span>
+            <!-- Começar Missão -->
+            <form action="/adicionarArmaLoja" method="post">
+                <input type="hidden" name="armaId" th:value="${arma.id}"/>
+                <button type="submit"> Adicionar a Loja </button>
+            </form>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

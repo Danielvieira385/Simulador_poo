@@ -23,8 +23,8 @@
 
 <h2>Resultado do Combate</h2>
 
-<p th:value="${primeiroAtacante}" id="primeiroAtacante"></p>
-<p th:value="${vencedor}" id="vencedor"></p>
+<p th:text="${primeiroAtacante}" id="primeiroAtacante"></p>
+<p th:text="${vencedor}" id="vencedor"></p>
 
 <div id="simulacaoCombate"></div>
 
@@ -35,15 +35,12 @@
     /*]]>*/
 </script>
 
-
-
 <form action="/arena" method="post">
     <input type="hidden" name="personagemId" th:value="${personagem.id}" />
     <button type="submit">Voltar para Arena</button>
 </form>
 
 <script src="/static/combateArena.js"></script>
-
 
 </body>
 </html>

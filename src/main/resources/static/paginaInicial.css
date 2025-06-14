@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(270deg, #323639, #25282b, #323639);
+    color: #d6caa8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    overflow: hidden;
+}
+
+#game-container {
+    position: relative; /* para as faíscas absolutas */
+    background: rgba(50, 45, 35, 0.85);
+    padding: 35px 50px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(120, 110, 85, 0.6);
+    text-align: center;
+    max-width: 360px;
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    overflow: visible;
+}
+
+/* Título */
+h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: #e6d9b8;
+    text-shadow: 1px 1px 3px #1a1a1a;
+    font-weight: 600;
+}
+
+/* Botão */
+button {
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(145deg, #556a7a, #3b4a58);
+    border: none;
+    border-radius: 7px;
+    color: #dfe6e9;
+    font-size: 1.3rem;
+    padding: 12px 40px;
+    cursor: pointer;
+    box-shadow: 0 0 12px #3a5269;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
+    user-select: none;
+    align-self: center;
+}
+
+button:hover {
+    background: linear-gradient(145deg, #89a6be, #627e98);
+    box-shadow: 0 0 24px #a9c3e2;
+    color: #273544;
+    transform: scale(1.07);
+}
+
+/* Faíscas animadas */
+.spark {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, #fffacd, #ffd700);
+    border-radius: 50%;
+    opacity: 0;
+    animation: sparkPulse 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 4px #ffec88);
+}
+
+/* Animação de brilho suave */
+@keyframes sparkPulse {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

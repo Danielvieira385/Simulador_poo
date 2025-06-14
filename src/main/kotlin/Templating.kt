@@ -484,18 +484,26 @@ fun Application.configureTemplating() {
                 val missaoEscolhida = Missao.começarMissao(missao, personagem)
 
                 if (missaoEscolhida != null) {
-                    val (combate, duracao, expMissao) = missaoEscolhida
+                    val (resultadoCombate, duracao, expMissao) = missaoEscolhida
+                    val logBatalha = resultadoCombate.third
+                    val primeiroAtacante = resultadoCombate.first
+                    val vencedor = resultadoCombate.second
+
                     call.respond(
                         ThymeleafContent(
                             "comecarMissao", mapOf(
                                 "personagem" to personagem,
                                 "missao" to missao,
-                                "combate" to combate,
+                                "combate" to resultadoCombate,
                                 "duracao" to duracao,
-                                "expMissao" to expMissao
+                                "expMissao" to expMissao,
+                                "logBatalha" to logBatalha,
+                                "primeiroAtacante" to primeiroAtacante,
+                                "vencedor" to vencedor
                             )
                         )
                     )
+
                 } else {
                     val context = mutableMapOf<String, Any>(
                         "missoesDisponiveis" to missoesDisponiveis,

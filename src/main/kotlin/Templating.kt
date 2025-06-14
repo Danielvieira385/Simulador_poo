@@ -6,6 +6,7 @@ import com.example.Adversários.Adversário.Companion.obterID_Adversario
 import com.example.Adversários.Adversário.Companion.obterTodosAdversarios
 import com.example.Criacao_personagem.Personagem
 import com.example.Criacao_personagem.Personagem.Companion
+import com.example.Criacao_personagem.Personagem.Companion.atualizarPersonagem
 import com.example.Criacao_personagem.Personagem.Companion.criarPersonagem
 import com.example.Criacao_personagem.Personagem.Companion.obterID_Personagem
 import com.example.Criacao_personagem.Personagem.Companion.obterTodosPersonagens
@@ -239,7 +240,7 @@ fun Application.configureTemplating() {
                 val categoriaPrincipal = params["categoria_principal"] ?: ""
                 val categoriaSecundaria = params["categoria_secundaria"] ?: ""
                 val nivel = 1
-                val inventario = listOf<Int>(1)
+                val armaEquipada = 1
                 val coins = 1
                 val progresso = 1
                 val personagem = criarPersonagem(
@@ -249,7 +250,7 @@ fun Application.configureTemplating() {
                     categoriaPrincipal,
                     categoriaSecundaria,
                     nivel,
-                    inventario,
+                    armaEquipada,
                     coins,
                     progresso
                 )
@@ -270,18 +271,66 @@ fun Application.configureTemplating() {
             }
         }
 
+        post("/perfilPersonagem") {
+            val params = call.receiveParameters()
+            val idPersonagem = params["personagem_ID"] ?:""
+            val personagem = obterTodosPersonagens().find {it.id == idPersonagem.toInt()}
+
+            //Inventario do Personagem
+            val inventarioPersonagem: Item = Item(idPersonagem.toInt())
+            val inventarioP = inventarioPersonagem.mostrarArmasInventarioPorID(idPersonagem.toInt())
+            val nomeArmasPersonagem = inventarioPersonagem.mostarArmasInventarioNome(inventarioP)
+
+            if (personagem != null) {
+                if (inventarioPersonagem != null) {
+                    call.respond(ThymeleafContent("perfilPersonagem", mapOf("personagem" to personagem,
+                        "inventarioNomes" to nomeArmasPersonagem,
+                        "inventarioID" to inventarioP)))
+                } else {
+                    call.respond(ThymeleafContent("perfilPersonagem", mapOf("personagem" to personagem,
+                        "erro" to "O inventário da Personagem está vazio")))
+                }
+            }
+        }
+
+        post("/equiparArma") {
+            val params = call.receiveParameters()
+            val idPersonagem = params["personagem_ID"]?:""
+            val idArma = params["arma_ID"]?:""
+            val personagem = obterTodosPersonagens().find {it.id == idPersonagem.toInt()}
+
+            //Inventario do Personagem
+            if (personagem != null) {
+                val inventarioPersonagem: Item = Item(idPersonagem.toInt())
+                val inventarioP = inventarioPersonagem.mostrarArmasInventarioPorID(idPersonagem.toInt())
+                val nomeArmasPersonagem = inventarioPersonagem.mostarArmasInventarioNome(inventarioP)
+                if (idPersonagem != null && idArma != null) {
+                    val personagem = obterTodosPersonagens().find { it.id == idPersonagem.toInt() }
+                    if (personagem != null) {
+                        personagem?.armaEquipada = idArma.toInt()
+                        call.respond(ThymeleafContent("perfilPersonagem", mapOf("personagem" to personagem,
+                            "inventarioNomes" to nomeArmasPersonagem,
+                            "inventarioID" to inventarioP)))
+                    }
+            }
+                } else {
+                    if (personagem != null) {
+                        call.respond(
+                            ThymeleafContent("perfilPersonagem", mapOf("personagem" to personagem,
+                                    "erro" to "Não foi possivel equipar a arma"
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+
         post("/arena") {
             val params = call.receiveParameters()
             val personagemId = params["personagemId"]?.toIntOrNull()
             val personagem = obterTodosPersonagens().find { it.id == personagemId }
             val adversarios = obterTodosAdversarios()
             var proximoAdversario = adversarios.find { it.id == personagem?.progresso }
-
-            //Ganhar XP
-            //if (personagem != null) {
-              //  passarNivel(50,personagem)
-                //println(personagem.nivel)
-            //}
 
             if (personagem != null) {
                 val context = mutableMapOf<String, Any>(
@@ -305,7 +354,7 @@ fun Application.configureTemplating() {
             val adversario = obterTodosAdversarios().find { it.id == adversarioId }!!
 
 
-            val (primeiroAtacante, vencedor, log) = Combate(personagem, adversario).comecarBatalha()
+            val (primeiroAtacante, vencedor, log) = Combate(personagem, adversario).comecarBatalha(false)
 
             call.respond(
                 ThymeleafContent(
@@ -330,7 +379,6 @@ fun Application.configureTemplating() {
             val inventarioPersonagem: Item = Item(idPersonagem)
             val inventarioP = inventarioPersonagem.mostrarArmasInventarioPorID(idPersonagem)
             val nomeArmasPersonagem = inventarioPersonagem.mostarArmasInventarioNome(inventarioP)
-            println(nomeArmasPersonagem)
 
             if (personagem != null) {
                 call.respond(ThymeleafContent("loja", mapOf(
@@ -422,6 +470,16 @@ fun Application.configureTemplating() {
             val missaoId = params["missao"]?.toIntOrNull()
 
             val personagem = obterTodosPersonagens().find { it.id == personagemId }
+
+            val missoes = obterTodasMissoes()
+            var missoesDisponiveis = mutableListOf<Missao>()
+            for (missao in missoes) {
+                if (personagem != null) {
+                    if (missao.nivel == personagem.nivel ) {
+                        missoesDisponiveis.add(missao)
+                    }
+                }
+            }
             val missao = obterTodasMissoes().find { it.id == missaoId }
 
             if (personagem != null && missao != null) {
@@ -440,6 +498,13 @@ fun Application.configureTemplating() {
                             )
                         )
                     )
+                } else {
+                    val context = mutableMapOf<String, Any>(
+                        "missoesDisponiveis" to missoesDisponiveis,
+                        "personagem" to personagem,
+                        "erro" to "A personagem perdeu a batalha, não completando a missão"
+                    )
+                    call.respond(ThymeleafContent("taberna", context))
                 }
             }
         }

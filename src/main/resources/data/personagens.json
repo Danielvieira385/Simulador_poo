@@ -1,14 +1,11 @@
 [
     {
         "id": 1,
-        "idUtilizador": 1,
-        "nome": "Teste",
-        "categoriaPrincipal": "Guerreiro",
-        "categoriaSecundaria": "Ferreiro",
-        "nivel": 1,
-        "inventario": [
-            1
-        ],
-        "coins": 50
+        "idUtilizador": 2,
+        "nome": "Daniel",
+        "categoriaPrincipal": "Arqueiro",
+        "categoriaSecundaria": "Agricultor",
+        "nivel": 2,
+        "coins": 220
     }
 ]

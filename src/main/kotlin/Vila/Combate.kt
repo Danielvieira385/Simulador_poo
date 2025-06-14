@@ -27,8 +27,8 @@ class Combate (var personagem : Personagem, var inimigo : Adversário) {
                 "       Arma: $inimigo.inventario"
     }
 
-    fun comecarBatalha(): Triple<String, String, List<String>> {
-        val armaPersonagem = obterTodasArmas().find { it.id == personagem.inventario[0] }
+    fun comecarBatalha(missao: Boolean): Triple<String, String, List<String>> {
+        val armaPersonagem = obterTodasArmas().find { it.id == personagem.armaEquipada }
         val armaAdversario = obterTodasArmas().find { it.id == inimigo.arma }
         var vitorioso = ""
         var personagemPV = 100
@@ -36,7 +36,6 @@ class Combate (var personagem : Personagem, var inimigo : Adversário) {
         var primeiroAtacante = ""
         val combateLog = mutableListOf<String>()
         val coinFlip = (1..2).random()
-
         if (armaPersonagem != null && armaAdversario != null) {
             if (coinFlip == 1) {
                 primeiroAtacante = "O personagem atacará primeiro!"
@@ -44,17 +43,17 @@ class Combate (var personagem : Personagem, var inimigo : Adversário) {
                 while (personagemPV > 0 && adversarioPV > 0) {
                     adversarioPV -= armaPersonagem.dano
                     combateLog.add("Personagem ataca com ${armaPersonagem.nome} causando ${armaPersonagem.dano} de dano. Vida do adversário: $adversarioPV")
-
                     if (adversarioPV <= 0) {
                         vitorioso = "O personagem é vitorioso"
                         atualizarPersonagem("nivel", passarNivel(20, personagem), personagem)
                         atualizarPersonagem("coins", "50", personagem)
+                        if (!missao) {
+                            atualizarPersonagem("progresso", (personagem.progresso + 1).toString(), personagem)
+                        }
                         break
                     }
-
                     personagemPV -= armaAdversario.dano
                     combateLog.add("Adversário ataca com ${armaAdversario.nome} causando ${armaAdversario.dano} de dano. Vida do personagem: $personagemPV")
-
                     if (personagemPV <= 0) {
                         vitorioso = "O adversário é vitorioso"
                         break
@@ -66,26 +65,24 @@ class Combate (var personagem : Personagem, var inimigo : Adversário) {
                 while (personagemPV > 0 && adversarioPV > 0) {
                     personagemPV -= armaAdversario.dano
                     combateLog.add("Adversário ataca com ${armaAdversario.nome} causando ${armaAdversario.dano} de dano. Vida do personagem: $personagemPV")
-
                     if (personagemPV <= 0) {
                         vitorioso = "O adversário é vitorioso"
                         break
                     }
-
                     adversarioPV -= armaPersonagem.dano
                     combateLog.add("Personagem ataca com ${armaPersonagem.nome} causando ${armaPersonagem.dano} de dano. Vida do adversário: $adversarioPV")
-
                     if (adversarioPV <= 0) {
                         vitorioso = "O personagem é vitorioso"
                         atualizarPersonagem("nivel", passarNivel(20, personagem), personagem)
                         atualizarPersonagem("coins", "50", personagem)
-                        atualizarPersonagem("progresso",(personagem.progresso+1).toString(),personagem)
+                        if (missao != true) {
+                            atualizarPersonagem("progresso", (personagem.progresso + 1).toString(), personagem)
+                        }
                         break
                     }
                 }
             }
         }
-
         return Triple(primeiroAtacante, vitorioso, combateLog)
     }
 

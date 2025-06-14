@@ -7,19 +7,6 @@
     <body>
         <h1>VILA</h1>
 
-        <div id="infoPersonagem">
-            <input type="hidden" name="personagem" th:value="${personagem}" />
-            <p th:text="'Nome: ' + ${personagem.nome}"></p>
-            <p th:text="'Nível do Personagem : '  + ${personagem.nivel}"></p>
-            <p th:text="'Coins : ' + ${personagem.coins}"></p>
-            <p th:text="'Progresso : ' + ${personagem.progresso}"></p>
-            <!--<p th:text="'ID Personagem: ' + ${personagem.id}"></p>-->
-            <!--<p th:text="'ID Utilizador: ' + ${personagem.idUtilizador}"></p>-->
-            <!--<p th:text="'Categoria Principal: ' + ${personagem.categoriaPrincipal}"></p>-->
-            <!--<p th:text="'Categoria Secundária: ' + ${personagem.categoriaSecundaria}"></p>-->
-            <!--<p th:text="'Inventario : ' + ${personagem.inventario}"></p>-->
-        </div>
-
         <button onClick = "window.location.href='/menu'">Voltar ao Menu!</button>
         <form action="/arena" method="post">
             <input type="hidden" name="personagemId" th:value="${personagem.id}" />
@@ -28,7 +15,7 @@
 
         <form action="/loja" method="post">
             <input type="hidden" name="personagemIdLoja" th:value="${personagem.id}" />
-            <input type="hidden" name="personagemInventario" th:value="${personagem.inventario}" />
+            <input type="hidden" name="personagemInventario" th:value="${personagem.armaEquipada}" />
             <input type="hidden" name="stockArmas" th:value="${armasDisponiveis}" />
             <button type="submit">Ir para Loja</button>
         </form>
@@ -37,6 +24,11 @@
         <form action="/taberna" method="post">
             <input type="hidden" name="personagemIdTaberna" th:value="${personagem.id}" />
             <button type="submit"> Ir para Taberna </button>
+        </form>
+
+        <form action="/perfilPersonagem" method="post">
+            <input type="hidden" name="personagem_ID" th:value="${personagem.id}" />
+            <button type="submit"> Perfil do Personagem </button>
         </form>
 
     </body>

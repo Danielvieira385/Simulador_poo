@@ -2,6 +2,7 @@ package com.example.Menu
 
 import com.example.Adversários.Adversário.Companion.obterTodosAdversarios
 import com.example.Criacao_personagem.Personagem
+import com.example.Criacao_personagem.Personagem.Companion.atualizarPersonagem
 import com.example.Criacao_personagem.Personagem.Companion.obterTodosPersonagens
 import com.example.Criacao_personagem.Personagem.Companion.passarNivel
 import com.example.Vila.Combate
@@ -76,11 +77,18 @@ data class Missao(
             val adversario = obterTodosAdversarios().find { it.id == missao.adversario_id } ?: return null
 
             val combate = Combate(personagem, adversario)
-            val batalha = combate.comecarBatalha() // Triple<String, String, List<String>>
-            val duracaoMissao = missao.duracao
-            val expMissao = passarNivel(missao.exp, personagem)
+            val batalha = combate.comecarBatalha(true) // Triple<String, String, List<String>>
+            if (batalha.second == "O personagem é vitorioso") {
+                val duracaoMissao = missao.duracao
+                val expMissao = passarNivel(missao.exp, personagem)
 
-            return Triple(batalha, duracaoMissao, expMissao)
+                atualizarPersonagem("coins",missao.recompensa_coins.toString(),personagem)
+                return Triple(batalha, duracaoMissao, expMissao)
+            } else  {
+                println("O personagem perdeu a batalha.")
+                return null
+            }
+
         }
 
     }

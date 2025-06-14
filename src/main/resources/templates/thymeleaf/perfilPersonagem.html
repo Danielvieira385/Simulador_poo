@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil do Personagem</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 800px; margin: auto; padding: 20px; }
+        .inventario-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border: 1px solid #ccc; padding: 10px; border-radius: 8px; }
+        .inventario-item button { padding: 5px 10px; cursor: pointer; }
+        h1, h2 { text-align: center; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 th:text="'Perfil de ' + ${personagem.nome}"></h1>
+
+    <h2>Informações do Personagem</h2>
+    <ul>
+        <li><strong>Nome:</strong> <span th:text="${personagem.nome}"></span></li>
+        <li><strong>Categoria Principal:</strong> <span th:text="${personagem.categoriaPrincipal}"></span></li>
+        <li><strong>Categoria Secundaria:</strong> <span th:text="${personagem.categoriaSecundaria}"></span></li>
+        <li><strong>Nível:</strong> <span th:text="${personagem.nivel}"></span></li>
+        <li><strong>Arma Equipada:</strong> <span th:text="${personagem.armaEquipada}"></span></li>
+        <li><strong>Coins:</strong> <span th:text="${personagem.coins}"></span></li>
+        <li><strong>Progresso Adversários:</strong> <span th:text="${personagem.progresso}"></span></li>
+        <!-- Adicione outras informações conforme necessário -->
+    </ul>
+
+    <h2>Inventário</h2>
+    <div th:each="arma, iterStat : ${inventarioNomes}">
+        <div class="inventario-item">
+            <span th:text="${arma}">Nome da Arma</span>
+            <form method="post" action="/equiparArma" >
+                <input type="hidden" name="personagem_ID" th:value="${personagem.id}" />
+                <input type="hidden" name="arma_ID" th:value="${inventarioID[iterStat.index]}" />
+                <button type="submit"> Equipar </button>
+            </form>
+            <div th:if="${erro}" style="color: red; font-weight: bold; margin-bottom: 10px;">
+                <p th:text="${erro}"></p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <form method="post" action="/vila">
+        <input type="hidden" name="tipoBusca" value="selecao" />
+        <input type="hidden" name="personagemSelecionado" th:value="${personagem.id}" />
+        <button type="submit"> Voltar para a Vila </button>
+    </form>
+</div>
+</body>
+</html>

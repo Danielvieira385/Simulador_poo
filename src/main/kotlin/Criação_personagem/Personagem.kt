@@ -15,7 +15,7 @@ data class Personagem(
     var categoriaPrincipal: String = "",
     var categoriaSecundaria: String = "",
     var nivel: Int = 0,
-    var inventario: List<Int> = listOf(),
+    var armaEquipada: Int = 1,
     var coins : Int = 0,
     var progresso : Int = 1
 ) {
@@ -27,7 +27,7 @@ data class Personagem(
                 "   Categoria Principal : ${categoriaPrincipal}" +
                 "   Categoria Secundaria : ${categoriaSecundaria}" +
                 "   Nível: $nivel" +
-                "   Inventário: $inventario" +
+                "   Inventário: $armaEquipada" +
                 "   Dinheiro: $coins" +
                 "   Progresso: $progresso"
     }
@@ -95,7 +95,7 @@ data class Personagem(
 
         fun criarPersonagem(
             id: Int, idUtilizador: Int, nome: String, categoriaPrincipal: String, categoriaSecundaria: String,
-            nivel: Int, inventario: List<Int>, coins: Int, progresso: Int
+            nivel: Int, armaEquipada: Int, coins: Int, progresso: Int
         ) : Personagem{
             val novaPersonagem = Personagem(
                 id = obterID_Personagem(),
@@ -104,7 +104,7 @@ data class Personagem(
                 categoriaPrincipal = categoriaPrincipal,
                 categoriaSecundaria = categoriaSecundaria,
                 nivel = nivel,
-                inventario = inventario,
+                armaEquipada = armaEquipada,
                 coins = coins,
                 progresso = progresso
             )

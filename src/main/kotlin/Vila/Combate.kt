@@ -27,50 +27,66 @@ class Combate (var personagem : Personagem, var inimigo : Adversário) {
                 "       Arma: $inimigo.inventario"
     }
 
-        fun comecarBatalha(): String {
-            val armaPersonagem = obterTodasArmas().find { it.id == personagem.inventario[0] }
-            val armaAdversario = obterTodasArmas().find { it.id == inimigo.arma }
-            var vitorioso: String = ""
-            var personagemPV: Int = 100
-            var adversarioPV: Int = 100
-            var primeiroAtacante: String = ""
-            val coinFlip = (1..2).random()
+    fun comecarBatalha(): Triple<String, String, List<String>> {
+        val armaPersonagem = obterTodasArmas().find { it.id == personagem.inventario[0] }
+        val armaAdversario = obterTodasArmas().find { it.id == inimigo.arma }
+        var vitorioso = ""
+        var personagemPV = 100
+        var adversarioPV = 100
+        var primeiroAtacante = ""
+        val combateLog = mutableListOf<String>()
+        val coinFlip = (1..2).random()
 
-            if (armaPersonagem != null) {
-                if (armaAdversario != null) {
-                    if (coinFlip == 1) {
-                        primeiroAtacante = "O personagem atacará primeiro!"
-                        while (personagemPV > 0 && adversarioPV > 0) {
-                            adversarioPV -= armaPersonagem.dano
-                            println("Vida Adversario - "+ adversarioPV)
-                            personagemPV -= armaAdversario.dano
-                            println("Vida Personagem - "+ personagemPV)
-                            if (adversarioPV <= 0) {
-                                vitorioso = "O personagem é vitorioso"
-                                atualizarPersonagem("nivel", passarNivel(20,personagem),personagem)
-                                atualizarPersonagem("coins", "50",personagem)
-                            } else if (personagemPV <= 0) {
-                                vitorioso = "O adversario é vitorioso"
-                            }
-                        }
-                    } else if (coinFlip == 2) {
-                        primeiroAtacante = "O Adversário atacará primeiro"
-                        while (personagemPV > 0 && adversarioPV > 0) {
-                            personagemPV -= armaAdversario.dano
-                            println("Vida Personagem - "+ personagemPV)
-                            adversarioPV -= armaPersonagem.dano
-                            println("Vida Adversario - "+ adversarioPV)
-                            if (personagemPV <= 0) {
-                                vitorioso = "O adversário é vitorioso"
-                            } else if (adversarioPV <= 0){
-                                vitorioso = "O personagem é vitorioso"
-                                atualizarPersonagem("nivel", passarNivel(20,personagem),personagem)
-                                atualizarPersonagem("coins", "50",personagem)
-                            }
-                        }
+        if (armaPersonagem != null && armaAdversario != null) {
+            if (coinFlip == 1) {
+                primeiroAtacante = "O personagem atacará primeiro!"
+                combateLog.add(primeiroAtacante)
+                while (personagemPV > 0 && adversarioPV > 0) {
+                    adversarioPV -= armaPersonagem.dano
+                    combateLog.add("Personagem ataca com ${armaPersonagem.nome} causando ${armaPersonagem.dano} de dano. Vida do adversário: $adversarioPV")
+
+                    if (adversarioPV <= 0) {
+                        vitorioso = "O personagem é vitorioso"
+                        atualizarPersonagem("nivel", passarNivel(20, personagem), personagem)
+                        atualizarPersonagem("coins", "50", personagem)
+                        break
+                    }
+
+                    personagemPV -= armaAdversario.dano
+                    combateLog.add("Adversário ataca com ${armaAdversario.nome} causando ${armaAdversario.dano} de dano. Vida do personagem: $personagemPV")
+
+                    if (personagemPV <= 0) {
+                        vitorioso = "O adversário é vitorioso"
+                        break
+                    }
+                }
+            } else {
+                primeiroAtacante = "O adversário atacará primeiro!"
+                combateLog.add(primeiroAtacante)
+                while (personagemPV > 0 && adversarioPV > 0) {
+                    personagemPV -= armaAdversario.dano
+                    combateLog.add("Adversário ataca com ${armaAdversario.nome} causando ${armaAdversario.dano} de dano. Vida do personagem: $personagemPV")
+
+                    if (personagemPV <= 0) {
+                        vitorioso = "O adversário é vitorioso"
+                        break
+                    }
+
+                    adversarioPV -= armaPersonagem.dano
+                    combateLog.add("Personagem ataca com ${armaPersonagem.nome} causando ${armaPersonagem.dano} de dano. Vida do adversário: $adversarioPV")
+
+                    if (adversarioPV <= 0) {
+                        vitorioso = "O personagem é vitorioso"
+                        atualizarPersonagem("nivel", passarNivel(20, personagem), personagem)
+                        atualizarPersonagem("coins", "50", personagem)
+                        atualizarPersonagem("progresso",(personagem.progresso+1).toString(),personagem)
+                        break
                     }
                 }
             }
-            return primeiroAtacante + " <br> " + vitorioso
         }
+
+        return Triple(primeiroAtacante, vitorioso, combateLog)
+    }
+
 }

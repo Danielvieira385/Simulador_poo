@@ -72,13 +72,13 @@ data class Missao(
             return novaMissao
         }
 
-        fun começarMissao(missao: Missao, personagem: Personagem): Triple<String, Int, String>? {
+        fun começarMissao(missao: Missao, personagem: Personagem): Triple<Triple<String, String, List<String>>, Int, String>? {
             val adversario = obterTodosAdversarios().find { it.id == missao.adversario_id } ?: return null
 
             val combate = Combate(personagem, adversario)
-            val batalha = combate.comecarBatalha()
-            var duracaoMissao = missao.duracao
-            var expMissao = passarNivel(missao.exp, personagem)
+            val batalha = combate.comecarBatalha() // Triple<String, String, List<String>>
+            val duracaoMissao = missao.duracao
+            val expMissao = passarNivel(missao.exp, personagem)
 
             return Triple(batalha, duracaoMissao, expMissao)
         }

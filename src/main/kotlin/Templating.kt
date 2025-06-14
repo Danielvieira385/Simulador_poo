@@ -297,21 +297,30 @@ fun Application.configureTemplating() {
         }
 
         post("/combate") {
-            val params = call.receiveParameters()
-            val personagemid = params["personagem"] ?: ""
-            val adversarioid = params["adversario"] ?: ""
-            val personagem = obterTodosPersonagens().find { it.id == personagemid.toInt()}
-            val adversario = obterTodosAdversarios().find { it.id == adversarioid.toInt()}
+            val params        = call.receiveParameters()
+            val personagemId  = params["personagem"]!!.toInt()
+            val adversarioId  = params["adversario"]!!.toInt()
 
-            if (personagem != null) {
-                if (adversario != null) {
-                    var combate = Combate(personagem,adversario)
-                    var luta = combate.comecarBatalha()
-                    call.respond(ThymeleafContent("combate", mapOf("personagem" to personagem,
-                        "adversario" to adversario, "luta" to luta)))
-                }
-            }
+            val personagem = obterTodosPersonagens().find { it.id == personagemId }!!
+            val adversario = obterTodosAdversarios().find { it.id == adversarioId }!!
+
+
+            val (primeiroAtacante, vencedor, log) = Combate(personagem, adversario).comecarBatalha()
+
+            call.respond(
+                ThymeleafContent(
+                    "combate",
+                    mapOf(
+                        "personagem"       to personagem,
+                        "adversario"       to adversario,
+                        "primeiroAtacante" to primeiroAtacante,
+                        "vencedor"         to vencedor,
+                        "logBatalha"       to log       // List<String>
+                    )
+                )
+            )
         }
+
 
         post("/loja") {
             val params = call.receiveParameters()

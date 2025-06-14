@@ -52,8 +52,9 @@ data class Personagem(
             }
             val jsonString = file.readText()
             return if (jsonString.isEmpty()) emptyList()
-            else json.decodeFromString(jsonString)
+            else json.decodeFromString(ListSerializer(Personagem.serializer()), jsonString)
         }
+
 
         fun atualizarPersonagem(infoAMudar: String, infoAtualizada: String, personagem: Personagem) {
             val personagens = obterTodosPersonagens().toMutableList()
@@ -107,6 +108,9 @@ data class Personagem(
                 coins = coins,
                 progresso = progresso
             )
+
+            val json = Json { encodeDefaults = true }
+
 
             val personagemExistentes = obterTodosPersonagens().toMutableList()
             personagemExistentes.add(novaPersonagem)

@@ -1,73 +1,14 @@
 [
     {
         "id": 1,
-        "idUtilizador": 2,
-        "nome": "Personagem1",
-        "categoriaPrincipal": "Guerreiro",
-        "categoriaSecundaria": "Ferreiro",
-        "nivel": 3,
-        "inventario": [
-            1
-        ],
-        "coins": 50
-    },
-    {
-        "id": 2,
-        "idUtilizador": 5,
-        "nome": "Lilrodrigo",
-        "categoriaPrincipal": "Guerreiro",
-        "categoriaSecundaria": "Caçador",
-        "nivel": 1,
-        "inventario": [
-            1
-        ],
-        "coins": 1
-    },
-    {
-        "id": 3,
-        "idUtilizador": 2,
-        "nome": "Personagem2",
-        "categoriaPrincipal": "Guerreiro",
-        "categoriaSecundaria": "Ferreiro",
-        "nivel": 2,
-        "inventario": [
-            1
-        ],
-        "coins": 50
-    },
-    {
-        "id": 4,
-        "idUtilizador": 6,
-        "nome": "PT",
-        "categoriaPrincipal": "Guerreiro",
-        "categoriaSecundaria": "Caçador",
-        "nivel": 1,
-        "inventario": [
-            1
-        ],
-        "coins": 10
-    },
-    {
-        "id": 5,
-        "idUtilizador": 7,
-        "nome": "TESTE",
-        "categoriaPrincipal": "Guerreiro",
-        "categoriaSecundaria": "Ferreiro",
-        "nivel": 3,
-        "inventario": [
-            1
-        ]
-    },
-    {
-        "id": 6,
-        "idUtilizador": 8,
+        "idUtilizador": 1,
         "nome": "Teste",
         "categoriaPrincipal": "Guerreiro",
         "categoriaSecundaria": "Ferreiro",
-        "nivel": 3,
+        "nivel": 1,
         "inventario": [
             1
         ],
-        "coins": 105
+        "coins": 50
     }
 ]

@@ -1,50 +1,8 @@
 [
     {
         "id": 1,
-        "nome": "Conta Administrador",
-        "idade": 24,
-        "password": "012"
-    },
-    {
-        "id": 2,
-        "nome": "Daniel",
-        "idade": 24,
-        "password": "123"
-    },
-    {
-        "id": 3,
-        "nome": "Daniel2",
-        "idade": 24,
-        "password": "124"
-    },
-    {
-        "id": 4,
-        "nome": "Teste2",
-        "idade": 18,
-        "password": "123"
-    },
-    {
-        "id": 5,
-        "nome": "Rodrigo",
-        "idade": 21,
-        "password": "123"
-    },
-    {
-        "id": 6,
-        "nome": "UT",
-        "idade": 23,
-        "password": "123"
-    },
-    {
-        "id": 7,
-        "nome": "USER",
-        "idade": 22,
-        "password": "123"
-    },
-    {
-        "id": 8,
         "nome": "UTeste",
-        "idade": 22,
+        "idade": 24,
         "password": "123"
     }
 ]

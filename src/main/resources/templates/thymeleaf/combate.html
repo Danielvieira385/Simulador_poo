@@ -21,8 +21,15 @@
     <p><strong th:text="${adversario.nome}"></strong></p>
 </div>
 
-<h2> RESULTADO: </h2>
-<p><strong th:text="${luta}"></strong></p>
+<h2>Resultado do Combate</h2>
+
+<p th:text="${primeiroAtacante}"></p>
+<p th:text="${vencedor}"></p>
+
+<ul>
+    <li th:each="l : ${logBatalha}" th:text="${l}"></li>
+</ul>
+
 
 <form action="/arena" method="post">
     <input type="hidden" name="personagemId" th:value="${personagem.id}" />

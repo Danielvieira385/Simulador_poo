@@ -6,13 +6,13 @@
 </head>
 <body>
 <h1> Combate </h1>
+
 <div>
     <label> Personagem </label>
     <input type="hidden" th:value="${personagem}" name="personagem">
     <input type="text" th:value="${personagem.nome}" readonly>
     <input type="text" th:value="${personagem.progresso}" readonly>
     <input type="text" th:value="${personagem.armaEquipada}">
-    <!--<input type="text" th:value="${personagem.nivel}">-->
 </div>
 
 <div id="proximoAdversario">
@@ -23,18 +23,27 @@
 
 <h2>Resultado do Combate</h2>
 
-<p th:text="${primeiroAtacante}"></p>
-<p th:text="${vencedor}"></p>
+<p th:value="${primeiroAtacante}" id="primeiroAtacante"></p>
+<p th:value="${vencedor}" id="vencedor"></p>
 
-<ul>
-    <li th:each="l : ${logBatalha}" th:text="${l}"></li>
-</ul>
+<div id="simulacaoCombate"></div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const combateLogData = [[${logBatalha}]];
+    console.log("CombateLog carregado:", combateLogData);
+    /*]]>*/
+</script>
+
 
 
 <form action="/arena" method="post">
     <input type="hidden" name="personagemId" th:value="${personagem.id}" />
     <button type="submit">Voltar para Arena</button>
 </form>
+
+<script src="/static/combateArena.js"></script>
+
 
 </body>
 </html>

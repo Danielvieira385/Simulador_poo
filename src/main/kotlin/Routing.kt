@@ -17,5 +17,8 @@ fun Application.configureRouting() {
         get("/") {
             call.respond(ThymeleafContent("index.html", mapOf()))
         }
+        static("/static") {
+            resources("static")
+        }
     }
 }

@@ -286,9 +286,6 @@ fun Application.configureTemplating() {
                     call.respond(ThymeleafContent("perfilPersonagem", mapOf("personagem" to personagem,
                         "inventarioNomes" to nomeArmasPersonagem,
                         "inventarioID" to inventarioP)))
-                } else {
-                    call.respond(ThymeleafContent("perfilPersonagem", mapOf("personagem" to personagem,
-                        "erro" to "O inventário da Personagem está vazio")))
                 }
             }
         }
@@ -307,7 +304,8 @@ fun Application.configureTemplating() {
                 if (idPersonagem != null && idArma != null) {
                     val personagem = obterTodosPersonagens().find { it.id == idPersonagem.toInt() }
                     if (personagem != null) {
-                        personagem?.armaEquipada = idArma.toInt()
+                        personagem.armaEquipada = idArma.toInt()
+                        atualizarPersonagem("armaEquipada",personagem.armaEquipada.toString(),personagem)
                         call.respond(ThymeleafContent("perfilPersonagem", mapOf("personagem" to personagem,
                             "inventarioNomes" to nomeArmasPersonagem,
                             "inventarioID" to inventarioP)))

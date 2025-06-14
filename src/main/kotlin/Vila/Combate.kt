@@ -29,6 +29,8 @@ class Combate (var personagem : Personagem, var inimigo : Adversário) {
 
     fun comecarBatalha(missao: Boolean): Triple<String, String, List<String>> {
         val armaPersonagem = obterTodasArmas().find { it.id == personagem.armaEquipada }
+        println("Arma da personagem!!:!:!:")
+        println(armaPersonagem)
         val armaAdversario = obterTodasArmas().find { it.id == inimigo.arma }
         var vitorioso = ""
         var personagemPV = 100

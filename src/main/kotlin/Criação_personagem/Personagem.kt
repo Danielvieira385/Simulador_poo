@@ -27,6 +27,7 @@ data class Personagem(
                 "   Categoria Principal : ${categoriaPrincipal}" +
                 "   Categoria Secundaria : ${categoriaSecundaria}" +
                 "   Nível: $nivel" +
+                "   Arma Equipada: $armaEquipada" +
                 "   Inventário: $armaEquipada" +
                 "   Dinheiro: $coins" +
                 "   Progresso: $progresso"
@@ -57,6 +58,7 @@ data class Personagem(
 
 
         fun atualizarPersonagem(infoAMudar: String, infoAtualizada: String, personagem: Personagem) {
+            val json = Json { encodeDefaults = true }
             val personagens = obterTodosPersonagens().toMutableList()
             val index = personagens.indexOfFirst { it.id == personagem.id }
             if (index == -1) {
@@ -68,6 +70,7 @@ data class Personagem(
                 "nivel" -> personagens[index].nivel = infoAtualizada.toIntOrNull() ?: personagens[index].nivel
                 "coins" -> personagens[index].coins = infoAtualizada.toIntOrNull() ?: personagens[index].coins
                 "progresso" -> personagens[index].progresso = infoAtualizada.toIntOrNull() ?: personagens[index].progresso
+                "armaequipada" -> personagens[index].armaEquipada = infoAtualizada.toIntOrNull() ?: personagens[index].armaEquipada
                 else -> {
                     println("Campo '$infoAMudar' não reconhecido.")
                     return

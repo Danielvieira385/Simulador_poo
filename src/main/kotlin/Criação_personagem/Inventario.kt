@@ -31,22 +31,32 @@ class Item(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableListOf(
        return "Inventário = $idArmas"
     }
 
-    // Adiciona uma arma ao inventário do personagem
+
     fun adicionarArmaInventario(idArma: Int) {
+        var nomeArmaLoja :String = ""
+        var idArmaDB : Int = 0
+        var armasDB = obterTodasArmas()
+        var armasLoja = obterTodasArmasLoja()
+        for (armaLoja in armasLoja) {
+            if (idArma == armaLoja.id)
+                nomeArmaLoja = armaLoja.nome
+        }
+        for (arma in armasDB) {
+            if (arma.nome == nomeArmaLoja) {
+                idArmaDB = arma.id
+            }
+        }
         val inventarioData: InventarioData =
             if (file.exists() && file.readText().isNotEmpty())
                 json.decodeFromString(file.readText())
             else
                 InventarioData()
 
-        // Pega a lista atual ou cria nova
         val listaAtual = inventarioData.inventarios.getOrDefault(idPersonagem, mutableListOf())
-        listaAtual.add(idArma)
+        listaAtual.add(idArmaDB)
 
-        // Atualiza o mapa com a lista modificada
         inventarioData.inventarios[idPersonagem] = listaAtual
 
-        // Salva novamente
         file.writeText(json.encodeToString(inventarioData))
     }
 
@@ -78,7 +88,7 @@ class Item(val idPersonagem: Int, val idArmas: MutableList<Int> = mutableListOf(
     }
 
     fun mostarArmasInventarioNome(inventario: List<Int>): List<String> {
-        val todasArmas = obterTodasArmasLoja()
+        val todasArmas = obterTodasArmas()
         val nomesArmas = mutableListOf<String>()
         for (item in inventario) {
             for (arma in todasArmas) {

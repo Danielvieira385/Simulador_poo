@@ -207,7 +207,7 @@ fun Application.configureTemplating() {
             if (idUtilizador != null) {
                 call.respond(ThymeleafContent("selecionarPersonagem", mapOf("idUtilizador" to idUtilizador)))
             } else {
-                call.respondRedirect("/menu")
+                call.respondRedirect("/usersMenu")
             }
         }
         post("/selecionarPersonagem") {
@@ -225,7 +225,7 @@ fun Application.configureTemplating() {
                     )
                 )
             } else {
-                call.respondRedirect("/menu")
+                call.respondRedirect("/usersMenu")
             }
         }
 

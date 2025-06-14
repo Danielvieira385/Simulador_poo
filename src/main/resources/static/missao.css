@@ -1,0 +1,22 @@
+#progressoContainer {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+#barraProgresso {
+    height: 30px;
+    width: 0%;
+    background-color: green;
+    text-align: center;
+    color: white;
+    line-height: 30px;
+    transition: width 1s linear;
+}
+
+#resultado {
+    display: none;
+    margin-top: 20px;
+}

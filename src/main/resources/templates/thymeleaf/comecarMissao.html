@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title> Missão </title>
+    <link rel="stylesheet" href="missao.css">
 </head>
 <body>
 <h1> Missão </h1>
@@ -12,7 +13,6 @@
     <input type="text" th:value="${personagem.nome}" readonly>
     <input type="text" th:value="${personagem.progresso}" readonly>
     <input type="text" th:value="${personagem.armaEquipada}">
-    <!--<input type="text" th:value="${personagem.nivel}">-->
 </div>
 
 <div id="missaoEscolhida">
@@ -22,19 +22,28 @@
     <p><strong th:text="${missao.descricao}"></strong></p>
 </div>
 
-<h2> RESULTADO: </h2>
-<p><strong th:text="${combate}"></strong></p>
-<br>
-<p><strong th:text="${duracao}"></strong></p>
-<br>
-<p><strong th:text="${expMissao}"></strong></p>
-<br>
-<p><strong th:text="${personagem.nivel}"></strong></p>
+<!-- Barra de Progresso -->
+<div id="progressoContainer">
+    <div id="barraProgresso">0%</div>
+</div>
+
+<!-- Resultado escondido inicialmente -->
+<div id="resultado">
+    <h2> RESULTADO: </h2>
+    <p><strong th:text="${combate}"></strong></p>
+    <br>
+    <p><strong th:text="${duracao}"></strong></p>
+    <br>
+    <p><strong th:text="${expMissao}"></strong></p>
+    <br>
+    <p><strong th:text="${personagem.nivel}"></strong></p>
+</div>
 
 <form method="post" action="/taberna">
     <input type="hidden" name="personagemIdTaberna" th:value="${personagem.id}" />
     <button type="submit"> Voltar para a Taberna </button>
 </form>
 
+<script src="simulacaoMissao.js"></script>
 </body>
 </html>

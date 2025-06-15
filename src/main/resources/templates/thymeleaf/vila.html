@@ -1,35 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Personagem Criado</title>
-    </head>
-    <body>
-        <h1>VILA</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Personagem Criado</title>
+    <link rel="stylesheet" href="/static/vila.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=MedievalSharp&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Botão de voltar ao menu -->
+<button id="menu-button" onClick="window.location.href='/menu'">Voltar ao Menu!</button>
 
-        <button onClick = "window.location.href='/menu'">Voltar ao Menu!</button>
-        <form action="/arena" method="post">
-            <input type="hidden" name="personagemId" th:value="${personagem.id}" />
-            <button type="submit">Ir para Arena</button>
-        </form>
 
-        <form action="/loja" method="post">
-            <input type="hidden" name="personagemIdLoja" th:value="${personagem.id}" />
-            <input type="hidden" name="personagemInventario" th:value="${personagem.armaEquipada}" />
-            <input type="hidden" name="stockArmas" th:value="${armasDisponiveis}" />
-            <button type="submit">Ir para Loja</button>
-        </form>
+<div id="perfil-container">
+    <h3 th:text="'Nv. ' + ${personagem.nivel} + ' - ' + ${personagem.nome}">Nv. 1 - Teste</h3>
+    <form action="/perfilPersonagem" method="post">
+        <input type="hidden" name="personagem_ID" th:value="${personagem.id}" />
+        <button type="submit">Perfil do Personagem</button>
+    </form>
+</div>
 
-<!--        <button onClick ="window.location.href='/loja'"> LOJA  </button>-->
-        <form action="/taberna" method="post">
-            <input type="hidden" name="personagemIdTaberna" th:value="${personagem.id}" />
-            <button type="submit"> Ir para Taberna </button>
-        </form>
 
-        <form action="/perfilPersonagem" method="post">
-            <input type="hidden" name="personagem_ID" th:value="${personagem.id}" />
-            <button type="submit"> Perfil do Personagem </button>
-        </form>
+<form id="taberna-button" action="/taberna" method="post">
+    <input type="hidden" name="personagemIdTaberna" th:value="${personagem.id}" />
+    <button type="submit">Ir para Taberna</button>
+</form>
 
-    </body>
+
+<form id="arena-button" action="/arena" method="post">
+    <input type="hidden" name="personagemId" th:value="${personagem.id}" />
+    <button type="submit">Ir para Arena</button>
+</form>
+
+
+<form id="loja-button" action="/loja" method="post">
+    <input type="hidden" name="personagemIdLoja" th:value="${personagem.id}" />
+    <input type="hidden" name="personagemInventario" th:value="${personagem.armaEquipada}" />
+    <input type="hidden" name="stockArmas" th:value="${armasDisponiveis}" />
+    <button type="submit">Ir para Loja</button>
+</form>
+</body>
 </html>

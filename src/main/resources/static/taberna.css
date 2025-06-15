@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("img/tavern.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #f5f5dc;
+    font-family: 'MedievalSharp', cursive;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 20px;
+}
+
+h1, h2 {
+    color: #d4af37;
+    text-shadow: 2px 2px #000;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 2.6em;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin-top: 10px;
+}
+
+#listaMissoes {
+    background: rgba(35, 24, 17, 0.95);
+    border: 2px solid #c9ab77;
+    border-radius: 20px;
+    padding: 20px;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 0 20px #000;
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 10px;
+}
+
+li {
+    margin-bottom: 15px;
+    background-color: rgba(43, 31, 19, 0.8);
+    padding: 12px;
+    border-radius: 10px;
+    border-left: 4px solid #d4af37;
+}
+
+strong {
+    color: #ffd700;
+}
+
+form {
+    margin-top: 10px;
+}
+
+input[type="text"] {
+    font-family: 'MedievalSharp', cursive;
+    background: #2b1f13;
+    color: #f5f5dc;
+    border: 2px solid #c9ab77;
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin-top: 5px;
+    width: 100%;
+    max-width: 300px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+button,
+input[type="submit"] {
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1.1em;
+    padding: 10px 22px;
+    background: #8b0000;
+    color: #f5f5dc;
+    border: 2px solid #d4af37;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    margin-top: 8px;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background: #a52a2a;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #d4af37;
+}

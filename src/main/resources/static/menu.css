@@ -1,6 +1,11 @@
-body {
+/* reset básico */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     background-image: url("img/inicial_background.jpg");
     background-size: cover;
     background-position: center;
@@ -13,24 +18,30 @@ body {
     align-items: center;
 }
 
-
-.container {
-    text-align: center;
+div {
     background: rgba(35, 24, 17, 0.95);
-    padding: 50px;
+    padding: 50px 40px;
     border: 3px solid #c9ab77;
     border-radius: 20px;
     box-shadow: 0 0 30px #000;
-    width: 80%;
-    max-width: 500px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
 }
 
 h1 {
-    font-family: 'Uncial Antiqua', cursive;
     font-size: 3em;
     margin-bottom: 40px;
     color: #d4af37;
     text-shadow: 2px 2px #000;
+}
+
+ul {
+    list-style: none;
+}
+
+form {
+    margin-bottom: 25px;
 }
 
 button {
@@ -42,11 +53,13 @@ button {
     border: 2px solid #d4af37;
     border-radius: 10px;
     cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    width: 100%;
+    max-width: 300px;
 }
 
 button:hover {
     background: #a52a2a;
     transform: scale(1.05);
-    box-shadow: 0 0 10px #d4af37;
+    box-shadow: 0 0 10px #d4af37;
 }

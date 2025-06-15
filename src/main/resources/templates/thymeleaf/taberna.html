@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>TABERNA</title>
+    <link rel="stylesheet" href="/static/taberna.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=MedievalSharp&display=swap" rel="stylesheet">
 </head>
 <body>
 <h1>BEMVINDO A TABERNA</h1>
@@ -27,15 +31,6 @@
             </form>
         </li>
     </ul>
-</div>
-
-<!-- Info do Personagem -->
-<div>
-    <label>Personagem:</label>
-    <input type="hidden" th:value="${personagem}" name="personagem">
-    <input type="text" th:value="${personagem.nome}" readonly>
-    <input type="text" th:value="${personagem.progresso}" readonly>
-    <!--<input type="text" th:value="${personagem.nivel}">-->
 </div>
 
 <br>

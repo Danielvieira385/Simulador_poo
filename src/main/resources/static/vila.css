@@ -1,0 +1,77 @@
+* {
+    overflow: hidden;
+}
+
+body {
+    background-image: url("img/villaBackground.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'MedievalSharp', cursive;
+    min-height: 100vh;
+    position: relative;
+    color: #f5f5dc;
+}
+
+
+button,
+input[type="submit"] {
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1.2em;
+    padding: 10px 22px;
+    background: #8b0000;
+    color: #f5f5dc;
+    border: 2px solid #d4af37;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+button:hover,
+input[type="submit"]:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 15px #d4af37;
+}
+
+
+#perfil-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(0, 0, 50, 0.6);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+#perfil-container h3 {
+    margin-bottom: 10px;
+    color: #ffd700;
+}
+
+
+#menu-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+
+#taberna-button {
+    position: absolute;
+    bottom: 50px;
+    left: 240px;
+}
+
+#arena-button {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+}
+
+#loja-button {
+    position: absolute;
+    bottom: 90px;
+    left: 800px;
+}

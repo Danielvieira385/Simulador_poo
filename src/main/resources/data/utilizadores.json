@@ -4,5 +4,17 @@
         "nome": "Teste",
         "idade": 24,
         "password": "123"
+    },
+    {
+        "id": 2,
+        "nome": "Dani",
+        "idade": 23,
+        "password": "123"
+    },
+    {
+        "id": 3,
+        "nome": "Daniel Sousa",
+        "idade": 23,
+        "password": "321"
     }
 ]

@@ -47,5 +47,5 @@ O sistema será estruturado com as seguintes classes principais:
 ### 🚧 **Dificuldades Esperadas:**
 No início, uma das dificuldades sentidas foi entender a lógica de passagem de informações entre os Backend e o Frontend,
 as dificuldades foram ultrapassadas com a ajuda de tutoriais e documentação. 
-A implementação de um sistema de combate e a gestão de inventário e interação cona loja também foram desafiadoras,
+A implementação de um sistema de combate, a gestão de inventário e a interação da loja também foram desafiadoras,
 mas conseguimos implementar uma lógica que permite ao jogador interagir com o jogo de forma dinâmica.

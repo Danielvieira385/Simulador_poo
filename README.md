@@ -1,52 +1,51 @@
-# Simulador_poo
-Projeto final de POO - Kotlin
+# 🏰 **Kotlin Adventures** 
+## Projeto de POO em Kotlin
+
+### 👥 **Autores:**
+* Daniel Sousa - 
+* Daniel Vieira - 126844 
 
 
-Autores:
-- Daniel Vieira
-- Daniel Sousa
+### 📜 **Descrição:**
+Este projeto consiste num simulador de vida medieval onde o utilizador cria um personagem e toma decisões que impactam a sua jornada numa vila medieval. 
+As escolhas do jogador influenciam a sua profissão, relacionamentos, participação em combates e envolvimento em eventos aleatórios.
 
-Descrição:
-Simulador de Jogo Medieval
-O utilizador cria um personagem e onde pode tomar decisões que afetam sua vida em uma vila medieval: profissão, relacionamentos entre personagens, combates, participação em eventos aleatórios.
+### 🎯 **Objetivo:**
+Desenvolver um jogo de simulação que permita ao utilizador experienciar a vida de um personagem na Idade Média.
 
-Objetivo:
-Desenvolver um jogo de simulação em que simule uma vida medieval de uma personagem.
+### 🛠️ **Sistema:**
+O sistema será estruturado com as seguintes classes principais:
+* **Utilizador:** Representa o jogador que controla o personagem no jogo.
+* **Personagem:** Representa o personagem do utilizador, incluindo atributos como nome, CategoriaPersonagem, CategoriaSecundaria e Inventario.
+* **CategoriaPersonagem:** Define a classe do personagem (guerreiro, mago, arqueiro).
+* **CategoriaSecundaria:** Define a profissão do personagem (ferreiro, agricultor, pescador, caçador).
+* **Missao:** Representa tarefas ou desafios que o personagem pode realizar (caçar, entregar cartas, etc.).
+* **Inventario:** Contém os itens que o personagem possui.
+* **Item:** Define um item genérico com atributos como nome, tipo (arma, comida, poção) e efeito.
+* **Arma:** Subclasse de Item, com atributos adicionais como dano, tipo e durabilidade.
+* **RelacaoSocial:** Representa as relações do personagem com outros personagens e com a vila (amizade, romance, rivalidade).
+* **Vila:** Representa o local onde o jogo se passa, incluindo informações sobre a população, locais e reputação do jogador.
+* **Taberna:** Um local na vila onde o personagem pode descansar, obter informações ou contratar serviços.
+* **SistemaDeCombate:** Lógica para gerenciar combates (ataque, defesa, vida).
+* **SistemaDeJogo:** Gerencia o fluxo geral do jogo, incluindo menus e entrada do utilizador.
 
-Sistema:
-Estrutura Inicial de Classes
-Proposta de organização das classes que iram ser utilizadas no projeto:
-1.	Personagem – nome, idade, CategoriaPersonagem, CategoriaSecundaria, Inventario, TempoDeJogo
-2.	CategoriaPersonagem – guerreiro, mago, aqueiro
-3.	CategoriaSecundaria - ferreiro, agricultor, pescador, caçador
-4.	Missao – pequenas tarefas ou desafios (ex: caçar, entregar carta, etc.).
-5.	Inventario – itens que o personagem carrega.
-6.	Item – nome, tipo (arma, comida, poção), efeito.
-7.	Arma – dano, tipo, durabilidade.
-8.	RelacaoSocial – relação com outras personagens e com a vila em geral (amizade, romance, rivalidade).
-9.	Evento – algo aleatório que acontece (festa na vila, ataque de bandidos, doença).
-10.	Vila – local onde tudo se passa (população, locais, reputação do jogador).
-11.	Taverna – um lugar onde o personagem pode descansar, ouvir rumores ou contratar serviços.
-12.	SistemaDeCombate – lógica para combates (ataque, defesa, vida).
-13.	SistemaDeJogo – gerência o fluxo do jogo, menus, entrada do utilizador.
+### ✨ **Funcionalidades:**
+* Criação de personagem com escolha de profissão.
+* Opções de ações: trabalhar, visitar a taberna, aceitar missões, combater
+* Utilização e compra de itens.
+* Combate.
+* Evolução do personagem ao longo do tempo.
 
+### 🔗 **Relações Entre as Classes:**
+* A classe Personagem possui uma CategoriaSecundaria (profissão), um Inventario e uma lista de adversários derrotados.
+* A classe Inventario contém múltiplos objetos Item (onde Arma é um tipo de Item).
+* A classe Missao pode recompensar o jogador com um Item.
+* A classe Vila é o ambiente principal onde o personagem vive, e Eventos podem ocorrer na vila.
+* A classe SistemaDeCombate gere os combates entre personagens.
+* A classe SistemaDeJogo gere o ciclo principal do jogo.
 
-Funcionalidades:
-. Criar personagem (com escolha de profissão).
-. Escolher o que fazer: trabalhar, ir à taverna, aceitar uma missão, explorar.
-. Participar de eventos aleatórios.
-. Usar/comprar itens.
-. Entrar em combate.
-. Aumentar reputação ou criar inimizades.
-. Evoluir o personagem ao longo do tempo.
-
-Relações Entre as Classes:
-. Personagem tem uma Profissao, um Inventario, uma lista de RelacaoSocial.
-. Inventario contém múltiplos Item (e Arma é um tipo de Item).
-. Missao pode dar como recompensa um Item.
-. Vila é o local geral onde o personagem vive, e Evento podem ocorrer nela.
-. SistemaDeCombate lida com combates entre dois personagens.
-. SistemaDeJogo gerencia o ciclo principal da aplicação.
-
-Dificuldades esperadas:
-O que vai ser mais difícil em termos de implementação.
+### 🚧 **Dificuldades Esperadas:**
+No início, uma das dificuldades sentidas foi entender a lógica de passagem de informações entre os Backend e o Frontend,
+as dificuldades foram ultrapassadas com a ajuda de tutoriais e documentação. 
+A implementação de um sistema de combate e a gestão de inventário e interação cona loja também foram desafiadoras,
+mas conseguimos implementar uma lógica que permite ao jogador interagir com o jogo de forma dinâmica.

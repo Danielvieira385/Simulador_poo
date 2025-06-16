@@ -16,5 +16,11 @@
         "nome": "Daniel Sousa",
         "idade": 23,
         "password": "321"
+    },
+    {
+        "id": 4,
+        "nome": "DanielV",
+        "idade": 29,
+        "password": "123"
     }
 ]

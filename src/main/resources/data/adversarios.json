@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "nome": "Adversario1",
+        "nome": "Kael, o Implacável",
         "categoriaPrincipal": "Guerreiro",
         "categoriaSecundaria": "Ferreiro",
         "nivel": 1,
@@ -9,7 +9,7 @@
     },
     {
         "id": 2,
-        "nome": "Adversario2",
+        "nome": "Valeria, a Destemida",
         "categoriaPrincipal": "Guerreiro",
         "categoriaSecundaria": "Ferreiro",
         "nivel": 2,
@@ -17,10 +17,50 @@
     },
     {
         "id": 3,
-        "nome": "Adversario3",
+        "nome": "Grom, o Bárbaro",
         "categoriaPrincipal": "Guerreiro",
         "categoriaSecundaria": "Ferreiro",
         "nivel": 3,
         "arma": 3
+    },
+    {
+        "id": 4,
+        "nome": "Morgana, a Feiticeira",
+        "categoriaPrincipal": "Mago",
+        "categoriaSecundaria": "Alquimista",
+        "nivel": 1,
+        "arma": 4
+    },
+    {
+        "id": 5,
+        "nome": "Zarthus, o Arcano",
+        "categoriaPrincipal": "Mago",
+        "categoriaSecundaria": "Alquimista",
+        "nivel": 2,
+        "arma": 5
+    },
+    {
+        "id": 6,
+        "nome": "Nimue, a Ilusionista",
+        "categoriaPrincipal": "Mago",
+        "categoriaSecundaria": "Alquimista",
+        "nivel": 3,
+        "arma": 6
+    },
+    {
+        "id": 7,
+        "nome": "Lysandra, a Veloz",
+        "categoriaPrincipal": "Arqueiro",
+        "categoriaSecundaria": "Ferreiro",
+        "nivel": 1,
+        "arma": 7
+    },
+    {
+        "id": 8,
+        "nome": "Arion, o Certeiro",
+        "categoriaPrincipal": "Arqueiro",
+        "categoriaSecundaria": "Ferreiro",
+        "nivel": 2,
+        "arma": 8
     }
 ]

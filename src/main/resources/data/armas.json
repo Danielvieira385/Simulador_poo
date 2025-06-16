@@ -33,7 +33,7 @@
     },
     {
         "id": 5,
-        "nome": "Arma Cara",
+        "nome": "Espada Longa",
         "dano": 50,
         "tipo": "Guerreiro",
         "nivel": 1,
@@ -41,10 +41,42 @@
     },
     {
         "id": 6,
-        "nome": "Arma Nivel alto",
+        "nome": "Espada Curta",
         "dano": 40,
         "tipo": "Guerreiro",
         "nivel": 3,
         "preco": 20
+    },
+    {
+        "id": 7,
+        "nome": "Machado",
+        "dano": 30,
+        "tipo": "Guerreiro",
+        "nivel": 2,
+        "preco": 100
+    },
+    {
+        "id": 8,
+        "nome": "Lança",
+        "dano": 35,
+        "tipo": "Guerreiro",
+        "nivel": 2,
+        "preco": 150
+    },
+    {
+        "id": 9,
+        "nome": "Besta",
+        "dano": 45,
+        "tipo": "Arqueiro",
+        "nivel": 3,
+        "preco": 300
+    },
+    {
+        "id": 10,
+        "nome": "Adaga",
+        "dano": 20,
+        "tipo": "Guerreiro",
+        "nivel": 1,
+        "preco": 30
     }
 ]

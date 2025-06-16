@@ -9,6 +9,22 @@
     },
     {
         "id": 2,
+        "nome": "Bastão",
+        "dano": 25,
+        "tipo": "Mago",
+        "nivel": 1,
+        "preco": 20
+    },
+    {
+        "id": 3,
+        "nome": "Arco",
+        "dano": 15,
+        "tipo": "Arqueiro",
+        "nivel": 1,
+        "preco": 25
+    },
+    {
+        "id": 4,
         "nome": "Flecha",
         "dano": 5,
         "tipo": "Munição",
@@ -16,19 +32,51 @@
         "preco": 5
     },
     {
-        "id": 3,
-        "nome": "Arma Cara",
+        "id": 5,
+        "nome": "Espada Longa",
         "dano": 50,
         "tipo": "Guerreiro",
         "nivel": 1,
         "preco": 200
     },
     {
-        "id": 4,
-        "nome": "Arma Nivel alto",
+        "id": 6,
+        "nome": "Espada Curta",
         "dano": 40,
         "tipo": "Guerreiro",
         "nivel": 3,
         "preco": 20
+    },
+    {
+        "id": 7,
+        "nome": "Machado",
+        "dano": 30,
+        "tipo": "Guerreiro",
+        "nivel": 2,
+        "preco": 100
+    },
+    {
+        "id": 8,
+        "nome": "Lança",
+        "dano": 35,
+        "tipo": "Guerreiro",
+        "nivel": 2,
+        "preco": 150
+    },
+    {
+        "id": 9,
+        "nome": "Besta",
+        "dano": 45,
+        "tipo": "Arqueiro",
+        "nivel": 3,
+        "preco": 300
+    },
+    {
+        "id": 10,
+        "nome": "Adaga",
+        "dano": 20,
+        "tipo": "Guerreiro",
+        "nivel": 1,
+        "preco": 30
     }
 ]

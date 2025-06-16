@@ -1,32 +1,102 @@
 [
     {
         "id": 1,
-        "nome": "Missão 1",
+        "nome": "O Desafio de Kael",
         "exp": 50,
         "recompensa_coins": 100,
         "nivel": 1,
         "adversario_id": 1,
-        "descricao": "Descrição teste 1",
+        "descricao": "Derrote Kael, o Implacável, para provar sua coragem e ganhar o respeito da vila.",
         "duracao": 2
     },
     {
         "id": 2,
-        "nome": "Missão teste 2 ",
+        "nome": "Duelo com Valeria",
         "exp": 100,
         "recompensa_coins": 120,
         "nivel": 1,
         "adversario_id": 1,
-        "descricao": "Descrição detalhada 2",
+        "descricao": "Valeria, a Destemida, desafia você para um duelo. Aceite o desafio e mostre sua força!",
         "duracao": 1
     },
     {
         "id": 3,
-        "nome": "Missão Teste 3",
+        "nome": "A Fúria de Grom",
         "exp": 120,
         "recompensa_coins": 200,
         "nivel": 2,
         "adversario_id": 2,
-        "descricao": "Descrição 3",
+        "descricao": "Grom, o Bárbaro, está aterrorizando a região. Encontre-o e acabe com sua fúria!",
         "duracao": 3
+    },
+    {
+        "id": 4,
+        "nome": "A Forja Perdida",
+        "exp": 150,
+        "recompensa_coins": 250,
+        "nivel": 2,
+        "adversario_id": 3,
+        "descricao": "Recupere os segredos da antiga forja élfica guardada por Grom, o Bárbaro",
+        "duracao": 4
+    },
+    {
+        "id": 5,
+        "nome": "Caça às Sombras",
+        "exp": 80,
+        "recompensa_coins": 150,
+        "nivel": 1,
+        "adversario_id": 4,
+        "descricao": "Infiltre-se na torre de Morgana e descubra seus planos sombrios",
+        "duracao": 2
+    },
+    {
+        "id": 6,
+        "nome": "O Grimório Proibido",
+        "exp": 200,
+        "recompensa_coins": 300,
+        "nivel": 3,
+        "adversario_id": 5,
+        "descricao": "Enfrente Zarthus, o Arcano, e recupere o grimório que pode salvar o reino",
+        "duracao": 5
+    },
+    {
+        "id": 7,
+        "nome": "Emboscada na Floresta",
+        "exp": 90,
+        "recompensa_coins": 180,
+        "nivel": 1,
+        "adversario_id": 7,
+        "descricao": "Sobreviva à emboscada de Lysandra nas florestas sombrias",
+        "duracao": 3
+    },
+    {
+        "id": 8,
+        "nome": "O Torneio dos Campeões",
+        "exp": 180,
+        "recompensa_coins": 350,
+        "nivel": 2,
+        "adversario_id": 8,
+        "descricao": "Derrote Arion, o Certeiro, no grande torneio de arqueiros",
+        "duracao": 4
+    },
+    {
+        "id": 9,
+        "nome": "Resgate na Masmorra",
+        "exp": 250,
+        "recompensa_coins": 400,
+        "nivel": 3,
+        "adversario_id": 6,
+        "descricao": "Liberte os prisioneiros das ilusões mortais de Nimue, a Ilusionista",
+        "duracao": 6
+    },
+    {
+        "id": 10,
+        "nome": "A Última Batalha",
+        "exp": 300,
+        "recompensa_coins": 500,
+        "nivel": 3,
+        "adversario_id": 3,
+        "descricao": "Confronto final contra Grom em sua fortaleza nas montanhas geladas",
+        "duracao": 7
     }
 ]

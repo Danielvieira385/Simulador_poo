@@ -1,0 +1,107 @@
+/* reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+    background-color: rgba(43, 31, 19, 0.95);
+
+}
+.inventario-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #d4af37;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.inventario-item button {
+    padding: 5px 10px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.btActions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btInventario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+}
+
+body {
+    background-image: url("img/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #f5f5dc;
+    font-family: 'MedievalSharp', cursive;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 40px;
+    color: #d4af37;
+    text-shadow: 2px 2px #000;
+}
+
+span {
+    font-size: 1.2em;
+    color: #d4af37;
+    font-weight: bold;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #d4af37;
+}
+
+ul {
+    list-style: none;
+}
+
+form {
+    margin-bottom: 25px;
+}
+
+button {
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1.5em;
+    padding: 15px 30px;
+    background: #8b0000;
+    color: #f5f5dc;
+    border: 2px solid #d4af37;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    width: 100%;
+    max-width: 300px;
+}
+
+button:hover {
+    background: #a52a2a;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #d4af37;
+}

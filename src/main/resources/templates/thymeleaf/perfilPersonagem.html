@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/static/perfilPersonagem.css">
 <head>
     <meta charset="UTF-8">
     <title>Perfil do Personagem</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .container { max-width: 800px; margin: auto; padding: 20px; }
-        .inventario-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border: 1px solid #ccc; padding: 10px; border-radius: 8px; }
-        .inventario-item button { padding: 5px 10px; cursor: pointer; }
-        h1, h2 { text-align: center; }
-    </style>
 </head>
 <body>
 <div class="container">
@@ -24,11 +18,10 @@
         <li><strong>Arma Equipada:</strong> <span th:text="${personagem.armaEquipada}"></span></li>
         <li><strong>Coins:</strong> <span th:text="${personagem.coins}"></span></li>
         <li><strong>Progresso Adversários:</strong> <span th:text="${personagem.progresso}"></span></li>
-        <!-- Adicione outras informações conforme necessário -->
     </ul>
 
+    <br>
     <h2>Inventário</h2>
-
     <!-- Mensagem de erro geral (fora do loop) -->
     <div th:if="${erro}" style="color: red; font-weight: bold; margin-bottom: 10px;">
         <p th:text="${erro}"></p>
@@ -39,11 +32,13 @@
         <div th:each="arma, iterStat : ${inventarioNomes}">
             <div class="inventario-item">
                 <span th:text="${arma}">Nome da Arma</span>
-                <form method="post" action="/equiparArma">
-                    <input type="hidden" name="personagem_ID" th:value="${personagem.id}" />
-                    <input type="hidden" name="arma_ID" th:value="${inventarioID[iterStat.index]}" />
-                    <button type="submit">Equipar</button>
-                </form>
+                <div class="btInventario">
+                    <form method="post" action="/equiparArma">
+                        <input type="hidden" name="personagem_ID" th:value="${personagem.id}" />
+                        <input type="hidden" name="arma_ID" th:value="${inventarioID[iterStat.index]}" />
+                        <button type="submit">Equipar</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -54,11 +49,12 @@
     </div>
 
     <br>
-    <form method="post" action="/vila">
-        <input type="hidden" name="tipoBusca" value="selecao" />
-        <input type="hidden" name="personagemSelecionado" th:value="${personagem.id}" />
-        <button type="submit"> Voltar para a Vila </button>
-    </form>
-</div>
+    <div class="btActions">
+        <form method="post" action="/vila">
+            <input type="hidden" name="tipoBusca" value="selecao" />
+            <input type="hidden" name="personagemSelecionado" th:value="${personagem.id}" />
+            <button type="submit"> Voltar para a Vila </button>
+        </form>
+    </div>
 </body>
 </html>

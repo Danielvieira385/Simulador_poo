@@ -276,16 +276,22 @@ fun Application.configureTemplating() {
             val idPersonagem = params["personagem_ID"] ?:""
             val personagem = obterTodosPersonagens().find {it.id == idPersonagem.toInt()}
 
-            //Inventario do Personagem
+
             val inventarioPersonagem: Item = Item(idPersonagem.toInt())
             val inventarioP = inventarioPersonagem.mostrarArmasInventarioPorID(idPersonagem.toInt())
             val nomeArmasPersonagem = inventarioPersonagem.mostarArmasInventarioNome(inventarioP)
 
+
+
+
             if (personagem != null) {
-                if (inventarioPersonagem != null) {
+                val nomeArmaEquipada = obterTodasArmas().find {personagem.armaEquipada == it.id}
+                val nomeArma = nomeArmaEquipada?.nome
+                if (inventarioPersonagem != null && nomeArma != null) {
                     call.respond(ThymeleafContent("perfilPersonagem", mapOf("personagem" to personagem,
                         "inventarioNomes" to nomeArmasPersonagem,
-                        "inventarioID" to inventarioP)))
+                        "inventarioID" to inventarioP,
+                        "nomeArma" to nomeArma)))
                 }
             }
         }
@@ -296,7 +302,7 @@ fun Application.configureTemplating() {
             val idArma = params["arma_ID"]?:""
             val personagem = obterTodosPersonagens().find {it.id == idPersonagem.toInt()}
 
-            //Inventario do Personagem
+
             if (personagem != null) {
                 val inventarioPersonagem: Item = Item(idPersonagem.toInt())
                 val inventarioP = inventarioPersonagem.mostrarArmasInventarioPorID(idPersonagem.toInt())

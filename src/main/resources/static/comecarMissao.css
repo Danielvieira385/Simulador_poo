@@ -1,83 +1,130 @@
-/* reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 body {
-    background-image: url("img/inicial_background.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #f5f5dc;
     font-family: 'MedievalSharp', cursive;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background-color: #1e1e1e;
+    color: #e0d9c0;
+    margin: 20px;
 }
 
-div {
-    background: rgba(35, 24, 17, 0.95);
-    padding: 40px 40px;
-    border: 3px solid #c9ab77;
-    border-radius: 20px;
-    box-shadow: 0 0 30px #000;
-    width: 90%;
-    max-width: 450px;
-    text-align: center;
+
+h1, h2 {
+    font-family: 'Uncial Antiqua', cursive;
+    color: #d9b382;
+    text-shadow: 1px 1px 2px #000;
 }
 
-h1 {
-    font-size: 3em;
-    margin-bottom: 40px;
-    color: #d4af37;
-    text-shadow: 2px 2px #000;
-}
 
-h2{
-    font-size: 2em;
-    color: #d4af37;
-}
-
-input{
+#barraContainer {
     width: 100%;
-    max-width: 280px;
-    padding: 8px 10px;
-    border: 2px solid rgba(35, 24, 17, 95%);
+    background: #3e2f1c;
     border-radius: 8px;
-    background-color: rgba(35, 24, 17, 95%);
-    color: #f5f5dc;
-    font-size: 1em;
+    box-shadow: inset 0 0 8px #000000aa;
+    height: 35px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+
+#barraProgresso {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #b48e2c, #f1d47a);
+    box-shadow: 0 0 8px #f1d47a;
+    color: #1e1e1e;
+    font-weight: bold;
+    font-family: 'MedievalSharp', cursive;
     text-align: center;
+    line-height: 35px;
+    transition: width 0.15s ease-in-out;
+    user-select: none;
 }
 
-ul {
-    list-style: none;
+#simulacaoCombate > div:nth-child(2) {
+    max-height: 200px;
+    overflow-y: auto;
+    margin: 15px auto 0 auto; /* centra horizontalmente com margem acima */
+    padding-right: 10px;
+    border-top: 1px solid #a37c1a;
+    max-width: 550px;
+    text-align: center; /* centraliza texto do log */
 }
 
-form {
-    margin-bottom: 25px;
+
+
+progress {
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    appearance: none;
+    -webkit-appearance: none;
+    margin-top: 5px;
 }
+
+
+progress::-webkit-progress-bar {
+    background-color: #6b5841;
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px #000000a0;
+}
+
+progress::-webkit-progress-value {
+    background: linear-gradient(90deg, #28a745, #85d47a);
+    border-radius: 10px;
+}
+
+progress::-moz-progress-bar {
+    background: linear-gradient(90deg, #28a745, #85d47a);
+    border-radius: 10px;
+}
+
+
+#simulacaoCombate > div:nth-child(2) {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 15px;
+    padding-right: 10px;
+    border-top: 1px solid #a37c1a;
+}
+
+
+#simulacaoCombate p {
+    margin: 4px 0;
+    font-size: 1rem;
+}
+
 
 button {
+    background-color: #b48e2c;
+    color: #1e1e1e;
     font-family: 'MedievalSharp', cursive;
-    font-size: 1.5em;
-    padding: 15px 30px;
-    background: #8b0000;
-    color: #f5f5dc;
-    border: 2px solid #d4af37;
-    border-radius: 10px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 25px;
+    margin-top: 20px;
     cursor: pointer;
-    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-    width: 100%;
-    max-width: 300px;
+    box-shadow: 0 0 10px #f1d47a;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background: #a52a2a;
-    transform: scale(1.05);
-    box-shadow: 0 0 10px #d4af37;
+    background-color: #d9b382;
+    box-shadow: 0 0 15px #f1d47a;
 }
+
+
+#simulacaoCombate > div:nth-child(2)::-webkit-scrollbar {
+    width: 8px;
+}
+
+#simulacaoCombate > div:nth-child(2)::-webkit-scrollbar-track {
+    background: #3b3327;
+    border-radius: 10px;
+}
+
+#simulacaoCombate > div:nth-child(2)::-webkit-scrollbar-thumb {
+    background: #b48e2c;
+    border-radius: 10px;
+}
+

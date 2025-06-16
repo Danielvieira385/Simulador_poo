@@ -1,9 +1,9 @@
-document.addEventListener("DOMContentLoaded", function () {
-    let duracaoTexto = document.querySelector('[th\\:text="${duracao}"]')?.textContent?.trim() || "5s";
-    let duracaoSegundos = parseInt(duracaoTexto.replace(/[^\d]/g, "")) || 5;
+document.addEventListener("DOMContentLoaded", () => {
+    // extrair segundos da string duracao, ex: "5s" -> 5
+    let duracaoSegundos = parseInt(duracao.replace(/[^\d]/g, "")) || 5;
 
     let barra = document.getElementById("barraProgresso");
-    let resultado = document.getElementById("resultado");
+    let resultadoDiv = document.getElementById("simulacaoCombate");
 
     let tempoTotal = duracaoSegundos * 1000;
     let intervalo = 100;
@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
             clearInterval(animacao);
             barra.style.width = progresso + "%";
             barra.textContent = Math.floor(progresso) + "%";
-            resultado.style.display = "block";
-            iniciarSimulacaoCombate();  // ⬅️ Começa a batalha aqui
+            resultadoDiv.style.display = "block";
+            iniciarSimulacaoCombate();  // Começa a simulação do combate
         } else {
             barra.style.width = progresso + "%";
             barra.textContent = Math.floor(progresso) + "%";
@@ -26,16 +26,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }, intervalo);
 });
 
-// 🧠 Essa função só é chamada ao terminar a barra
 function iniciarSimulacaoCombate() {
-    const combateLog = typeof combateLogData !== 'undefined' ? combateLogData : [];
+    const combateLog = combateLogData || [];
     const resultadoDiv = document.getElementById("simulacaoCombate");
 
-    let index = 0;
+    resultadoDiv.innerHTML = ""; // limpa conteúdo
+
     let vidaPersonagem = 100;
     let vidaAdversario = 100;
 
-    // Criação das barras de vida
+    // Barras de vida
     const vidaDiv = document.createElement("div");
     vidaDiv.innerHTML = `
         <p><strong>Vida Personagem:</strong> <progress id="vidaPersonagem" value="100" max="100"></progress></p>
@@ -46,6 +46,7 @@ function iniciarSimulacaoCombate() {
     const logDiv = document.createElement("div");
     resultadoDiv.appendChild(logDiv);
 
+    let index = 0;
     function mostrarProximoTurno() {
         if (index < combateLog.length) {
             const msg = combateLog[index];
@@ -75,20 +76,24 @@ function iniciarSimulacaoCombate() {
             fim.style.fontWeight = "bold";
             resultadoDiv.appendChild(fim);
 
-            const primeiroAtacanteElem = document.getElementById("primeiroAtacante");
-            const vencedorElem = document.getElementById("vencedor");
+            // Mostrar info primeiro atacante e vencedor
+            const p1 = document.createElement("p");
+            p1.textContent = "Primeiro Atacante: " + primeiroAtacante;
+            resultadoDiv.appendChild(p1);
 
-            if (primeiroAtacanteElem) {
-                const p1 = document.createElement("p");
-                p1.textContent = "Primeiro Atacante: " + (primeiroAtacanteElem.textContent || primeiroAtacanteElem.value);
-                resultadoDiv.appendChild(p1);
-            }
+            const p2 = document.createElement("p");
+            p2.textContent = "Vencedor: " + vencedor;
+            resultadoDiv.appendChild(p2);
 
-            if (vencedorElem) {
-                const p2 = document.createElement("p");
-                p2.textContent = "Vencedor: " + (vencedorElem.textContent || vencedorElem.value);
-                resultadoDiv.appendChild(p2);
-            }
+            // Botão para voltar à Taberna
+            const form = document.createElement("form");
+            form.method = "post";
+            form.action = "/taberna";
+            form.innerHTML = `
+                <input type="hidden" name="personagemIdTaberna" value="${document.querySelector('[name=\"personagemIdTaberna\"]').value}">
+                <button type="submit" style="margin-top:20px;">Voltar para a Taberna</button>
+            `;
+            resultadoDiv.appendChild(form);
         }
     }
 

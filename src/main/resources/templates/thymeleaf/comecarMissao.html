@@ -1,56 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<link rel="stylesheet" href="/static/comecarMissao.css">
+<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <title> Missão </title>
+    <meta charset="UTF-8" />
+    <title>Missão</title>
+    <link rel="stylesheet" href="/static/comecarMissao.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=MedievalSharp&display=swap" rel="stylesheet" />
 </head>
 <body>
-<h1> Missão </h1>
-<div>
-    <h2> Personagem </h2>
-    <input type="hidden" th:value="${personagem}" name="personagem">
-    <br>
-    <input type="text" th:value="${personagem.nome}" readonly>
-    <input type="hidden" th:value="${personagem.progresso}" readonly>
-    <input type="hidden" th:value="${personagem.armaEquipada}">
-</div>
 
-<div id="missaoEscolhida">
-    <h2> Missão </h2>
-    <input type="hidden" th:value="${missao}" name="adversario">
-    <p><strong th:text="${missao.nome}"></strong></p>
-    <p><strong th:text="${missao.descricao}"></strong></p>
-</div>
+<h1>Missão</h1>
 
-<!-- Barra de Progresso -->
+<h1 th:text="${missao.nome}">Nome da Missão</h1>
+<p th:text="${missao.descricao}" style="max-width: 600px; margin-bottom: 25px; font-family: 'MedievalSharp', cursive; color: #d9b382; text-shadow: 1px 1px 1px #000;">
+</p>
+
 <div id="progressoContainer">
-    <h2> Progresso </h2>
-    <br>
-    <div id="barraProgresso">0%</div>
+    <h2>Progresso</h2>
+    <div id="barraContainer">
+        <div id="barraProgresso">0%</div>
+    </div>
 </div>
 
-<br>
-<form method="post" action="/taberna">
-    <input type="hidden" name="personagemIdTaberna" th:value="${personagem.id}" />
-    <button type="submit"> Voltar para a Taberna </button>
-</form>
+<div id="simulacaoCombate"></div>
 
-<script src="/static/simulacaoMissao.js"></script>
+<input type="hidden" name="personagemIdTaberna" th:value="${personagem.id}" />
 
-<!--<h2>Resultado do Combate</h2>-->
-
-<!--<p th:value="${combate.first}" id="primeiroAtacante"></p>-->
-<!--<p th:value="${combate.second}" id="vencedor"></p>-->
-
-<!--<div id="simulacaoCombate"></div>-->
-
+<!-- Passar dados do backend para JS -->
 <script th:inline="javascript">
     /*<![CDATA[*/
     const combateLogData = [[${logBatalha}]];
-    console.log("CombateLog carregado:", combateLogData);
+    const primeiroAtacante = '[[${primeiroAtacante}]]';
+    const vencedor = '[[${vencedor}]]';
+    const duracao = '[[${duracao}]]';
     /*]]>*/
 </script>
+
+<script src="/static/simulacaoMissao.js"></script>
 
 </body>
 </html>

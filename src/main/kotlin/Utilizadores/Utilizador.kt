@@ -24,7 +24,7 @@ data class Utilizador(
     companion object {
 
 
-        private val CAMINHODATA = "./src/main/resources/data"
+        val CAMINHODATA = "./src/main/resources/data"
         private val utilizadores = mutableMapOf<String, Utilizador>()
 
         fun obterID_Utilizador(): Int {

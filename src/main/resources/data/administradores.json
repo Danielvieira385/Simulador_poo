@@ -1,8 +1,7 @@
 [
     {
         "id": 1,
-        "nome": "Daniel",
-        "idade": 23,
+        "nome": "Daniel Administrador",
         "password": "123"
     }
 ]

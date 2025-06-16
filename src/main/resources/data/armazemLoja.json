@@ -78,5 +78,21 @@
         "tipo": "Guerreiro",
         "nivel": 1,
         "preco": 30
+    },
+    {
+        "id": 11,
+        "nome": "Adaga",
+        "dano": 20,
+        "tipo": "Guerreiro",
+        "nivel": 1,
+        "preco": 30
+    },
+    {
+        "id": 12,
+        "nome": "Espada",
+        "dano": 20,
+        "tipo": "Guerreiro",
+        "nivel": 1,
+        "preco": 50
     }
 ]

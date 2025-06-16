@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/menu.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=MedievalSharp&display=swap" rel="stylesheet">
+</head>
+<body>
+<div>
+    <h1>Menu Criação Admin</h1>
+    <form method="post" action="/criarAdmin">
+        <label for="codigoAdmin">Código Administrador: </label>
+        <input type="hidden" th:value="${nomeAdmin}" name="nomeAdmin">
+        <input type="hidden" th:value="${passwordAdmin}" name="passwordAdmin">
+        <input type="text" name="codigoAdmin" id="codigoAdmin"/>
+        <br>
+        <button type="submit">Criar Conta de Administrador</button>
+    </form>
+</div>
+</body>
+</html>

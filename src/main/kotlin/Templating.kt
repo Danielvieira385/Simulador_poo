@@ -20,6 +20,8 @@ import com.example.Menu.Missao
 import com.example.Menu.Missao.Companion.criarMissao
 import com.example.Menu.Missao.Companion.obterIDMissao
 import com.example.Menu.Missao.Companion.obterTodasMissoes
+import com.example.Utilizadores.Administrador
+import com.example.Utilizadores.Administrador.Companion.obterAdministradores
 import com.example.Vila.Loja
 import com.example.Vila.Loja.Companion.mostrarTodasArmas
 
@@ -63,23 +65,52 @@ fun Application.configureTemplating() {
         get("/usersMenu") {
             call.respond(ThymeleafContent("usersMenu", mapOf()))
         }
+
         post("/usersMenu") {
             val params = call.receiveParameters()
             val nomeUtilizador = params["nome_utilizador"] ?: ""
             val password = params["password"] ?: ""
-
             val utilizadores = obterTodosUtilizadores()
             val utilizador = utilizadores.find { it.nome == nomeUtilizador && it.password == password }
+
             if (utilizador != null) {
-                if (utilizador.nome == "Conta Administrador" && utilizador.password == "012") {
+                call.respondRedirect("/menu?id=${utilizador.id}")
+
+            } else if (utilizador == null) {
+                if (nomeUtilizador.contains("Administrador")) {
+                    val administradores = obterAdministradores()
+                    val administrador = administradores.find { it.nome == nomeUtilizador && it.password == password }
                     call.respondRedirect("/ferramentasAdmin")
                 } else {
-                    call.respondRedirect("/menu?id=${utilizador.id}")
+                    call.respond(ThymeleafContent("usersMenu", mapOf("erro" to "Credenciais inválidas")))
                 }
-            } else {
-                call.respond(ThymeleafContent("usersMenu", mapOf("erro" to "Credenciais inválidas")))
             }
         }
+
+        get("/criacaoAdmin") {
+            call.respondRedirect("/criacaoAdmin")
+        }
+
+        post("/criarAdmin") {
+            var params = call.receiveParameters()
+            var codigo = params["codigoAdmin"]?.toInt()
+            var nomeAdmin = params["nomeAdmin"]?:""
+            var passwordAdmin = params["passwordAdmin"]?:""
+
+            println(codigo)
+            println(nomeAdmin)
+            println(passwordAdmin)
+            if (codigo != null) {
+              var novoAdmin = Administrador.criarAdministrador(Administrador.obterID_Administrador(),nomeAdmin,passwordAdmin,codigo)
+                if (novoAdmin != null) {
+                    call.respondRedirect("/ferramentasAdmin")
+                } else {
+                    call.respond(ThymeleafContent("usersMenu", mapOf("erro" to "Credenciais inválidas")))
+                }
+            }
+        }
+
+
         get("/ferramentasAdmin") {
             call.respond(ThymeleafContent("ferramentasAdmin", mapOf("titulo" to "Painel do Administrador")))
         }
@@ -168,8 +199,14 @@ fun Application.configureTemplating() {
             val password = params["password"] ?: ""
             val idade = params["idade"] ?: ""
 
-            val utilizador = criarUtilizador(id, nome, idade.toInt(), password)
-            call.respond(ThymeleafContent("usersMenu", mapOf("utilizador" to utilizador)))
+            if (nome.contains("Administrador")) {
+                call.respond(ThymeleafContent("criacaoAdmin", mapOf("nomeAdmin" to nome,
+                    "passwordAdmin" to password)))
+            } else {
+                val utilizador = criarUtilizador(id, nome, idade.toInt(), password)
+                call.respond(ThymeleafContent("usersMenu", mapOf("utilizador" to utilizador)))
+            }
+
         }
         get("/menu") {
             val idUtilizador = call.request.queryParameters["id"]?.toIntOrNull()

@@ -78,5 +78,13 @@
         "tipo": "Guerreiro",
         "nivel": 1,
         "preco": 30
+    },
+    {
+        "id": 11,
+        "nome": "12",
+        "dano": 12,
+        "tipo": "12",
+        "nivel": 12,
+        "preco": 12
     }
 ]

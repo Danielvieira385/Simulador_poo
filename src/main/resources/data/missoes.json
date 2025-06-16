@@ -98,5 +98,15 @@
         "adversario_id": 3,
         "descricao": "Confronto final contra Grom em sua fortaleza nas montanhas geladas",
         "duracao": 7
+    },
+    {
+        "id": 11,
+        "nome": "12",
+        "exp": 12,
+        "recompensa_coins": 12,
+        "nivel": 12,
+        "adversario_id": 12,
+        "descricao": "12",
+        "duracao": 12
     }
 ]

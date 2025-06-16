@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/combate2.css">
     <title> Combate </title>
 </head>
 <body>
 <h1> Combate </h1>
 
-<div>
+<div class="nomePernonagem">
     <label> Personagem </label>
     <input type="hidden" th:value="${personagem}" name="personagem">
     <input type="text" th:value="${personagem.nome}" readonly>
-    <input type="text" th:value="${personagem.progresso}" readonly>
-    <input type="text" th:value="${personagem.armaEquipada}">
+    <input type="hidden" th:value="${personagem.progresso}" readonly>
+    <input type="hidden" th:value="${personagem.armaEquipada}">
 </div>
 
 <div id="proximoAdversario">

@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="/static/comecarMissao.css">
 <head>
     <meta charset="UTF-8">
     <title> Missão </title>
-    <link rel="stylesheet" href="/static/comecarMissao.css">
 </head>
 <body>
 <h1> Missão </h1>
 <div>
-    <label> Personagem </label>
+    <h2> Personagem </h2>
     <input type="hidden" th:value="${personagem}" name="personagem">
+    <br>
     <input type="text" th:value="${personagem.nome}" readonly>
-    <input type="text" th:value="${personagem.progresso}" readonly>
-    <input type="text" th:value="${personagem.armaEquipada}">
+    <input type="hidden" th:value="${personagem.progresso}" readonly>
+    <input type="hidden" th:value="${personagem.armaEquipada}">
 </div>
 
 <div id="missaoEscolhida">
@@ -24,6 +25,8 @@
 
 <!-- Barra de Progresso -->
 <div id="progressoContainer">
+    <h2> Progresso </h2>
+    <br>
     <div id="barraProgresso">0%</div>
 </div>
 

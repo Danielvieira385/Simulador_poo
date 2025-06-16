@@ -14,9 +14,9 @@ body {
     font-family: 'MedievalSharp', cursive;
     height: 100vh;
     display: flex;
-    flex-direction: row;
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: flex-start; /* Alinha à esquerda */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 div {
